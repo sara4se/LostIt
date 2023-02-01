@@ -8,17 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
-		562C5D1D298ACF2400A23762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* ContentView.swift */; };
+		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
 		562C5D22298ACF2600A23762 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D21298ACF2600A23762 /* Preview Assets.xcassets */; };
+		562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D2B298ACFBD00A23762 /* SignUp.swift */; };
+		562C5D2E298AD00700A23762 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D2D298AD00700A23762 /* Community.swift */; };
+		562C5D30298AD01800A23762 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D2F298AD01800A23762 /* Profile.swift */; };
+		562C5D32298AD02B00A23762 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D31298AD02B00A23762 /* Post.swift */; };
+		562C5D34298AD03700A23762 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D33298AD03700A23762 /* Chat.swift */; };
+		562C5D36298AD06500A23762 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D35298AD06500A23762 /* Splash.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
-		562C5D1C298ACF2400A23762 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		562C5D1E298ACF2600A23762 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		562C5D21298ACF2600A23762 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		562C5D2B298ACFBD00A23762 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		562C5D2D298AD00700A23762 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		562C5D2F298AD01800A23762 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		562C5D31298AD02B00A23762 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		562C5D33298AD03700A23762 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		562C5D35298AD06500A23762 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +63,10 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				562C5D2A298ACF5200A23762 /* Model */,
+				562C5D29298ACF4900A23762 /* ViewModel */,
+				562C5D28298ACF4100A23762 /* View */,
 				562C5D1A298ACF2400A23762 /* DaltiApp.swift */,
-				562C5D1C298ACF2400A23762 /* ContentView.swift */,
 				562C5D1E298ACF2600A23762 /* Assets.xcassets */,
 				562C5D20298ACF2600A23762 /* Preview Content */,
 			);
@@ -65,6 +79,34 @@
 				562C5D21298ACF2600A23762 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		562C5D28298ACF4100A23762 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				562C5D1C298ACF2400A23762 /* SignIn.swift */,
+				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
+				562C5D2D298AD00700A23762 /* Community.swift */,
+				562C5D2F298AD01800A23762 /* Profile.swift */,
+				562C5D31298AD02B00A23762 /* Post.swift */,
+				562C5D33298AD03700A23762 /* Chat.swift */,
+				562C5D35298AD06500A23762 /* Splash.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		562C5D29298ACF4900A23762 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		562C5D2A298ACF5200A23762 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +179,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				562C5D1D298ACF2400A23762 /* ContentView.swift in Sources */,
+				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
+				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
+				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
+				562C5D34298AD03700A23762 /* Chat.swift in Sources */,
+				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
+				562C5D32298AD02B00A23762 /* Post.swift in Sources */,
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
+				562C5D2E298AD00700A23762 /* Community.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
