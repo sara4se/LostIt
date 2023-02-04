@@ -8,8 +8,39 @@
 import SwiftUI
 
 struct Community: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            ZStack {
+                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            }
+         
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading:
+                                    HStack {
+                NavigationLink(destination: Profile(), label:{
+                    Label("Profile", systemImage: "person.circle")
+                        .foregroundColor(.black)
+                })
+            }, trailing:
+                                    HStack {
+                NavigationLink(destination: Chat(), label:{
+                    Label("Chat", systemImage: "message")
+                        .foregroundColor(.black)
+                })
+                
+                NavigationLink(destination: Post(), label:{
+                    Label("Post", systemImage: "plus")
+                        .foregroundColor(.black)
+                })
+            })
+            
+            //.navigationBarItems(leading: btnBack)
+            .navigationBarTitle("Community", displayMode: .large)
+            
+            
+        }
     }
 }
 

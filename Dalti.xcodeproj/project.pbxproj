@@ -84,13 +84,13 @@
 		562C5D28298ACF4100A23762 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				562C5D1C298ACF2400A23762 /* SignIn.swift */,
+				562C5D35298AD06500A23762 /* Splash.swift */,
 				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
+				562C5D1C298ACF2400A23762 /* SignIn.swift */,
 				562C5D2D298AD00700A23762 /* Community.swift */,
 				562C5D2F298AD01800A23762 /* Profile.swift */,
 				562C5D31298AD02B00A23762 /* Post.swift */,
 				562C5D33298AD03700A23762 /* Chat.swift */,
-				562C5D35298AD06500A23762 /* Splash.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

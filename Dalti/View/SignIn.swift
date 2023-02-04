@@ -10,13 +10,17 @@ import SwiftUI
 struct SignIn: View {
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack{
+            
+            NavigationLink {
+                // destination view to navigation to
+                Community()
+            } label: {
+                Text("Sign Up Page")
+                    .foregroundColor(.gray)
+            }
+            .navigationTitle("Sign In")
         }
-        .padding()
     }
 }
 
