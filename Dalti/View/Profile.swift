@@ -9,7 +9,25 @@ import SwiftUI
 
 struct Profile: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack {
+                Text("Profile Page")
+            }.toolbar{
+                            NavigationLink(destination: Chat(), label:{
+                    Label("Chat", systemImage: "message")
+                        .foregroundColor(.black)
+                })
+                                  
+                                  NavigationLink(destination: Post(), label:{
+                    Label("Post", systemImage: "plus")
+                        .foregroundColor(.black)
+                })
+                
+                
+            }
+            .navigationBarTitle("Profile", displayMode: .large)
+        }
+        
     }
 }
 

@@ -9,7 +9,19 @@ import SwiftUI
 
 struct Post: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            ZStack {
+                Text("Post Page")
+            }.toolbar{
+                NavigationLink(destination: Chat(), label:{
+                    Label("Chat", systemImage: "message")
+                        .foregroundColor(.black)
+                })
+            }
+            .navigationBarTitle("Post", displayMode: .large)
+        }
+        
+        
     }
 }
 
