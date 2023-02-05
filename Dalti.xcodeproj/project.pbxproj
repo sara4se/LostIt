@@ -18,8 +18,8 @@
 		562C5D34298AD03700A23762 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D33298AD03700A23762 /* Chat.swift */; };
 		562C5D36298AD06500A23762 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D35298AD06500A23762 /* Splash.swift */; };
 		56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DED37129902F1900453E73 /* ScaledButtonStyle.swift */; };
+		56DED3742990315900453E73 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DED3732990315900453E73 /* CustomCorner.swift */; };
 		56E2E6BD298EE66600A9979B /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E6BC298EE66600A9979B /* Today.swift */; };
-		56E2E6BF298EE97F00A9979B /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E6BE298EE97F00A9979B /* CustomCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +35,8 @@
 		562C5D33298AD03700A23762 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		562C5D35298AD06500A23762 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		56DED37129902F1900453E73 /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
+		56DED3732990315900453E73 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
 		56E2E6BC298EE66600A9979B /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
-		56E2E6BE298EE97F00A9979B /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,16 +90,15 @@
 		562C5D28298ACF4100A23762 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				562C5D35298AD06500A23762 /* Splash.swift */,
-				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
 				56DED36E29902EF000453E73 /* Helper */,
+				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
 				562C5D1C298ACF2400A23762 /* SignIn.swift */,
 				562C5D2D298AD00700A23762 /* Community.swift */,
 				562C5D2F298AD01800A23762 /* Profile.swift */,
 				562C5D31298AD02B00A23762 /* Post.swift */,
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
-				56E2E6BE298EE97F00A9979B /* CustomCorner.swift */,
+				56DED3732990315900453E73 /* CustomCorner.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,7 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
-				56E2E6BF298EE97F00A9979B /* CustomCorner.swift in Sources */,
+				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
 				562C5D34298AD03700A23762 /* Chat.swift in Sources */,

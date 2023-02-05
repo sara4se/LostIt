@@ -18,8 +18,31 @@ struct Community: View {
     
     var body: some View {
         NavigationStack{
-            ZStack {
-                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            VStack {
+                ScrollView(.vertical,showsIndicators: false){
+                    VStack(spacing: 0){
+//                        HStack(alignment: .bottom){
+//                            VStack(alignment: .leading, spacing: 8){
+//                                Text("Day 1").font(.callout).foregroundColor(.gray)
+//                            }
+//                        }  .padding(.horizontal)
+//                            .padding(.bottom)
+//                            .opacity(showDeaialPage ? 0 : 1)
+                        ForEach(items){item in
+                            Button{
+                                withAnimation(.interactiveSpring(response: 0.6,dampingFraction: 0.7,blendDuration: 0.7)){
+                                    currentItem = item
+                                    showDeaialPage = true
+                                }
+                            }
+                        label: {
+                            CardView(item: item)
+                                .scaleEffect(currentItem?.id == item.id && showDeaialPage ? 1 : 0.93)
+                        }.buttonStyle(ScaledButtonStyle())
+                                .opacity(showDeaialPage ? (currentItem?.id == item.id ? 1 : 0) : 1)
+                        }.padding(10)
+                    }
+                }
             }
          
             .navigationBarBackButtonHidden(true)
@@ -46,45 +69,20 @@ struct Community: View {
             .navigationBarTitle("Community", displayMode: .large)
             
             
-        }
-        Na
-        VStack {
-            ScrollView(.vertical,showsIndicators: false){
-                VStack(spacing: 0){
-                    HStack(alignment: .bottom){
-                        VStack(alignment: .leading, spacing: 8){
-                            Text("Day 1").font(.callout).foregroundColor(.gray)
-                        }
-                    }  .padding(.horizontal)
-                        .padding(.bottom)
-                        .opacity(showDeaialPage ? 0 : 1)
-                    ForEach(items){item in
-                        Button{
-                            withAnimation(.interactiveSpring(response: 0.6,dampingFraction: 0.7,blendDuration: 0.7)){
-                                currentItem = item
-                                showDeaialPage = true
-                            }
-                        }
-                    label: {
-                        CardView(item: item)
-                            .scaleEffect(currentItem?.id == item.id && showDeaialPage ? 1 : 0.93)
-                    }.buttonStyle(ScaledButtonStyle())
-                            .opacity(showDeaialPage ? (currentItem?.id == item.id ? 1 : 0) : 1)
-                    }.padding(10)
-                }
-            }.overlay{
-                if let currentItem = currentItem, showDeaialPage{
-                    DetailView(item: currentItem).ignoresSafeArea(.container, edges: .top)
-                }
+        }.overlay{
+            if let currentItem = currentItem, showDeaialPage{
+                DetailView(item: currentItem).ignoresSafeArea(.container, edges: .top)
             }
-            .background(alignment: .top){
-                RoundedRectangle(cornerRadius: 15, style: .continuous)
-                    .fill(.gray)
-                    .frame(height: animateView ? nil : 350 , alignment: .top)
-                    .opacity(animateView ? 1 : 0)
-                    .ignoresSafeArea()
         }
-        }
+        .background(alignment: .top){
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .fill(.white)
+                .frame(height: animateView ? nil : 350 , alignment: .top)
+                .opacity(animateView ? 1 : 0)
+                .ignoresSafeArea()
+    }
+        
+      
     }
     
     @ViewBuilder
@@ -97,21 +95,21 @@ struct Community: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size.width, height: size.height)
-                        .clipShape(CustomCorner(corner: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: 15))
+                        .clipShape(CustomCorner(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: 15))
                     
                 }.frame(height: 400)
                 LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom)
-                VStack(alignment: .leading, spacing: 8){
-                    Text(item.title.uppercased())
-                        .font(.callout).fontWeight(.semibold)
-                    Text(item.category.uppercased())
-                        .font(.largeTitle.bold())
-                }.foregroundColor(.white)
-                    .padding()
-                    .offset(y: currentItem?.id == item.id && animateView ? safeArea().top : 0)
+//                VStack(alignment: .leading, spacing: 8){
+//                    Text(item.title.uppercased())
+//                        .font(.callout).fontWeight(.semibold)
+//                    Text(item.category.uppercased())
+//                        .font(.largeTitle.bold())
+//                }.foregroundColor(.white)
+//                    .padding()
+//                    .offset(y: currentItem?.id == item.id && animateView ? safeArea().top : 0)
             }
             HStack(spacing: 12){
-                Text("title")
+                Text("title").font(.callout).fontWeight(.semibold)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(width: 60,height: 60)
@@ -119,7 +117,7 @@ struct Community: View {
             .padding([.horizontal,.bottom])
         }
         .background{
-            RoundedRectangle(cornerRadius: 15,style: .continuous).fill(.gray)
+            RoundedRectangle(cornerRadius: 15,style: .continuous).fill(.white)
         }
         .matchedGeometryEffect(id: item.id, in: animation)
     }
