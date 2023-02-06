@@ -17,6 +17,7 @@ struct SignIn: View {
                 Community()
             } label: {
                 Text("Sign Up Page")
+                Text("Sign Up Page")
                     .foregroundColor(.gray)
             }
             .navigationTitle("Sign In")
