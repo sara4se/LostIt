@@ -9,8 +9,8 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
-    @State var Title1: String = ""
-    @State var fullText1: String = "Item color, location..."
+    @State var Title: String = ""
+    @State var fullText: String = "Item color, location..."
     var body: some View {
       
         NavigationStack{
@@ -29,6 +29,7 @@ struct Post: View {
                             .frame(width: 300 , height: 53)
                             .background(Color(("Mygreen")))
                             .cornerRadius(8)
+
                     }
                 }
              
@@ -136,11 +137,11 @@ struct ItemType: View {
     var itemType = ["Select","Lost","Found"]
     @State var  ItemType = "Select"
     @State var Title : String = ""
-    @State var fullText: String = ""
+    @State var fullText: String = "Item color, location..."
     
     var body: some View {
         ZStack {
-            Color.white
+            Color.gray.opacity(0.1)
             .ignoresSafeArea()
             Form {
                 
@@ -165,23 +166,31 @@ struct ItemType: View {
 
                 Section{
                     Text("Description:")
-                    TextField("Item color, location...", text: $fullText)
+                    TextEditor(text: $fullText)
+                               .frame(height: 100)
                                .submitLabel(.join)
                                .font(.custom("HelveticaNeue", size: 14))
                                .lineSpacing(5)
+                               .foregroundColor(.gray)
+                              
                 }
-//                Button {
+//                Section{
+//                    Button {
 //
-//                } label: {
-//                        Text("POST")
-//                        .foregroundColor(.white)
-//                        .font(.headline)
-//                        .frame(width: 300 , height: 53)
-//                        .background(Color(("Mygreen")))
-//                        .cornerRadius(8)
+//                    } label: {
+//                            Text("POST")
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                            .frame(width: 300 , height: 53)
+//                            .background(Color(("Mygreen")))
+//                            .cornerRadius(8)
+//
+//                    }
 //                }
+
             }
-            .pickerStyle(MenuPickerStyle())
+          
+         //   .pickerStyle(MenuPickerStyle())
             .pickerStyle(.inline)
         }
     }
