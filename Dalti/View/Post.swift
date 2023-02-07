@@ -9,25 +9,19 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
+    @State var Title1: String = ""
+    @State var fullText1: String = "Item color, location..."
     var body: some View {
+      
         NavigationStack{
             ZStack {
            
                 VStack{
-                    
-//                    Text("Item Image:")
-//                        .padding(.trailing,250)
-//                    AddPhoto()
+                
                     ItemType()
-                  
                 
                 }
              
-            }.toolbar{
-                NavigationLink(destination: Chat(), label:{
-                    Label("Chat", systemImage: "message")
-                        .foregroundColor(.black)
-                })
             }
             .navigationBarTitle("Post", displayMode: .large)
         }
@@ -47,7 +41,7 @@ struct AddPhoto: View {
     @State private var image: Image? = Image("photo")
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
-    @State private var shouldPresentCamera = false
+    @State private var shouldPresentCamera = true
     
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
@@ -59,10 +53,11 @@ struct AddPhoto: View {
                     .stroke(Color(.white), lineWidth: 1))
                 .background(Color("Mygray"))
                 .cornerRadius(8)
+            if (!shouldPresentActionScheet && !shouldPresentImagePicker && shouldPresentCamera){
                 Image(systemName: "plus")
-                .resizable()
-                .frame(width: 68 , height: 76)
-                .foregroundColor(Color("+"))
+                    .resizable()
+                    .frame(width: 68 , height: 76)
+                .foregroundColor(Color("+"))}
 
         }
            
@@ -135,13 +130,12 @@ struct ItemType: View {
     
     var body: some View {
         ZStack {
-            Color.purple
+            Color.white
             .ignoresSafeArea()
             Form {
                 
-                    Text("Item Image:")
-                    AddPhoto()
-                    
+                Text("Item Image:")
+                AddPhoto()
                 
                 Section {
                     Picker("Select the item state", selection: $ItemType) {
@@ -149,14 +143,14 @@ struct ItemType: View {
                             Text($0)}
                        
                         
-                    }
+                    }.pickerStyle(.navigationLink)
                     
                 }
                 Section{
                     Text("Item Name:")
                     TextField("Add Title", text: $Title)
                 }
-                
+
                 Section{
                     Text("Description:")
                     TextEditor(text: $fullText)
@@ -165,28 +159,20 @@ struct ItemType: View {
                                .lineSpacing(5)
                 }
                 Button {
-                    
+
                 } label: {
-                                       Text("POST")
-                        .background(.gray)
-                    //    .font(.headline)
+                        Text("POST")
                         .foregroundColor(.white)
                         .background(.gray)
-                                      
+                 
+
                 }
 
-//                Button( action: {
-//
-//                } , label: {
-//                   Text("POST")
-//                        .padding()
-//                        .frame(minWidth: .infinity)
-//                        .background(.gray.cornerRadius(10))
-//                        .foregroundColor(.white)
-//                        .font(.headline)
-//                })
+
             }
+            
             .pickerStyle(MenuPickerStyle())
+            .pickerStyle(.inline)
         }
     }
 }
