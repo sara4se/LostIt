@@ -15,11 +15,21 @@ struct Post: View {
       
         NavigationStack{
             ZStack {
-           
+                Color.gray.opacity(0.1)
+                .ignoresSafeArea()
                 VStack{
                 
                     ItemType()
-                
+                    Button {
+
+                    } label: {
+                            Text("POST")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(width: 300 , height: 53)
+                            .background(Color(("Mygreen")))
+                            .cornerRadius(8)
+                    }
                 }
              
             }
@@ -126,7 +136,7 @@ struct ItemType: View {
     var itemType = ["Select","Lost","Found"]
     @State var  ItemType = "Select"
     @State var Title : String = ""
-    @State var fullText: String = "Item color, location..."
+    @State var fullText: String = ""
     
     var body: some View {
         ZStack {
@@ -149,28 +159,28 @@ struct ItemType: View {
                 Section{
                     Text("Item Name:")
                     TextField("Add Name", text: $Title)
+                        .font(.custom("HelveticaNeue", size: 14))
+                        .lineSpacing(5)
                 }
 
                 Section{
                     Text("Description:")
-                    TextEditor(text: $fullText)
-                               .foregroundColor(Color.gray)
-                               .font(.custom("HelveticaNeue", size: 13))
+                    TextField("Item color, location...", text: $fullText)
+                               .submitLabel(.join)
+                               .font(.custom("HelveticaNeue", size: 14))
                                .lineSpacing(5)
                 }
-                Button {
-
-                } label: {
-                        Text("POST")
-                        .foregroundColor(.white)
-                        .background(.gray)
-                 
-
-                }
-
-
+//                Button {
+//
+//                } label: {
+//                        Text("POST")
+//                        .foregroundColor(.white)
+//                        .font(.headline)
+//                        .frame(width: 300 , height: 53)
+//                        .background(Color(("Mygreen")))
+//                        .cornerRadius(8)
+//                }
             }
-            
             .pickerStyle(MenuPickerStyle())
             .pickerStyle(.inline)
         }
