@@ -148,7 +148,7 @@ struct ItemType: View {
                 }
                 Section{
                     Text("Item Name:")
-                    TextField("Add Title", text: $Title)
+                    TextField("Add Name", text: $Title)
                 }
 
                 Section{
