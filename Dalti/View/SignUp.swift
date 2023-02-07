@@ -14,8 +14,7 @@ struct SignUp: View {
             NavigationLink {
                 // destination view to navigation to
                 Community()
-                Text("Sign Up Page2")
-                    .foregroundColor(.gray)
+              
             } label: {
                 Text("Sign Up Page")
                     .foregroundColor(.gray)
