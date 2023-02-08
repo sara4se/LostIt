@@ -138,15 +138,22 @@ struct ItemType: View {
     @State var  ItemType = "Select"
     @State var Title : String = ""
     @State var fullText: String = "Item color, location..."
-    
+    @State var Show: Bool = true
     var body: some View {
         ZStack {
             Color.gray.opacity(0.1)
             .ignoresSafeArea()
             Form {
                 
-                Text("Item Image:")
-                AddPhoto()
+                Section{
+//                    Text("Item Image:")
+                    AddPhoto()}header: {
+                        Text("Item Image:")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                    }footer: {
+                        Text("(Optional)")
+                    }
                 
                 Section {
                     Picker("Select the item state", selection: $ItemType) {
@@ -158,21 +165,44 @@ struct ItemType: View {
                     
                 }
                 Section{
-                    Text("Item Name:")
+//                    Text("Item Name:")
                     TextField("Add Name", text: $Title)
                         .font(.custom("HelveticaNeue", size: 14))
                         .lineSpacing(5)
+                }header: {
+                    Text("Item Name:")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                }footer: {
+                    Text("(Require)")
                 }
 
                 Section{
-                    Text("Description:")
+                 //   Text("Description:").font(.headline)
                     TextEditor(text: $fullText)
-                               .frame(height: 100)
+                            //   .frame(height: 100)
                                .submitLabel(.join)
                                .font(.custom("HelveticaNeue", size: 14))
                                .lineSpacing(5)
                                .foregroundColor(.gray)
+                    
                               
+                } header: {
+                    Text("Description:")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                }footer: {
+                    Text("(Optional)")
+                }
+                
+                Section{
+                    Toggle(
+                        isOn: $Show,
+                        label:{
+                            Text("Show phone number ")
+                        })
+                }footer: {
+                    Text("(Optional)")
                 }
 //                Section{
 //                    Button {
