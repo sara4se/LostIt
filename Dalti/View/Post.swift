@@ -146,10 +146,10 @@ struct ItemType: View {
             Form {
                 
                 Section{
-//                    Text("Item Image:")
+
                     AddPhoto()}header: {
                         Text("Item Image:")
-                            .font(.headline)
+                            .font(.custom("SF Pro", size: 16))
                             .foregroundColor(.black)
                     }footer: {
                         Text("(Optional)")
@@ -159,37 +159,37 @@ struct ItemType: View {
                     Picker("Select the item state", selection: $ItemType) {
                         ForEach(itemType, id: \.self) {
                             Text($0)}
+                        .font(.custom("SF Pro", size: 16))
                        
                         
                     }.pickerStyle(.navigationLink)
                     
                 }
                 Section{
-//                    Text("Item Name:")
+
                     TextField("Add Name", text: $Title)
-                        .font(.custom("HelveticaNeue", size: 14))
+                        .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
                 }header: {
                     Text("Item Name:")
-                        .font(.headline)
+                        .font(.custom("SF Pro", size: 16))
                         .foregroundColor(.black)
                 }footer: {
                     Text("(Require)")
                 }
 
                 Section{
-                 //   Text("Description:").font(.headline)
+                
                     TextEditor(text: $fullText)
-                            //   .frame(height: 100)
+                               .font(.custom("SF Pro", size: 16))
                                .submitLabel(.join)
-                               .font(.custom("HelveticaNeue", size: 14))
                                .lineSpacing(5)
                                .foregroundColor(.gray)
-                    
+                     
                               
                 } header: {
                     Text("Description:")
-                        .font(.headline)
+                        .font(.custom("SF Pro", size: 16))
                         .foregroundColor(.black)
                 }footer: {
                     Text("(Optional)")
@@ -200,27 +200,14 @@ struct ItemType: View {
                         isOn: $Show,
                         label:{
                             Text("Show phone number ")
+                                .font(.custom("SF Pro", size: 16))
                         })
                 }footer: {
                     Text("(Optional)")
                 }
-//                Section{
-//                    Button {
-//
-//                    } label: {
-//                            Text("POST")
-//                            .foregroundColor(.white)
-//                            .font(.headline)
-//                            .frame(width: 300 , height: 53)
-//                            .background(Color(("Mygreen")))
-//                            .cornerRadius(8)
-//
-//                    }
-//                }
+
 
             }
-          
-         //   .pickerStyle(MenuPickerStyle())
             .pickerStyle(.inline)
         }
     }
