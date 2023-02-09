@@ -9,8 +9,9 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
-    @State var Title: String = ""
-    @State var fullText: String = "Item color, location..."
+    @State var  ItemType = "Select"
+    @State var Title : String = ""
+    @State var fullText: String = ""
     var body: some View {
       
         NavigationStack{
@@ -19,18 +20,20 @@ struct Post: View {
                 .ignoresSafeArea()
                 VStack{
                 
-                    ItemType()
-                    Button {
-
-                    } label: {
-                            Text("POST")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(width: 300 , height: 53)
-                            .background(Color(("Mygreen")))
-                            .cornerRadius(8)
-
-                    }
+                    Dalti.ItemType()
+//                    Button {
+//
+//                    } label: {
+//                            Text("POST")
+//                            .foregroundColor(.white)
+//                            .font(.headline)
+//                            .frame(width: 300 , height: 53)
+//                            .background(Color(("Mygreen")))
+//                            .cornerRadius(8)
+//
+//                    }
+                      
+                    
                 }
              
             }
@@ -134,10 +137,10 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
 }
 
 struct ItemType: View {
-    var itemType = ["Select","Lost","Found"]
-    @State var  ItemType = "Select"
+    @State var itemType = ["Lost","Found"]
+    @State var  ItemType = ""
     @State var Title : String = ""
-    @State var fullText: String = "Item color, location..."
+    @State var fullText: String = ""
     @State var Show: Bool = true
     var body: some View {
         ZStack {
@@ -148,11 +151,14 @@ struct ItemType: View {
                 Section{
 
                     AddPhoto()}header: {
-                        Text("Item Image:")
-                            .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(.black)
-                    }footer: {
-                        Text("(Optional)")
+                        HStack{
+                            Text("Item Image:")
+                                .font(.custom("SF Pro", size: 16))
+                                .foregroundColor(.black)
+                          
+                            Text("(OPTIONAL)")
+                                .font(.custom("SF Pro", size: 12))
+                        }
                     }
                 
                 Section {
@@ -160,55 +166,98 @@ struct ItemType: View {
                         ForEach(itemType, id: \.self) {
                             Text($0)}
                         .font(.custom("SF Pro", size: 16))
-                       
-                        
+
+
                     }.pickerStyle(.navigationLink)
-                    
+                  
+
+           
                 }
                 Section{
 
                     TextField("Add Name", text: $Title)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
+                    
+                    
                 }header: {
-                    Text("Item Name:")
-                        .font(.custom("SF Pro", size: 16))
+                    HStack{
+                        Text("Item Name:")
+                            .font(.custom("SF Pro", size: 16))
                         .foregroundColor(.black)
-                }footer: {
-                    Text("(Require)")
+                        Text("(REQUIRE)")
+                            .font(.custom("SF Pro", size: 10))
+                    }
+                    
                 }
 
                 Section{
                 
-                    TextEditor(text: $fullText)
-                               .font(.custom("SF Pro", size: 16))
-                               .submitLabel(.join)
-                               .lineSpacing(5)
-                               .foregroundColor(.gray)
-                     
+                    TextEditorWithPlaceholder(text: $fullText)
+                        .font(.custom("SF Pro", size: 16))
+                        .frame(width: 355 , height: 104)
                               
                 } header: {
+                    HStack{
                     Text("Description:")
                         .font(.custom("SF Pro", size: 16))
                         .foregroundColor(.black)
-                }footer: {
-                    Text("(Optional)")
+                    Text("(OPTIONAL)")
+                            .font(.custom("SF Pro", size: 10))
+                }
                 }
                 
                 Section{
                     Toggle(
                         isOn: $Show,
                         label:{
-                            Text("Show phone number ")
+                             Text("Show phone number ")
                                 .font(.custom("SF Pro", size: 16))
+                            
                         })
-                }footer: {
-                    Text("(Optional)")
                 }
-
+                Section{
+                    Button {
+                    
+                } label: {
+                    Text("POST")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(width: 300 , height: 53)
+                        .background(Color(("Mygreen")))
+                        .cornerRadius(8)
+                    
+                }.disabled(ItemType.isEmpty || Title.isEmpty )
+                }.listRowBackground(Color.clear)
 
             }
             .pickerStyle(.inline)
         }
     }
 }
+
+struct TextEditorWithPlaceholder: View {
+        @Binding var text: String
+        
+        var body: some View {
+            ZStack(alignment: .leading) {
+                if text.isEmpty {
+                   VStack {
+                        Text("Item color, location...")
+                           .foregroundColor(.gray)
+                            .padding(.top, 10)
+                            .padding(.leading, 20)
+                            .opacity(0.6)
+                        Spacer()
+                    }
+                }
+                
+                VStack {
+                    TextEditor(text: $text)
+                        .frame(minHeight: 150, maxHeight: 300)
+                        .opacity(text.isEmpty ? 0.85 : 1)
+                    Spacer()
+                }
+            }
+        }
+    }
