@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
-    @State var  ItemType = "Select"
+    @State var  ItemType = ""
     @State var Title : String = ""
     @State var fullText: String = ""
     var body: some View {
@@ -21,19 +21,7 @@ struct Post: View {
                 VStack{
                 
                     Dalti.ItemType()
-//                    Button {
-//
-//                    } label: {
-//                            Text("POST")
-//                            .foregroundColor(.white)
-//                            .font(.headline)
-//                            .frame(width: 300 , height: 53)
-//                            .background(Color(("Mygreen")))
-//                            .cornerRadius(8)
-//
-//                    }
-                      
-                    
+    
                 }
              
             }
@@ -79,7 +67,7 @@ struct AddPhoto: View {
             .sheet(isPresented: $shouldPresentImagePicker) {
                 SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker)
         }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                 self.shouldPresentImagePicker = true
                 self.shouldPresentCamera = true
             }), ActionSheet.Button.default(Text("Photo Library"), action: {
@@ -142,11 +130,11 @@ struct ItemType: View {
     @State var Title : String = ""
     @State var fullText: String = ""
     @State var Show: Bool = true
+    @State var Show2: Bool = false
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.1)
-            .ignoresSafeArea()
-            Form {
+          
+            Form{
                 
                 Section{
 
@@ -166,20 +154,17 @@ struct ItemType: View {
                         ForEach(itemType, id: \.self) {
                             Text($0)}
                         .font(.custom("SF Pro", size: 16))
-
-
+                        if(!ItemType.isEmpty){
+                            let _ = Show2.toggle()}
                     }.pickerStyle(.navigationLink)
-                  
-
-           
                 }
                 Section{
 
                     TextField("Add Name", text: $Title)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
-                    
-                    
+//                    if(!Title.isEmpty){
+//                        let _ = Show2.toggle()}
                 }header: {
                     HStack{
                         Text("Item Name:")
@@ -196,6 +181,8 @@ struct ItemType: View {
                     TextEditorWithPlaceholder(text: $fullText)
                         .font(.custom("SF Pro", size: 16))
                         .frame(width: 355 , height: 104)
+                        .padding(.top, 20)
+                        .padding(.leading,20)
                               
                 } header: {
                     HStack{
@@ -211,29 +198,48 @@ struct ItemType: View {
                     Toggle(
                         isOn: $Show,
                         label:{
-                             Text("Show phone number ")
+                            Text("Show phone number ")
                                 .font(.custom("SF Pro", size: 16))
                             
-                        })
-                }
-                Section{
-                    Button {
-                    
-                } label: {
-                    Text("POST")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .frame(width: 300 , height: 53)
-                        .background(Color(("Mygreen")))
-                        .cornerRadius(8)
-                    
-                }.disabled(ItemType.isEmpty || Title.isEmpty )
-                }.listRowBackground(Color.clear)
+                        })}
+               
+            footer:{
+             
+                
+                        Button {
+                           
+                    } label: {
+                      if(!ItemType.isEmpty && !Title.isEmpty){
+                            Text("POST")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .frame(width: 300 , height: 53)
+                                .background(Color(("Mygreen")))
+                                .cornerRadius(8)
+                        }else{
+                            Text("POST")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .frame(width: 300 , height: 53)
+                                .background(Color(("Mygray")))
+                                .cornerRadius(8)
+                        }
+
+                          
+                        
+                    }.disabled(ItemType.isEmpty || Title.isEmpty)
+                    .padding(.top,20)
+            }
+                  
+
+                
 
             }
             .pickerStyle(.inline)
+        
         }
     }
+   
 }
 
 struct TextEditorWithPlaceholder: View {
@@ -244,10 +250,12 @@ struct TextEditorWithPlaceholder: View {
                 if text.isEmpty {
                    VStack {
                         Text("Item color, location...")
+                           .font(.custom("SF Pro", size: 16))
                            .foregroundColor(.gray)
                             .padding(.top, 10)
-                            .padding(.leading, 20)
+                            .padding(.leading, 10)
                             .opacity(0.6)
+                            
                         Spacer()
                     }
                 }
