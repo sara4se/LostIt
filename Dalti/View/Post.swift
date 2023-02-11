@@ -59,7 +59,7 @@ struct AddPhoto: View {
                 Image(systemName: "plus")
                     .resizable()
                     .frame(width: 68 , height: 76)
-                .foregroundColor(Color("+"))}
+                .foregroundColor(Color("darkgray"))}
 
         }
            
@@ -67,7 +67,7 @@ struct AddPhoto: View {
             .sheet(isPresented: $shouldPresentImagePicker) {
                 SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker)
         }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to upload your item image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                 self.shouldPresentImagePicker = true
                 self.shouldPresentCamera = true
             }), ActionSheet.Button.default(Text("Photo Library"), action: {
@@ -126,7 +126,7 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
 
 struct ItemType: View {
     @State var itemType = ["Lost","Found"]
-    @State var  ItemType = ""
+    @State var  ItemType = "Lost"
     @State var Title : String = ""
     @State var fullText: String = ""
     @State var Show: Bool = true
@@ -228,7 +228,7 @@ struct ItemType: View {
                           
                         
                     }.disabled(ItemType.isEmpty || Title.isEmpty)
-                    .padding(.top,20)
+                    .padding(.all)
             }
                   
 
