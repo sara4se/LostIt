@@ -37,6 +37,7 @@
 		56DED37129902F1900453E73 /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
 		56DED3732990315900453E73 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
 		56E2E6BC298EE66600A9979B /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		DB6AE2A12997609C00D692B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,8 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				DB6AE2A12997609C00D692B1 /* Info.plist */,
+				56DED36E29902EF000453E73 /* Helper */,
 				562C5D2A298ACF5200A23762 /* Model */,
 				562C5D29298ACF4900A23762 /* ViewModel */,
 				562C5D28298ACF4100A23762 /* View */,
@@ -90,7 +93,6 @@
 		562C5D28298ACF4100A23762 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				56DED36E29902EF000453E73 /* Helper */,
 				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
 				562C5D1C298ACF2400A23762 /* SignIn.swift */,
 				562C5D2D298AD00700A23762 /* Community.swift */,
@@ -338,6 +340,9 @@
 				DEVELOPMENT_TEAM = 8286J2C5RM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dalti/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures and detect your face";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,6 +372,9 @@
 				DEVELOPMENT_TEAM = 8286J2C5RM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dalti/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures and detect your face";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
