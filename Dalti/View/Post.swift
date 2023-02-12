@@ -7,11 +7,17 @@
 
 import SwiftUI
 import UIKit
-
+enum Mode {
+  case new
+  case edit
+}
+ 
+enum Action {
+  case delete
+  case done
+  case cancel
+}
 struct Post: View {
-    @State var  ItemType = ""
-    @State var Title : String = ""
-    @State var fullText: String = ""
     var body: some View {
       
         NavigationStack{
@@ -37,6 +43,182 @@ struct Post_Previews: PreviewProvider {
         Post()
     }
 }
+
+
+struct ItemType: View {
+    @Environment(\.presentationMode) private var presentationMode
+    @State var presentActionSheet = false
+    var mode: Mode = .new
+    var completionHandler: ((Result<Action, Error>) -> Void)?
+    @State var itemType = ["Lost","Found"]
+    @ObservedObject var viewModel = PostViewModel()
+    @State var Show: Bool = true
+    @State var Show2: Bool = false
+    var body: some View {
+        ZStack {
+//            Form{
+            Section{
+                
+                AddPhoto()
+                
+            }header: {
+                    HStack{
+                        Text("Item Image:")
+                            .font(.custom("SF Pro", size: 16))
+                            .foregroundColor(.black)
+                        
+                        Text("(OPTIONAL)")
+                            .font(.custom("SF Pro", size: 12))
+                    }
+                }
+            
+            Section {
+                Picker("Select the item state", selection: $viewModel.post.ItemState) {
+                    ForEach(itemType, id: \.self) {
+                        Text($0)}
+                    .font(.custom("SF Pro", size: 16))
+                    if(!viewModel.post.ItemState.isEmpty){
+                        let _ = Show2.toggle()}
+                }.pickerStyle(.navigationLink)
+            }
+            Section{
+                
+                TextField("Add Name", text: $viewModel.post.ItemName)
+                    .font(.custom("SF Pro", size: 16))
+                    .lineSpacing(5)
+                //                    if(!Title.isEmpty){
+                //                        let _ = Show2.toggle()}
+            }header: {
+                HStack{
+                    Text("Item Name:")
+                        .font(.custom("SF Pro", size: 16))
+                        .foregroundColor(.black)
+                    Text("(REQUIRE)")
+                        .font(.custom("SF Pro", size: 10))
+                }
+                
+            }
+            
+            Section{
+                
+                TextEditorWithPlaceholder(text: $viewModel.post.Description)
+                    .font(.custom("SF Pro", size: 16))
+                    .frame(width: 355 , height: 104)
+                    .padding(.top, 20)
+                    .padding(.leading,20)
+                
+            } header: {
+                HStack{
+                    Text("Description:")
+                        .font(.custom("SF Pro", size: 16))
+                        .foregroundColor(.black)
+                    Text("(OPTIONAL)")
+                        .font(.custom("SF Pro", size: 10))
+                }
+            }
+            
+            Section{
+                Toggle(
+                    isOn: $Show,
+                    label:{
+                        Text("Show phone number ")
+                            .font(.custom("SF Pro", size: 16))
+                        
+                    })}
+            
+        footer:{
+            
+            
+            Button {
+                
+            } label: {
+                if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){
+                    Text("POST")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(width: 300 , height: 53)
+                        .background(Color(("Mygreen")))
+                        .cornerRadius(8)
+                }else{
+                    Text("POST")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(width: 300 , height: 53)
+                        .background(Color(("Mygray")))
+                        .cornerRadius(8)
+                }
+                
+                
+                
+            }.disabled(viewModel.post.ItemState.isEmpty || viewModel.post.ItemName.isEmpty)
+                .padding(.all)
+        }
+//        }
+//            .pickerStyle(.inline)
+//        
+        }
+    }
+    
+   func handleCancelTapped() {
+     self.dismiss()
+   }
+    
+   func handleDoneTapped() {
+     self.viewModel.handleDoneTapped()
+     self.dismiss()
+   }
+    
+   func handleDeleteTapped() {
+     viewModel.handleDeleteTapped()
+     self.dismiss()
+     self.completionHandler?(.success(.delete))
+   }
+    
+   func dismiss() {
+     self.presentationMode.wrappedValue.dismiss()
+   }
+ }
+
+
+struct TextEditorWithPlaceholder: View {
+        @Binding var text: String
+        
+        var body: some View {
+            ZStack(alignment: .leading) {
+                if text.isEmpty {
+                   VStack {
+                        Text("Item color, location...")
+                           .font(.custom("SF Pro", size: 16))
+                           .foregroundColor(.gray)
+                            .padding(.top, 10)
+                            .padding(.leading, 10)
+                            .opacity(0.6)
+                            
+                        Spacer()
+                    }
+                }
+                
+                VStack {
+                    TextEditor(text: $text)
+                        .frame(minHeight: 150, maxHeight: 300)
+                        .opacity(text.isEmpty ? 0.85 : 1)
+                    Spacer()
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 struct AddPhoto: View {
  
@@ -123,149 +305,3 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
     }
     
 }
-
-struct ItemType: View {
-    @State var itemType = ["Lost","Found"]
-    @State var  ItemType = "Lost"
-    @State var Title : String = ""
-    @State var fullText: String = ""
-    @State var Show: Bool = true
-    @State var Show2: Bool = false
-    var body: some View {
-        ZStack {
-          
-            Form{
-                
-                Section{
-
-                    AddPhoto()}header: {
-                        HStack{
-                            Text("Item Image:")
-                                .font(.custom("SF Pro", size: 16))
-                                .foregroundColor(.black)
-                          
-                            Text("(OPTIONAL)")
-                                .font(.custom("SF Pro", size: 12))
-                        }
-                    }
-                
-                Section {
-                    Picker("Select the item state", selection: $ItemType) {
-                        ForEach(itemType, id: \.self) {
-                            Text($0)}
-                        .font(.custom("SF Pro", size: 16))
-                        if(!ItemType.isEmpty){
-                            let _ = Show2.toggle()}
-                    }.pickerStyle(.navigationLink)
-                }
-                Section{
-
-                    TextField("Add Name", text: $Title)
-                        .font(.custom("SF Pro", size: 16))
-                        .lineSpacing(5)
-//                    if(!Title.isEmpty){
-//                        let _ = Show2.toggle()}
-                }header: {
-                    HStack{
-                        Text("Item Name:")
-                            .font(.custom("SF Pro", size: 16))
-                        .foregroundColor(.black)
-                        Text("(REQUIRE)")
-                            .font(.custom("SF Pro", size: 10))
-                    }
-                    
-                }
-
-                Section{
-                
-                    TextEditorWithPlaceholder(text: $fullText)
-                        .font(.custom("SF Pro", size: 16))
-                        .frame(width: 355 , height: 104)
-                        .padding(.top, 20)
-                        .padding(.leading,20)
-                              
-                } header: {
-                    HStack{
-                    Text("Description:")
-                        .font(.custom("SF Pro", size: 16))
-                        .foregroundColor(.black)
-                    Text("(OPTIONAL)")
-                            .font(.custom("SF Pro", size: 10))
-                }
-                }
-                
-                Section{
-                    Toggle(
-                        isOn: $Show,
-                        label:{
-                            Text("Show phone number ")
-                                .font(.custom("SF Pro", size: 16))
-                            
-                        })}
-               
-            footer:{
-             
-                
-                        Button {
-                           
-                    } label: {
-                      if(!ItemType.isEmpty && !Title.isEmpty){
-                            Text("POST")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: 300 , height: 53)
-                                .background(Color(("Mygreen")))
-                                .cornerRadius(8)
-                        }else{
-                            Text("POST")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: 300 , height: 53)
-                                .background(Color(("Mygray")))
-                                .cornerRadius(8)
-                        }
-
-                          
-                        
-                    }.disabled(ItemType.isEmpty || Title.isEmpty)
-                    .padding(.all)
-            }
-                  
-
-                
-
-            }
-            .pickerStyle(.inline)
-        
-        }
-    }
-   
-}
-
-struct TextEditorWithPlaceholder: View {
-        @Binding var text: String
-        
-        var body: some View {
-            ZStack(alignment: .leading) {
-                if text.isEmpty {
-                   VStack {
-                        Text("Item color, location...")
-                           .font(.custom("SF Pro", size: 16))
-                           .foregroundColor(.gray)
-                            .padding(.top, 10)
-                            .padding(.leading, 10)
-                            .opacity(0.6)
-                            
-                        Spacer()
-                    }
-                }
-                
-                VStack {
-                    TextEditor(text: $text)
-                        .frame(minHeight: 150, maxHeight: 300)
-                        .opacity(text.isEmpty ? 0.85 : 1)
-                    Spacer()
-                }
-            }
-        }
-    }

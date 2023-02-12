@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import Combine
+import SwiftUI
 class PostViewModel: ObservableObject {
    
   @Published var post: PostModel
@@ -15,12 +16,12 @@ class PostViewModel: ObservableObject {
    
   private var cancellables = Set<AnyCancellable>()
    
-    init(post: PostModel = PostModel(ItemName: "", TtemState: "", Description: "")) {
+    init(post: PostModel = PostModel(ItemName: "", ItemState: "", Description: "")) {
     self.post = post
      
     self.$post
       .dropFirst()
-      .sink { [weak self] book in
+      .sink { [weak self] post in
         self?.modified = true
       }
       .store(in: &self.cancellables)
@@ -28,7 +29,7 @@ class PostViewModel: ObservableObject {
    
   private var db = Firestore.firestore()
    
-  private func addBook(_ post: PostModel) {
+  private func addPost(_ post: PostModel) {
     do {
       let _ = try db.collection("Posts").addDocument(from: post)
     }
@@ -37,10 +38,10 @@ class PostViewModel: ObservableObject {
     }
   }
    
-  private func updateBook(_ book: PostModel) {
+  private func updatePost(_ post: PostModel) {
     if let documentId = post.id {
       do {
-        try db.collection("Posts").document(documentId).setData(from: book)
+        try db.collection("Posts").document(documentId).setData(from: post)
       }
       catch {
         print(error)
@@ -48,16 +49,16 @@ class PostViewModel: ObservableObject {
     }
   }
    
-  private func updateOrAddBook() {
+  private func updateOrAddPost() {
     if let _ = post.id {
-      self.updateBook(self.post)
+      self.updatePost(self.post)
     }
     else {
-      addBook(post)
+      addPost(post)
     }
   }
    
-  private func removeBook() {
+  private func removePost() {
     if let documentId = post.id {
       db.collection("Posts").document(documentId).delete { error in
         if let error = error {
@@ -68,11 +69,11 @@ class PostViewModel: ObservableObject {
   }
    
   func handleDoneTapped() {
-    self.updateOrAddBook()
+    self.updateOrAddPost()
   }
    
   func handleDeleteTapped() {
-    self.removeBook()
+    self.removePost()
   }
    
 }
