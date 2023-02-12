@@ -12,6 +12,7 @@ struct Profile: View {
         NavigationStack {
             ZStack {
                 Text("Profile Page")
+                
             }.toolbar{
                             NavigationLink(destination: Chat(), label:{
                     Label("Chat", systemImage: "message")
