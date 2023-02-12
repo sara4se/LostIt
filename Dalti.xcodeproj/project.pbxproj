@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5621C769299830B700625D55 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C768299830B700625D55 /* PostViewModel.swift */; };
+		5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76B2998B73E00625D55 /* FirebaseFirestore */; };
+		5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */; };
+		5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76F2998B73E00625D55 /* FirebaseStorage */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -19,10 +23,11 @@
 		562C5D36298AD06500A23762 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D35298AD06500A23762 /* Splash.swift */; };
 		56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DED37129902F1900453E73 /* ScaledButtonStyle.swift */; };
 		56DED3742990315900453E73 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DED3732990315900453E73 /* CustomCorner.swift */; };
-		56E2E6BD298EE66600A9979B /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E6BC298EE66600A9979B /* Today.swift */; };
+		56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2E6BC298EE66600A9979B /* PostModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5621C768299830B700625D55 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -36,7 +41,7 @@
 		562C5D35298AD06500A23762 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		56DED37129902F1900453E73 /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
 		56DED3732990315900453E73 /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
-		56E2E6BC298EE66600A9979B /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		56E2E6BC298EE66600A9979B /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */,
+				5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */,
+				5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +114,7 @@
 		562C5D29298ACF4900A23762 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5621C768299830B700625D55 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -113,7 +122,7 @@
 		562C5D2A298ACF5200A23762 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				56E2E6BC298EE66600A9979B /* Today.swift */,
+				56E2E6BC298EE66600A9979B /* PostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -142,6 +151,11 @@
 			dependencies = (
 			);
 			name = Dalti;
+			packageProductDependencies = (
+				5621C76B2998B73E00625D55 /* FirebaseFirestore */,
+				5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */,
+				5621C76F2998B73E00625D55 /* FirebaseStorage */,
+			);
 			productName = Dalti;
 			productReference = 562C5D17298ACF2400A23762 /* Dalti.app */;
 			productType = "com.apple.product-type.application";
@@ -170,6 +184,9 @@
 				Base,
 			);
 			mainGroup = 562C5D0E298ACF2400A23762;
+			packageReferences = (
+				5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 562C5D18298ACF2400A23762 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -196,12 +213,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
 				562C5D34298AD03700A23762 /* Chat.swift in Sources */,
-				56E2E6BD298EE66600A9979B /* Today.swift in Sources */,
+				56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */,
 				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
 				562C5D32298AD02B00A23762 /* Post.swift in Sources */,
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
@@ -407,6 +425,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5621C76B2998B73E00625D55 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		5621C76F2998B73E00625D55 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 562C5D0F298ACF2400A23762 /* Project object */;
 }

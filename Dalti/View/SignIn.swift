@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SignIn: View {
-    
+    @State var itemType = ["Lost","Found"]
+    @State var  ItemType = ""
     var body: some View {
         NavigationStack{
-            
             NavigationLink {
                 // destination view to navigation to
                 Community()
