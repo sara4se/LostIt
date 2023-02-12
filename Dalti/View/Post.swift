@@ -9,11 +9,7 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
-    @State var  ItemType = ""
-    @State var Title : String = ""
-    @State var fullText: String = ""
     var body: some View {
-      
         NavigationStack{
             ZStack {
                 Color.gray.opacity(0.1)
@@ -163,8 +159,7 @@ struct ItemType: View {
                     TextField("Add Name", text: $Title)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
-//                    if(!Title.isEmpty){
-//                        let _ = Show2.toggle()}
+
                 }header: {
                     HStack{
                         Text("Item Name:")
