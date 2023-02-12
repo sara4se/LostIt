@@ -77,7 +77,6 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
-				DB6AE2A12997609C00D692B1 /* Info.plist */,
 				56DED36E29902EF000453E73 /* Helper */,
 				562C5D2A298ACF5200A23762 /* Model */,
 				562C5D29298ACF4900A23762 /* ViewModel */,
@@ -354,11 +353,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalti/Preview Content\"";
-				DEVELOPMENT_TEAM = 8286J2C5RM;
+				DEVELOPMENT_TEAM = 44QNX63HR6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures and detect your face";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take picture of the found item";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -386,11 +385,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalti/Preview Content\"";
-				DEVELOPMENT_TEAM = 8286J2C5RM;
+				DEVELOPMENT_TEAM = 44QNX63HR6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures and detect your face";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take picture of the found item";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
