@@ -127,6 +127,10 @@ struct ItemType: View {
     @State var fullText: String = ""
     @State var Show: Bool = true
     @State var Show2: Bool = false
+    @FocusState private var focusedField: Field?
+   enum Field: Int, CaseIterable {
+          case itemName, description
+      }
     var body: some View {
         ZStack {
           
@@ -157,6 +161,7 @@ struct ItemType: View {
                 Section{
 
                     TextField("Add Name", text: $Title)
+                        .focused($focusedField, equals: .itemName)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
 
@@ -174,6 +179,7 @@ struct ItemType: View {
                 Section{
                 
                     TextEditorWithPlaceholder(text: $fullText)
+                        .focused($focusedField, equals: .description)
                         .font(.custom("SF Pro", size: 16))
                         .frame(width: 355 , height: 104)
                         .padding(.top, 20)
@@ -229,6 +235,13 @@ struct ItemType: View {
 
                 
 
+            }
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    Button("Done") {
+                        focusedField = nil
+                    }.padding(.trailing,340)
+                }
             }
             .pickerStyle(.inline)
         
