@@ -17,6 +17,7 @@ struct Post: View {
                 VStack{
                 
                     Dalti.ItemType()
+                    
     
                 }
              
@@ -121,16 +122,13 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
 }
 
 struct ItemType: View {
-    @State var itemType = ["Lost","Found"]
-    @State var  ItemType = "Lost"
+    @State var itemType = ["Select","Lost","Found"]
+    @State var  ItemType = ""
     @State var Title : String = ""
     @State var fullText: String = ""
     @State var Show: Bool = true
     @State var Show2: Bool = false
-    @FocusState private var focusedField: Field?
-   enum Field: Int, CaseIterable {
-          case itemName, description
-      }
+    @FocusState private var amountIsFocused: Bool
     var body: some View {
         ZStack {
           
@@ -141,10 +139,12 @@ struct ItemType: View {
                     AddPhoto()}header: {
                         HStack{
                             Text("Item Image:")
+                                .textCase(nil)
                                 .font(.custom("SF Pro", size: 16))
                                 .foregroundColor(.black)
                           
-                            Text("(OPTIONAL)")
+                                Text("(Optional)")
+                                .textCase(nil)
                                 .font(.custom("SF Pro", size: 12))
                         }
                     }
@@ -161,17 +161,19 @@ struct ItemType: View {
                 Section{
 
                     TextField("Add Name", text: $Title)
-                        .focused($focusedField, equals: .itemName)
+                        .focused($amountIsFocused)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
 
                 }header: {
                     HStack{
                         Text("Item Name:")
+                            .textCase(nil)
                             .font(.custom("SF Pro", size: 16))
-                        .foregroundColor(.black)
-                        Text("(REQUIRE)")
-                            .font(.custom("SF Pro", size: 10))
+                            .foregroundColor(.black)
+                        Text("(Requier)")
+                        .textCase(nil)
+                        .font(.custom("SF Pro", size: 12))
                     }
                     
                 }
@@ -179,19 +181,21 @@ struct ItemType: View {
                 Section{
                 
                     TextEditorWithPlaceholder(text: $fullText)
-                        .focused($focusedField, equals: .description)
+                        .focused($amountIsFocused)
                         .font(.custom("SF Pro", size: 16))
                         .frame(width: 355 , height: 104)
                         .padding(.top, 20)
-                        .padding(.leading,20)
+                     //   .padding(.leading,10)
                               
                 } header: {
                     HStack{
                     Text("Description:")
+                            .textCase(nil)
                         .font(.custom("SF Pro", size: 16))
-                        .foregroundColor(.black)
-                    Text("(OPTIONAL)")
-                            .font(.custom("SF Pro", size: 10))
+                       .foregroundColor(.black)
+                        Text("(Optional)")
+                        .textCase(nil)
+                        .font(.custom("SF Pro", size: 12))
                 }
                 }
                 
@@ -237,13 +241,16 @@ struct ItemType: View {
 
             }
             .toolbar {
-                ToolbarItem(placement: .keyboard) {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+
                     Button("Done") {
-                        focusedField = nil
-                    }.padding(.trailing,340)
+                        amountIsFocused = false
+                    }
                 }
             }
             .pickerStyle(.inline)
+            
         
         }
     }
@@ -277,3 +284,4 @@ struct TextEditorWithPlaceholder: View {
             }
         }
     }
+
