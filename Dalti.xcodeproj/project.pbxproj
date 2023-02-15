@@ -11,6 +11,9 @@
 		5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76B2998B73E00625D55 /* FirebaseFirestore */; };
 		5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */; };
 		5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C76F2998B73E00625D55 /* FirebaseStorage */; };
+		5621C781299D4F1900625D55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5621C780299D4F1900625D55 /* GoogleService-Info.plist */; };
+		5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C782299D4F5000625D55 /* PostsViewModel.swift */; };
+		5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C785299D4FB400625D55 /* SDWebImageSwiftUI */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -28,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		5621C768299830B700625D55 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		5621C780299D4F1900625D55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5621C782299D4F5000625D55 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */,
 				5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */,
 				5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */,
 				5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */,
@@ -77,6 +83,7 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				5621C780299D4F1900625D55 /* GoogleService-Info.plist */,
 				562C5D2A298ACF5200A23762 /* Model */,
 				562C5D29298ACF4900A23762 /* ViewModel */,
 				562C5D28298ACF4100A23762 /* View */,
@@ -114,6 +121,7 @@
 		562C5D29298ACF4900A23762 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5621C782299D4F5000625D55 /* PostsViewModel.swift */,
 				5621C768299830B700625D55 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
@@ -155,6 +163,7 @@
 				5621C76B2998B73E00625D55 /* FirebaseFirestore */,
 				5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */,
 				5621C76F2998B73E00625D55 /* FirebaseStorage */,
+				5621C785299D4FB400625D55 /* SDWebImageSwiftUI */,
 			);
 			productName = Dalti;
 			productReference = 562C5D17298ACF2400A23762 /* Dalti.app */;
@@ -186,6 +195,7 @@
 			mainGroup = 562C5D0E298ACF2400A23762;
 			packageReferences = (
 				5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5621C784299D4FB400625D55 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 562C5D18298ACF2400A23762 /* Products */;
 			projectDirPath = "";
@@ -203,6 +213,7 @@
 			files = (
 				562C5D22298ACF2600A23762 /* Preview Assets.xcassets in Resources */,
 				562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */,
+				5621C781299D4F1900625D55 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +226,7 @@
 			files = (
 				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
+				5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */,
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
@@ -435,6 +447,14 @@
 				kind = branch;
 			};
 		};
+		5621C784299D4FB400625D55 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -452,6 +472,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		5621C785299D4FB400625D55 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C784299D4FB400625D55 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
