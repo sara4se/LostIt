@@ -57,21 +57,21 @@ class PostsViewModel: ObservableObject {
         }
     }
     
- 
-    func downloadImageFunc(){
-        Storage.storage().reference().child("temp").getData(maxSize: 12 * 1024 * 1024) { (data,error) in
-            if let error = error{
-                print("an error has occurrd - \(error.localizedDescription)")
-            }else {
-                if let imageData = data{
-                    // self.postToFB.ImageURL = UIImage(data: imageData)
-                    //                    print("image download successfully")
-                }
-                else{
-                    print("could't unwrap/case image to data")
-                }
-            }
-        }
-    }
+// 
+//    func downloadImageFunc(){
+//        Storage.storage().reference().child("temp").getData(maxSize: 12 * 1024 * 1024) { (data,error) in
+//            if let error = error{
+//                print("an error has occurrd - \(error.localizedDescription)")
+//            }else {
+//                if let imageData = data{
+//                    // self.postToFB.ImageURL = UIImage(data: imageData)
+//                    //                    print("image download successfully")
+//                }
+//                else{
+//                    print("could't unwrap/case image to data")
+//                }
+//            }
+//        }
+//    }
     
 }
