@@ -47,12 +47,12 @@ struct Community: View {
          
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
-                                    HStack {
-                NavigationLink(destination: Profile(), label:{
-                    Label("Profile", systemImage: "person.circle")
-                        .foregroundColor(.black)
-                })
-            }, trailing:
+//                                    HStack {
+//                NavigationLink(destination: Profile(), label:{
+//                    Label("Profile", systemImage: "person.circle")
+//                        .foregroundColor(.black)
+//                })
+//            }, trailing:
                                     HStack {
                 NavigationLink(destination: Chat(), label:{
                     Label("Chat", systemImage: "message")
