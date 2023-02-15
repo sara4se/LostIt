@@ -14,9 +14,11 @@ struct SignUp: View {
             NavigationLink {
                 // destination view to navigation to
                 Community()
+              
             } label: {
                 Text("Sign Up Page")
                     .foregroundColor(.gray)
+                
             }
             .navigationBarTitle("Sign Up", displayMode: .large)
         }
