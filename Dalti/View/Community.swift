@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+
 extension View {
     func navigationBarItems<L, C, T>(leading: L, center: C, trailing: T) -> some View where L: View, C: View, T: View {
         self.navigationBarItems(leading:
@@ -32,17 +34,19 @@ extension View {
         )
     }
 }
+
 struct Community: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var currentItem : TodayItem?
+    @State var currentItem : PostModel?
+    @StateObject var viewModel = PostsViewModel()
+    @StateObject var viewModel1 = PostViewModel()
     @State var showDeaialPage: Bool = false
     @Namespace var animation
     @State var animateView : Bool = false
     @State var itemType = ["Lost","Found"]
     @State var  ItemType = ""
     @State var dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    
     var body: some View {
         NavigationStack{
             VStack {
@@ -51,40 +55,37 @@ struct Community: View {
                     ForEach(itemType, id: \.self) {
                         Text($0).foregroundColor(Color("lightGreen"))}
                     .font(.custom("SF Pro", size: 16))
-
-
                 }.pickerStyle(.segmented)
                     .frame(width: 345).padding(1)
                 
                 ScrollView(.vertical,showsIndicators: false){
                     VStack(spacing: 0){
-//                        HStack(alignment: .bottom){
-//                            VStack(alignment: .leading, spacing: 8){
-//                                Text("Day 1").font(.callout).foregroundColor(.gray)
-//                            }
-//                        }  .padding(.horizontal)
-//                            .padding(.bottom)
-//                            .opacity(showDeaialPage ? 0 : 1)
-                  
-                        ForEach(items){item in
+                        ForEach(viewModel.posts){post in
                             Button{
                                 withAnimation(.interactiveSpring(response: 0.6,dampingFraction: 0.7,blendDuration: 0.7)){
-                                    currentItem = item
+                                    currentItem = post
                                     showDeaialPage = true
                                 }
                             }
                         label: {
-                            CardView(item: item).overlay(
+                            CardView(item: post).overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color("cornerColor"), lineWidth: 1)
                             )
-                                .scaleEffect(currentItem?.id == item.id && showDeaialPage ? 1 : 0.93)
+                                .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
                         }.buttonStyle(ScaledButtonStyle())
-                                .opacity(showDeaialPage ? (currentItem?.id == item.id ? 1 : 0) : 1)
-                        }.padding(10)
-                    }
+                                .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
+                        }
+                    .onDelete() { indexSet in
+                      viewModel.removePosts(atOffsets: indexSet)
+                    }.padding(10)
                 }
-            }.background(Color("lightWhite"))
+        }
+            }.onAppear() {
+                print("PostsListView appears. and data updates.")
+                self.viewModel.subscribe()
+              }
+            .background(Color("lightWhite"))
          
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
@@ -100,20 +101,13 @@ struct Community: View {
                         .foregroundColor(Color("lightGreen"))
                 })
                 
-                NavigationLink(destination: Post(), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })
             })
             .toolbar {
                 ToolbarItem(placement: .status) {
-//                    Picker("Select the item state", selection: $ItemType) {
-//                        ForEach(itemType, id: \.self) {
-//                            Text($0)}
-//                        .font(.custom("SF Pro", size: 16))
-//
-//
-//                    }.pickerStyle(.segmented)
 
                 }
             }
@@ -136,25 +130,30 @@ struct Community: View {
     }
     
     @ViewBuilder
-    func CardView(item: TodayItem)-> some View{
+    func CardView(item: PostModel)-> some View{
         
         VStack(alignment: .leading, spacing: 15){
 
             ZStack(alignment: .topLeading){
                 GeometryReader{ proxy in
                     let size = proxy.size
-                    Image("image2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size.width, height: size.height)
-                        .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
+//                    Image("image2")
+                    if let url = item.ImageURL1, let data = try? Data(contentsOf: url),
+                       let image = UIImage(data: data){
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                            .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
+                        
+                    }
                     
                 }.frame(height: 400)
 //                LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
                 VStack(alignment: .leading, spacing: 8){
-                    Text(item.title.uppercased())
+                    Text(item.ItemName.uppercased())
                         .font(.callout).fontWeight(.semibold)
-                    Text(item.category.uppercased())
+                    Text(item.ItemState.uppercased())
                         .font(.largeTitle.bold())
                 }.foregroundColor(.white)
                     .padding()
@@ -168,7 +167,7 @@ struct Community: View {
                         .foregroundColor(.black)
                        // .frame(width: 335.75,height: 20.18)
                     if (!animateView){
-                        Text(dummyText).font(.caption).fontWeight(.regular)
+                        Text(item.Description).font(.caption).fontWeight(.regular)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                             .frame(width: 335.75,height: 31.95)
@@ -182,13 +181,13 @@ struct Community: View {
         .matchedGeometryEffect(id: item.id, in: animation)
     }
     
-    func DetailView(item: TodayItem)-> some View{
+    func DetailView(item: PostModel)-> some View{
         ScrollView(.vertical,showsIndicators: false){
             VStack{
                 CardView(item: item)
                     .scaleEffect(animateView ? 1 : 0.93)
                 VStack(spacing: 15){
-                    Text(dummyText).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)
+                    Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)
                     Divider()
                     HStack{
                         Button{
