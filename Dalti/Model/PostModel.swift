@@ -15,7 +15,6 @@ struct PostModel : Identifiable,Codable{
     var ItemState : String
     var Description : String
     var ImageURL : String
-    var ImageURL1 : URL?
     
     
     //    init(id: String? = nil, ItemName: String, ItemState: String, Description: String, ImageURL: UIImage? = nil) {
