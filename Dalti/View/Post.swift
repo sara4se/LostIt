@@ -19,9 +19,11 @@ enum Action {
   case cancel
 }
 struct Post: View {
+
+=======
     var post: PostModel
+
     var body: some View {
-      
         NavigationStack{
             ZStack {
                 Color.gray.opacity(0.1)
@@ -29,6 +31,7 @@ struct Post: View {
                 VStack{
                 
                     Dalti.ItemType()
+                    
     
                 }
              
@@ -68,6 +71,15 @@ extension UIImage {
     }
 }
 struct ItemType: View {
+
+    @State var itemType = ["Select","Lost","Found"]
+    @State var  ItemType = ""
+    @State var Title : String = ""
+    @State var fullText: String = ""
+    @State var Show: Bool = true
+    @State var Show2: Bool = false
+    @FocusState private var amountIsFocused: Bool
+=======
     @Environment(\.presentationMode) private var presentationMode
     @State var presentActionSheet = false
     var mode: Mode = .new
@@ -79,10 +91,25 @@ struct ItemType: View {
     @State var Show2: Bool = false
     @State private var image: UIImage?
 //    @State private var UrlForImage: URL?
+
     var body: some View {
         ZStack {
             Form{
                 Section{
+
+
+                    AddPhoto()}header: {
+                        HStack{
+                            Text("Item Image:")
+                                .textCase(nil)
+                                .font(.custom("SF Pro", size: 16))
+                                .foregroundColor(.black)
+                          
+                                Text("(Optional)")
+                                .textCase(nil)
+                                .font(.custom("SF Pro", size: 12))
+                        }
+=======
                     
                     AddPhoto(image: $image)
     
@@ -94,6 +121,7 @@ struct ItemType: View {
                         
                         Text("(OPTIONAL)")
                             .font(.custom("SF Pro", size: 12))
+
                     }
                 }
                 
@@ -109,23 +137,58 @@ struct ItemType: View {
                     }.pickerStyle(.navigationLink)
                 }
                 Section{
+
+
+                    TextField("Add Name", text: $Title)
+                        .focused($amountIsFocused)
+                        .font(.custom("SF Pro", size: 16))
+                        .lineSpacing(5)
+
+=======
                     
                     TextField("Add Name", text: $viewModel.post.ItemName)
                         .font(.custom("SF Pro", size: 16))
                         .lineSpacing(5)
                     //                    if(!Title.isEmpty){
                     //                        let _ = Show2.toggle()}
+
                 }header: {
                     HStack{
                         Text("Item Name:")
+                            .textCase(nil)
                             .font(.custom("SF Pro", size: 16))
                             .foregroundColor(.black)
+
+                        Text("(Requier)")
+                        .textCase(nil)
+                        .font(.custom("SF Pro", size: 12))
+=======
                         Text("(REQUIRE)")
                             .font(.custom("SF Pro", size: 10))
+
                     }
                     
                 }
                 
+
+                    TextEditorWithPlaceholder(text: $fullText)
+                        .focused($amountIsFocused)
+                        .font(.custom("SF Pro", size: 16))
+                        .frame(width: 355 , height: 104)
+                        .padding(.top, 20)
+                     //   .padding(.leading,10)
+                              
+                } header: {
+                    HStack{
+                    Text("Description:")
+                            .textCase(nil)
+                        .font(.custom("SF Pro", size: 16))
+                       .foregroundColor(.black)
+                        Text("(Optional)")
+                        .textCase(nil)
+                        .font(.custom("SF Pro", size: 12))
+                }
+=======
                 Section{
                     
                     TextEditorWithPlaceholder(text: $viewModel.post.Description)
@@ -142,6 +205,7 @@ struct ItemType: View {
                         Text("(OPTIONAL)")
                             .font(.custom("SF Pro", size: 10))
                     }
+
                 }
                 
                 Section{
@@ -189,7 +253,21 @@ struct ItemType: View {
             }
                 //
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
+                }
+            }
             .pickerStyle(.inline)
+
+            
+        
+=======
+
         }
     }
     func handleCancelTapped() {
@@ -243,6 +321,8 @@ struct TextEditorWithPlaceholder: View {
         }
     }
 
+
+=======
 
 
 let placeHolderImage = UIImage()
@@ -355,3 +435,4 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
     }
     
 }
+
