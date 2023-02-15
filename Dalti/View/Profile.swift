@@ -12,13 +12,14 @@ struct Profile: View {
         NavigationStack {
             ZStack {
                 Text("Profile Page")
+                
             }.toolbar{
                             NavigationLink(destination: Chat(), label:{
                     Label("Chat", systemImage: "message")
                         .foregroundColor(.black)
                 })
                                   
-                                  NavigationLink(destination: Post(), label:{
+                NavigationLink(destination: Post(post: PostModel.init(ItemName: "", ItemState: "", Description: "", ImageURL: "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(.black)
                 })
