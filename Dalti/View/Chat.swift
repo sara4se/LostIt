@@ -14,7 +14,7 @@ struct Chat: View {
                 Text("Chat Page")
             }.toolbar{
                 
-                NavigationLink(destination: Post(), label:{
+                NavigationLink(destination:  Post(post: PostModel.init(ItemName: "", ItemState: "", Description: "", ImageURL: "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(.black)
                 })

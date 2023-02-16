@@ -69,10 +69,11 @@ struct Community: View {
                                 }
                             }
                         label: {
-                            CardView(item: post).overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color("cornerColor"), lineWidth: 1)
-                            )
+                            CardView(item: post)
+//                                .overlay(
+//                                RoundedRectangle(cornerRadius: 8)
+//                                    .stroke(Color("cornerColor"), lineWidth: 1)
+//                            )
                             .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
                         }.buttonStyle(ScaledButtonStyle())
                                 .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
@@ -86,7 +87,7 @@ struct Community: View {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
             }
-            .background(Color("lightWhite"))
+            .background(Color("BackGroundColor"))
             
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:

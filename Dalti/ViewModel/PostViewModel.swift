@@ -61,9 +61,13 @@ class PostViewModel: ObservableObject {
             if err == nil && data != nil {
                 fileRef.downloadURL { downloadUrl, error in
                     if error == nil {
+                        print("this is your data after put it in the storge : \(data.debugDescription)")
+                        print("this is your url after put it in the storge : \(String(describing: downloadUrl?.absoluteString))")
                             guard let url = downloadUrl?.absoluteString else {return}
                                 let post = PostModel(ItemName: ItemName, ItemState: ItemState, Description: Description, ImageURL: url)
+                        print("this is your post after put it in the storge : \(String(describing: post))")
                         let id = self.db.collection("Posts").document().documentID
+                        print("this is your id after put it in the storge : \(String(describing: id))")
                         self.db.collection("Posts").document(id).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": id])
    
                     }

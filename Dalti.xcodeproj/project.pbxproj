@@ -14,6 +14,9 @@
 		5621C781299D4F1900625D55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5621C780299D4F1900625D55 /* GoogleService-Info.plist */; };
 		5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C782299D4F5000625D55 /* PostsViewModel.swift */; };
 		5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C785299D4FB400625D55 /* SDWebImageSwiftUI */; };
+		5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBA1299E700900415833 /* FirebaseMessaging */; };
+		5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAB299E9DC000415833 /* LocationManager.swift */; };
+		5621EBAE299EAA8100415833 /* TodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAD299EAA8000415833 /* TodayCardView.swift */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -33,6 +36,10 @@
 		5621C768299830B700625D55 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		5621C780299D4F1900625D55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5621C782299D4F5000625D55 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
+		5621C7A3299E1B2500625D55 /* Dalti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dalti.entitlements; sourceTree = "<group>"; };
+		5621EBA3299E726200415833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5621EBAB299E9DC000415833 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		5621EBAD299EAA8000415833 /* TodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCardView.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -56,6 +63,7 @@
 			files = (
 				5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */,
 				5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */,
+				5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */,
 				5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */,
 				5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */,
 			);
@@ -64,11 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5621EBA0299E700900415833 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		562C5D0E298ACF2400A23762 = {
 			isa = PBXGroup;
 			children = (
 				562C5D19298ACF2400A23762 /* Dalti */,
 				562C5D18298ACF2400A23762 /* Products */,
+				5621EBA0299E700900415833 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +99,8 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBA3299E726200415833 /* Info.plist */,
+				5621C7A3299E1B2500625D55 /* Dalti.entitlements */,
 				5621C780299D4F1900625D55 /* GoogleService-Info.plist */,
 				562C5D2A298ACF5200A23762 /* Model */,
 				562C5D29298ACF4900A23762 /* ViewModel */,
@@ -114,6 +132,7 @@
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
 				56DED3732990315900453E73 /* CustomCorner.swift */,
+				5621EBAD299EAA8000415833 /* TodayCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				5621C782299D4F5000625D55 /* PostsViewModel.swift */,
+				5621EBAB299E9DC000415833 /* LocationManager.swift */,
 				5621C768299830B700625D55 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
@@ -164,6 +184,7 @@
 				5621C76D2998B73E00625D55 /* FirebaseFirestoreSwift */,
 				5621C76F2998B73E00625D55 /* FirebaseStorage */,
 				5621C785299D4FB400625D55 /* SDWebImageSwiftUI */,
+				5621EBA1299E700900415833 /* FirebaseMessaging */,
 			);
 			productName = Dalti;
 			productReference = 562C5D17298ACF2400A23762 /* Dalti.app */;
@@ -230,10 +251,12 @@
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
+				5621EBAE299EAA8100415833 /* TodayCardView.swift in Sources */,
 				562C5D34298AD03700A23762 /* Chat.swift in Sources */,
 				56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */,
 				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
 				562C5D32298AD02B00A23762 /* Post.swift in Sources */,
+				5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */,
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
 				562C5D2E298AD00700A23762 /* Community.swift in Sources */,
 				56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */,
@@ -362,12 +385,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Dalti/Dalti.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalti/Preview Content\"";
 				DEVELOPMENT_TEAM = 44QNX63HR6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -391,12 +416,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Dalti/Dalti.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalti/Preview Content\"";
 				DEVELOPMENT_TEAM = 44QNX63HR6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,6 +504,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5621C784299D4FB400625D55 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		5621EBA1299E700900415833 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
