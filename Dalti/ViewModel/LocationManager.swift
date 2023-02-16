@@ -86,7 +86,7 @@ class LocationManager: NSObject, ObservableObject {
     }
     
     
-  // To add requst to the notifition center
+  // to add requst to the notifition center
   private func registerNotification() {
     
    
@@ -94,7 +94,7 @@ class LocationManager: NSObject, ObservableObject {
     //creat conent  (what notification disply)
     let notificationContent = UNMutableNotificationContent()
     notificationContent.title = "Welcome to DAN"
-    notificationContent.body = "Post info "
+    notificationContent.body = "Would you like to receive notification of near by loctin posts "
     notificationContent.sound = .default
 
    
