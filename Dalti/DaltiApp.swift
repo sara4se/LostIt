@@ -8,10 +8,16 @@
 import SwiftUI
 
 @main
+
 struct DaltiApp: App {
+    
+    @StateObject private var locationManager = LocationManager()
     var body: some Scene {
         WindowGroup {
             Community()
+                .environmentObject(locationManager)
         }
     }
 }
+
+

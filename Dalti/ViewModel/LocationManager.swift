@@ -16,13 +16,13 @@ class LocationManager: NSObject, ObservableObject {
   // circle Notification to add to Trigger to add request to the notifition Center
   lazy var Region = makeRegion()
   
-  @Published var didArriveAtTakeout = false
+ // @Published var NearLoction = false
   // 1
-  lazy var locationManager = makeLocationManager()
+  lazy var locationManager = LocationManager()
   // 2
   
 // to updates the location
-  private func makeLocationManager() -> CLLocationManager {
+  private func LocationManager() -> CLLocationManager {
     // 3
     let manager = CLLocationManager()
     manager.allowsBackgroundLocationUpdates = true
@@ -40,6 +40,7 @@ class LocationManager: NSObject, ObservableObject {
       identifier: UUID().uuidString)
     // 3
     region.notifyOnEntry = true
+ 
     // 4
     return region
   }
@@ -125,6 +126,9 @@ class LocationManager: NSObject, ObservableObject {
     notificationCenter.delegate = self
   }
 }
+
+
+
 extension LocationManager: UNUserNotificationCenterDelegate {
   // 1
   func userNotificationCenter(
@@ -134,7 +138,7 @@ extension LocationManager: UNUserNotificationCenterDelegate {
   ) {
     // 2
     print("Received Notification")
-    didArriveAtTakeout = true
+    //  NearLoction = true
     // 3
     completionHandler()
   }
@@ -148,7 +152,7 @@ extension LocationManager: UNUserNotificationCenterDelegate {
   ) {
     // 5
     print("Received Notification in Foreground")
-    didArriveAtTakeout = true
+    //  NearLoction = true
     // 6
     completionHandler(.sound)
   }

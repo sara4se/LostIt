@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct Community: View {
-    
+    @EnvironmentObject private var locationManager: LocationManager
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var currentItem : TodayItem?
     @State var showDeaialPage: Bool = false

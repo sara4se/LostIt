@@ -346,6 +346,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of the found item";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "pleas allow to got Notifition of near by post ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "pleas allow to got Notifition of near by post ";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -378,6 +380,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of the found item";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "pleas allow to got Notifition of near by post ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "pleas allow to got Notifition of near by post ";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To select image and upload a post on \"Ligata\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

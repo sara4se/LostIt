@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 
 struct Post: View {
+    @EnvironmentObject private var locationManager: LocationManager
     var body: some View {
         NavigationStack{
             ZStack {
@@ -30,6 +31,7 @@ struct Post: View {
 }
 
 struct Post_Previews: PreviewProvider {
+    @EnvironmentObject private var locationManager: LocationManager
     static var previews: some View {
         Post()
     }
@@ -122,6 +124,8 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
 }
 
 struct ItemType: View {
+    @EnvironmentObject private var locationManager: LocationManager
+    @State private var Save = false
     @State var itemType = ["Select","Lost","Found"]
     @State var  ItemType = ""
     @State var Title : String = ""
@@ -131,129 +135,154 @@ struct ItemType: View {
     @FocusState private var amountIsFocused: Bool
     var body: some View {
         ZStack {
-          
-            Form{
-                
-                Section{
+            VStack {
+              
+                Form{
+                    
+                    Section{
 
-                    AddPhoto()}header: {
+                        AddPhoto()}header: {
+                            HStack{
+                                Text("Item Image:")
+                                    .textCase(nil)
+                                    .font(.custom("SF Pro", size: 16))
+                                    .foregroundColor(.black)
+                              
+                                    Text("(Optional)")
+                                    .textCase(nil)
+                                    .font(.custom("SF Pro", size: 12))
+                            }
+                        }
+                    
+                    Section {
+                        Picker("Select the item state", selection: $ItemType) {
+                            ForEach(itemType, id: \.self) {
+                                Text($0)}
+                            .font(.custom("SF Pro", size: 16))
+                            if(!ItemType.isEmpty){
+                                let _ = Show2.toggle()}
+                        }.pickerStyle(.navigationLink)
+                    }
+                    Section{
+
+                        TextField("Add Name", text: $Title)
+                            .focused($amountIsFocused)
+                            .font(.custom("SF Pro", size: 16))
+                            .lineSpacing(5)
+
+                    }header: {
                         HStack{
-                            Text("Item Image:")
+                            Text("Item Name:")
                                 .textCase(nil)
                                 .font(.custom("SF Pro", size: 16))
                                 .foregroundColor(.black)
-                          
-                                Text("(Optional)")
-                                .textCase(nil)
-                                .font(.custom("SF Pro", size: 12))
-                        }
-                    }
-                
-                Section {
-                    Picker("Select the item state", selection: $ItemType) {
-                        ForEach(itemType, id: \.self) {
-                            Text($0)}
-                        .font(.custom("SF Pro", size: 16))
-                        if(!ItemType.isEmpty){
-                            let _ = Show2.toggle()}
-                    }.pickerStyle(.navigationLink)
-                }
-                Section{
-
-                    TextField("Add Name", text: $Title)
-                        .focused($amountIsFocused)
-                        .font(.custom("SF Pro", size: 16))
-                        .lineSpacing(5)
-
-                }header: {
-                    HStack{
-                        Text("Item Name:")
+                            Text("(Requier)")
                             .textCase(nil)
+                            .font(.custom("SF Pro", size: 12))
+                        }
+                        
+                    }
+
+                    Section{
+                    
+                        TextEditorWithPlaceholder(text: $fullText)
+                            .focused($amountIsFocused)
                             .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(.black)
-                        Text("(Requier)")
-                        .textCase(nil)
-                        .font(.custom("SF Pro", size: 12))
+                            .frame(width: 355 , height: 104)
+                            .padding(.top, 20)
+                         //   .padding(.leading,10)
+                                  
+                    } header: {
+                        HStack{
+                        Text("Description:")
+                                .textCase(nil)
+                            .font(.custom("SF Pro", size: 16))
+                           .foregroundColor(.black)
+                            Text("(Optional)")
+                            .textCase(nil)
+                            .font(.custom("SF Pro", size: 12))
+                    }
                     }
                     
-                }
+                    Section{
+                        Toggle(
+                            isOn: $Show,
+                            label:{
+                                Text("Show phone number ")
+                                    .font(.custom("SF Pro", size: 16))
+                                
+                            })}
+                   
+                footer:{
+                 
+                    
+                            Button {
+                               CheckAuth()
+                        } label: {
+                          if(!ItemType.isEmpty && !Title.isEmpty){
+                                Text("POST")
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                                    .frame(width: 300 , height: 53)
+                                    .background(Color(("Mygreen")))
+                                    .cornerRadius(8)
+                            }else{
+                                Text("POST")
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                                    .frame(width: 300 , height: 53)
+                                    .background(Color(("Mygray")))
+                                    .cornerRadius(8)
+                            }
 
-                Section{
-                
-                    TextEditorWithPlaceholder(text: $fullText)
-                        .focused($amountIsFocused)
-                        .font(.custom("SF Pro", size: 16))
-                        .frame(width: 355 , height: 104)
-                        .padding(.top, 20)
-                     //   .padding(.leading,10)
                               
-                } header: {
-                    HStack{
-                    Text("Description:")
-                            .textCase(nil)
-                        .font(.custom("SF Pro", size: 16))
-                       .foregroundColor(.black)
-                        Text("(Optional)")
-                        .textCase(nil)
-                        .font(.custom("SF Pro", size: 12))
-                }
-                }
-                
-                Section{
-                    Toggle(
-                        isOn: $Show,
-                        label:{
-                            Text("Show phone number ")
-                                .font(.custom("SF Pro", size: 16))
                             
-                        })}
-               
-            footer:{
-             
-                
-                        Button {
-                           
-                    } label: {
-                      if(!ItemType.isEmpty && !Title.isEmpty){
-                            Text("POST")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: 300 , height: 53)
-                                .background(Color(("Mygreen")))
-                                .cornerRadius(8)
-                        }else{
-                            Text("POST")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(width: 300 , height: 53)
-                                .background(Color(("Mygray")))
-                                .cornerRadius(8)
+                        }.disabled(ItemType.isEmpty || Title.isEmpty)
+                        .padding(.all)
+                }
+                      
+
+                    
+
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+
+                        Button("Done") {
+                            amountIsFocused = false
                         }
-
-                          
-                        
-                    }.disabled(ItemType.isEmpty || Title.isEmpty)
-                    .padding(.all)
-            }
-                  
-
-                
-
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-
-                    Button("Done") {
-                        amountIsFocused = false
                     }
                 }
-            }
-            .pickerStyle(.inline)
+                .pickerStyle(.inline)
+                
             
-        
+            }
+            .alert(isPresented: $Save) {
+                Alert(
+                  title: Text("Notifition"),
+                  message:
+                    Text("""
+                      your post is updated .
+                      Would you like to be notified on near by post ?
+                      """),
+                  primaryButton: .default(Text("Yes")) {
+                    requestNotification()
+                  },
+                  secondaryButton: .default(Text("No"))
+                )
+        }
         }
     }
+    
+    func CheckAuth() {
+        Save = true
+    }
+
+    func requestNotification() {
+      locationManager.validateLocationAuthorizationStatus()
+    }
+
    
 }
 
