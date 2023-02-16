@@ -16,7 +16,6 @@
 		5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C785299D4FB400625D55 /* SDWebImageSwiftUI */; };
 		5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBA1299E700900415833 /* FirebaseMessaging */; };
 		5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAB299E9DC000415833 /* LocationManager.swift */; };
-		5621EBAE299EAA8100415833 /* TodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAD299EAA8000415833 /* TodayCardView.swift */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -39,7 +38,6 @@
 		5621C7A3299E1B2500625D55 /* Dalti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dalti.entitlements; sourceTree = "<group>"; };
 		5621EBA3299E726200415833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5621EBAB299E9DC000415833 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		5621EBAD299EAA8000415833 /* TodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCardView.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
 				56DED3732990315900453E73 /* CustomCorner.swift */,
-				5621EBAD299EAA8000415833 /* TodayCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,7 +248,6 @@
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
-				5621EBAE299EAA8100415833 /* TodayCardView.swift in Sources */,
 				562C5D34298AD03700A23762 /* Chat.swift in Sources */,
 				56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */,
 				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
@@ -393,6 +389,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ask for location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +421,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ask for location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
