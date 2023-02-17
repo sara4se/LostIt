@@ -34,14 +34,22 @@ import CoreLocation
 import UserNotifications
 
 class LocationManager: NSObject, ObservableObject {
-    // 24.793550,46.746728
-    let location = CLLocationCoordinate2D(latitude: 24.793550, longitude: 46.746728)
+   // 24.793550,46.746728
+    @Published var location = CLLocationCoordinate2D()
+    //CLLocationCoordinate2D(latitude: 24.793550, longitude: 46.746728)
   let notificationCenter = UNUserNotificationCenter.current()
   lazy var storeRegion = makeStoreRegion()
   @Published var didArriveAtTakeout = false
   // 1
   lazy var locationManager = makeLocationManager()
-  // 2
+    
+    func locationCurrnent() -> CLLocationCoordinate2D{
+        let lc = locationManager.location
+        location = CLLocationCoordinate2D(latitude: lc!.coordinate.latitude, longitude: lc!.coordinate.longitude)
+//        print("currentLoc: ",location.latitude)
+//        print("currentLoc: ",location.longitude)
+     return location
+    }
   private func makeLocationManager() -> CLLocationManager {
     // 3
     let manager = CLLocationManager()
@@ -84,7 +92,16 @@ class LocationManager: NSObject, ObservableObject {
       break
     }
   }
-
+      func viewDidLoad() {
+        locationManager.requestWhenInUseAuthorization()
+        var currentLoc: CLLocation!
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+        CLLocationManager.authorizationStatus() == .authorizedAlways) {
+           currentLoc = locationManager.location
+           print("currentLoc: ",currentLoc.coordinate.latitude)
+           print("currentLoc: ",currentLoc.coordinate.longitude)
+        }
+     }
   // 1
   private func requestNotificationAuthorization() {
     // 2
@@ -101,7 +118,7 @@ class LocationManager: NSObject, ObservableObject {
   }
 
   // 1
-  private func registerNotification() {
+  private func registerNotification(){
     // 2
     let notificationContent = UNMutableNotificationContent()
     notificationContent.title = "Welcome to Swifty TakeOut"
@@ -116,14 +133,15 @@ class LocationManager: NSObject, ObservableObject {
       identifier: UUID().uuidString,
       content: notificationContent,
       trigger: trigger)
-
+    
+      UNUserNotificationCenter.current().add(request)
     // 5
-    notificationCenter
-      .add(request) { error in
-        if error != nil {
-          print("Error: \(String(describing: error))")
-        }
-      }
+//    notificationCenter
+//      .add(request) { error in
+//        if error != nil {
+//          print("Error: \(String(describing: error))")
+//        }
+//      }
   }
 
   // 1
@@ -148,33 +166,16 @@ extension LocationManager: UNUserNotificationCenterDelegate {
   }
 
   // 4
-//  func userNotificationCenter(
-//    _ center: UNUserNotificationCenter,
-//    willPresent notification: UNNotification,
-//    withCompletionHandler completionHandler:
-//      @escaping (UNNotificationPresentationOptions) -> Void
-//  ) {
-//    // 5
-//    print("Received Notification in Foreground")
-//    didArriveAtTakeout = true
-//    // 6
-//    completionHandler(.sound)
-//  }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler:  @escaping (UNNotificationPresentationOptions) -> Void) {
-      let userInfo = response.notification.request.content.userInfo
-      
-      // ...
-      
-      // With swizzling disabled you must let Messaging know about the message, for Analytics
-      // Messaging.messaging().appDidReceiveMessage(userInfo)
-      
-      // Print full message.
-      print(userInfo)
-        print("Received Notification in Foreground")
-        didArriveAtTakeout = true
-        completionHandler(.sound)
-    }
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler:
+      @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    // 5
+    print("Received Notification in Foreground")
+    didArriveAtTakeout = true
+    // 6
+    completionHandler(.sound)
+  }
 }

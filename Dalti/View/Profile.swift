@@ -13,7 +13,8 @@ struct Profile: View {
             ZStack {
                 Text("Profile Page")
                 
-            }.toolbar{
+            }
+                .toolbar{
                             NavigationLink(destination: Chat(), label:{
                     Label("Chat", systemImage: "message")
                         .foregroundColor(.black)
@@ -27,7 +28,7 @@ struct Profile: View {
                 
             }
             .navigationBarTitle("Profile", displayMode: .large)
-        }
+        }.background(Color("BackGroundColor"))
         
     }
 }

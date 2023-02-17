@@ -36,8 +36,8 @@
 		5621C780299D4F1900625D55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5621C782299D4F5000625D55 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		5621C7A3299E1B2500625D55 /* Dalti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dalti.entitlements; sourceTree = "<group>"; };
-		5621EBA3299E726200415833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5621EBAB299E9DC000415833 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		5621EBB1299F9FCE00415833 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -97,7 +97,8 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
-				5621EBA3299E726200415833 /* Info.plist */,
+				56DED36E29902EF000453E73 /* Helper */,
+				5621EBB1299F9FCE00415833 /* Info.plist */,
 				5621C7A3299E1B2500625D55 /* Dalti.entitlements */,
 				5621C780299D4F1900625D55 /* GoogleService-Info.plist */,
 				562C5D2A298ACF5200A23762 /* Model */,
@@ -121,7 +122,6 @@
 		562C5D28298ACF4100A23762 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				56DED36E29902EF000453E73 /* Helper */,
 				562C5D2B298ACFBD00A23762 /* SignUp.swift */,
 				562C5D1C298ACF2400A23762 /* SignIn.swift */,
 				562C5D2D298AD00700A23762 /* Community.swift */,
