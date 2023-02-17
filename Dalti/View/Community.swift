@@ -8,36 +8,12 @@
 import SwiftUI
 import Firebase
 import SDWebImageSwiftUI
-extension View {
-    func navigationBarItems<L, C, T>(leading: L, center: C, trailing: T) -> some View where L: View, C: View, T: View {
-        self.navigationBarItems(leading:
-                                    HStack{
-            HStack {
-                leading
-            }
-            .frame(width: 60, alignment: .leading)
-            Spacer()
-            HStack {
-                center
-            }
-            .frame(width: 300, alignment: .center)
-            Spacer()
-            HStack {
-                //Text("asdasd")
-                trailing
-            }
-            //.background(Color.blue)
-            .frame(width: 100, alignment: .trailing)
-        }
-                                //.background(Color.yellow)
-            .frame(width: UIScreen.main.bounds.size.width-32)
-        )
-    }
-}
-
+import UserNotifications
+ 
 struct Community: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject private var locationManager: LocationManager
     @State var currentItem : PostModel?
     @StateObject var viewModels = PostsViewModel()
     @StateObject var viewModel = PostViewModel()
@@ -51,7 +27,14 @@ struct Community: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Divider()
+//                Picker(selection: $selectedSchool, label: Text("School Name")) {
+//                    ForEach(self.schoolData.datas.sorted(by: { $0.name < $1.name } )) {i in
+//                        Text(self.schoolData.datas.count != 0 ? i.name : "No Schools Available").tag(i as schoolName?)
+//                    }
+//                }
+//                Text("Selected School: \(selectedSchool?.name ?? "No School Selected")")
+//
+//                Divider()
                 Picker("Select the item state", selection: $ItemType) {
                     ForEach(itemType, id: \.self) {
                         Text($0).foregroundColor(Color("lightGreen"))}
@@ -70,11 +53,11 @@ struct Community: View {
                             }
                         label: {
                             CardView(item: post)
-//                                .overlay(
-//                                RoundedRectangle(cornerRadius: 8)
-//                                    .stroke(Color("cornerColor"), lineWidth: 1)
-//                            )
-                            .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
+                            //                                .overlay(
+                            //                                RoundedRectangle(cornerRadius: 8)
+                            //                                    .stroke(Color("cornerColor"), lineWidth: 1)
+                            //                            )
+                                .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
                         }.buttonStyle(ScaledButtonStyle())
                                 .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
                         }
@@ -83,12 +66,15 @@ struct Community: View {
                         }.padding(10)
                     }
                 }
-            }.onAppear() {
+            }
+            .onAppear() {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
+                locationManager.locationCurrnent()
+                print("long",  locationManager.locationCurrnent().longitude)
+                print("lat",  locationManager.locationCurrnent().latitude)
             }
             .background(Color("BackGroundColor"))
-            
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                                     HStack {
@@ -155,13 +141,11 @@ struct Community: View {
                     
                     
                 }.frame(height: 400)
-                //                LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
+                                LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
                 VStack(alignment: .leading, spacing: 8){
-//                    Text(item.ItemName.uppercased())
-//                        .font(.callout).fontWeight(.semibold)
                     Text(item.ItemState.uppercased())
                         .font(.largeTitle.bold())
-                }.foregroundColor(.white)
+                }.foregroundColor(Color("colorOfText"))
                     .padding()
                     .offset(y: currentItem?.id == item.id && animateView ? safeArea().top : 0)
             }
@@ -170,19 +154,19 @@ struct Community: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(item.ItemName).font(.callout).fontWeight(.semibold)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("colorOfText"))
                     // .frame(width: 335.75,height: 20.18)
-                    if (!animateView){
-                        Text(item.Description).font(.caption).fontWeight(.regular)
+                    Text(animateView ? "" : item.Description )
+                        .font(.caption).fontWeight(.regular)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("colorOfText"))
                             .frame(width: 335.75,height: 31.95)
-                    }
+                    
                 }.padding([.leading,.top])
             }
-        }
+        }.foregroundColor(Color("BackGroundColor"))
         .background{
-            RoundedRectangle(cornerRadius: 8,style: .continuous).fill(.white)
+            RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor")).border(animateView ? .clear : .gray,width: 1)
         }
         .matchedGeometryEffect(id: item.id, in: animation)
     }
@@ -206,6 +190,32 @@ struct Community: View {
                             Text("Call")
                         }
                         Button{
+                            requestNotification()
+                             print("this is loction manger resilt ",locationManager.didArriveAtTakeout)
+                            if (locationManager.didArriveAtTakeout){
+                                
+//                                let content = UNMutableNotificationContent()
+//                                content.title = "Feed the cat"
+//                                content.subtitle = "It looks hungry"
+//                                content.sound = UNNotificationSound.default
+//
+//                                // show this notification five seconds from now
+//                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//                                // choose a random identifier
+//                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//                                // add our notification request
+//                                UNUserNotificationCenter.current().add(request)
+    //                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+    //                                if success {
+    //                                    print("All set!")
+    //                                } else if let error = error {
+    //                                    print(error.localizedDescription)
+    //                                }
+    //                            }
+                            }
+                        
                         }
                     label: {
                         Text("Chat")
@@ -226,7 +236,8 @@ struct Community: View {
                     currentItem = nil
                     showDeaialPage = false
                 }
-            }label: {
+            }
+            label: {
                 Image(systemName: "xmark.circle.fill")
                     .font(.title)
                     .foregroundColor(.white)
@@ -234,8 +245,9 @@ struct Community: View {
                 .padding(.top,safeArea().top)
                 .offset(y: -10)
                 .opacity(animateView ? 1 : 0)
-        }) .background{
-            RoundedRectangle(cornerRadius: 8,style: .continuous).fill(.white)
+        })
+        .background{
+            RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor"))
         }
         .onAppear{
             withAnimation(.interactiveSpring(response: 0.6,
@@ -244,6 +256,9 @@ struct Community: View {
             }
         }
         .transition(.identity)
+    }
+    func requestNotification() {
+      locationManager.validateLocationAuthorizationStatus()
     }
     func handleDeleteTapped() {
         viewModel.handleDeleteTapped()
@@ -258,17 +273,5 @@ struct Community: View {
 struct Community_Previews: PreviewProvider {
     static var previews: some View {
         Community()
-    }
-}
-extension View {
-    func safeArea()->UIEdgeInsets{
-        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        else{
-            return .zero
-        }
-        guard let safeArea = screen.windows.first?.safeAreaInsets else{
-            return .zero
-        }
-        return safeArea
     }
 }

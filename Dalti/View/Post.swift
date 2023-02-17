@@ -90,7 +90,7 @@ struct ItemType: View {
                     HStack{
                         Text("Item Image:")
                             .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("colorOfText"))
                         
                         Text("(OPTIONAL)")
                             .font(.custom("SF Pro", size: 12))
@@ -102,11 +102,11 @@ struct ItemType: View {
                         ForEach(itemType, id: \.self) {
                             Text($0)}
                         .font(.custom("SF Pro", size: 16))
-                        if(!viewModel.post.ItemState.isEmpty){
-                            let _ = Show2.toggle()
-                            
-                        }
                     }.pickerStyle(.navigationLink)
+                    if(!viewModel.post.ItemState.isEmpty){
+                        let _ = Show2.toggle()
+                        
+                    }
                 }
                 Section{
                     
@@ -119,7 +119,7 @@ struct ItemType: View {
                     HStack{
                         Text("Item Name:")
                             .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("colorOfText"))
                         Text("(REQUIRE)")
                             .font(.custom("SF Pro", size: 10))
                     }
@@ -138,7 +138,7 @@ struct ItemType: View {
                     HStack{
                         Text("Description:")
                             .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("colorOfText"))
                         Text("(OPTIONAL)")
                             .font(.custom("SF Pro", size: 10))
                     }
@@ -166,14 +166,14 @@ struct ItemType: View {
                 } label: {
                     
                     if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){
-                        Text("POST")
+                        Text("Post")
                             .foregroundColor(.white)
                             .font(.headline)
                             .frame(width: 300 , height: 53)
                             .background(Color(("Mygreen")))
                             .cornerRadius(8)
                     }else{
-                        Text("POST")
+                        Text("Post")
                             .foregroundColor(.white)
                             .font(.headline)
                             .frame(width: 300 , height: 53)
@@ -277,14 +277,16 @@ struct AddPhoto: View {
                 .cornerRadius(8)
                 .overlay( RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(.white), lineWidth: 1))
-                .background(Color("Mygray"))
+                .background(Color("cornerColor"))
                 .cornerRadius(8)
             
             if (!shouldPresentActionScheet && !shouldPresentImagePicker && shouldPresentCamera){
                 Image(systemName: "plus")
                     .resizable()
                     .frame(width: 68 , height: 76)
-                .foregroundColor(Color("darkgray"))}
+                .foregroundColor(Color("darkgray"))
+                
+            }
      
         }
         

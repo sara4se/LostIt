@@ -10,11 +10,12 @@ import FirebaseCore
 import FirebaseMessaging
 class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.Message_ID"
+ 
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        
-        
+       
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -53,14 +54,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    
 }
 
 @main
 struct DaltiApp: App {
+    @StateObject private var locationManager = LocationManager()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            Community()
+            Community().environmentObject(locationManager)
         }
     }
 }
@@ -87,8 +90,47 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Change this to your preferred presentation option
       completionHandler([[.banner, .sound]])
   }
-  
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
+    
+ 
+  /*  func getNotificationSettings(_ center: UNUserNotificationCenter,completionHandler: @escaping (UNNotificationSettings) -> Void){
+        center.getNotificationSettings { settings in
+            guard (settings.authorizationStatus == .authorized) ||
+                    (settings.authorizationStatus == .provisional) else { return }
+            let current = UNUserNotificationCenter.current()
+            if settings.alertSetting == .enabled {
+                current.getNotificationSettings(completionHandler: { permission in
+                    switch permission.authorizationStatus  {
+                    case .authorized:
+                        print("User granted permission for notification")
+                    case .denied , .notDetermined:
+                        print("User denied notification permission")
+                        current.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                            if success {
+                                    print("All set!")
+                                } else if let error = error {
+                                    print(error.localizedDescription)
+                                }
+                        }
+
+                    case .provisional:
+                        // @available(iOS 12.0, *)
+                        print("The application is authorized to post non-interruptive user notifications.")
+                    case .ephemeral:
+                        // @available(iOS 14.0, *)
+                        print("The application is temporarily authorized to post notifications. Only available to app clips.")
+                    @unknown default:
+                        print("Unknow Status")
+                    }
+                })
+             } else {
+                // Schedule a notification with a badge and sound.
+            }
+//
+          
+         
+        }}
+  */
+  /* func userNotificationCenter(_ center: UNUserNotificationCenter,
                               didReceive response: UNNotificationResponse,
                               withCompletionHandler completionHandler: @escaping () -> Void) {
     let userInfo = response.notification.request.content.userInfo
@@ -100,9 +142,44 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     // Print full message.
     print(userInfo)
-    
+      center.getNotificationSettings { settings in
+          guard (settings.authorizationStatus == .authorized) ||
+                  (settings.authorizationStatus == .provisional) else { return }
+          let current = UNUserNotificationCenter.current()
+          if settings.alertSetting == .enabled {
+              current.getNotificationSettings(completionHandler: { permission in
+                  switch permission.authorizationStatus  {
+                  case .authorized:
+                      print("User granted permission for notification")
+                  case .denied , .notDetermined:
+                      print("User denied notification permission")
+                      current.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                          if success {
+                                  print("All set!")
+                              } else if let error = error {
+                                  print(error.localizedDescription)
+                              }
+                      }
+
+                  case .provisional:
+                      // @available(iOS 12.0, *)
+                      print("The application is authorized to post non-interruptive user notifications.")
+                  case .ephemeral:
+                      // @available(iOS 14.0, *)
+                      print("The application is temporarily authorized to post notifications. Only available to app clips.")
+                  @unknown default:
+                      print("Unknow Status")
+                  }
+              })
+           } else {
+              // Schedule a notification with a badge and sound.
+          }
+//
+        
+       
+      }
     completionHandler()
-  }
+  }*/
   
   func application(_ application: UIApplication,
                    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -125,12 +202,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   }
 
     func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
-        print(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())
+        print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
     }
 }
 
+
 extension AppDelegate: MessagingDelegate {
-  
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     print("Firebase registration token: \(String(describing: fcmToken))")
     

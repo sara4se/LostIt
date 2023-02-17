@@ -12,7 +12,8 @@ struct Chat: View {
         NavigationStack{
             ZStack {
                 Text("Chat Page")
-            }.toolbar{
+            }.background(Color("BackGroundColor"))
+                .toolbar{
                 
                 NavigationLink(destination:  Post(post: PostModel.init(ItemName: "", ItemState: "", Description: "", ImageURL: "")), label:{
                     Label("Post", systemImage: "plus")
@@ -20,7 +21,13 @@ struct Chat: View {
                 })
             }
             .navigationBarTitle("Chat", displayMode: .large)
+        }.background(alignment: .top){
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .fill(Color("BackGroundColor"))
+                .frame(width: .infinity,height: .infinity)
+                .ignoresSafeArea()
         }
+        
     }
 }
 
