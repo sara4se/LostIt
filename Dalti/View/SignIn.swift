@@ -12,12 +12,15 @@ struct SignIn: View {
     @State var  ItemType = ""
     var body: some View {
         NavigationStack{
+       
+            ZStack{
+                Color("BackGroundColor").ignoresSafeArea()
+            }
             NavigationLink {
                 // destination view to navigation to
                 Community()
             } label: {
-                Text("Sign Up Page")
-                    .foregroundColor(.gray)
+                
             }
             .navigationTitle("Sign In")
         }

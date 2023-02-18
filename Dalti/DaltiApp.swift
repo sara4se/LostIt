@@ -59,11 +59,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct DaltiApp: App {
-    @StateObject private var locationManager = LocationManager()
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            Community().environmentObject(locationManager)
+            Splash()
         }
     }
 }
@@ -73,23 +73,23 @@ struct DaltiApp: App {
 extension AppDelegate: UNUserNotificationCenterDelegate {
   
   // Receive displayed notifications for iOS 10 devices.
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                              willPresent notification: UNNotification,
-                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
-                              -> Void) {
-    let userInfo = notification.request.content.userInfo
-    
-    // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
-    
-    // ...
-    
-    // Print full message.
-    print(userInfo)
-    
-    // Change this to your preferred presentation option
-      completionHandler([[.banner, .sound]])
-  }
+//  func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                              willPresent notification: UNNotification,
+//                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+//                              -> Void) {
+//    let userInfo = notification.request.content.userInfo
+//    
+//    // With swizzling disabled you must let Messaging know about the message, for Analytics
+//    // Messaging.messaging().appDidReceiveMessage(userInfo)
+//    
+//    // ...
+//    
+//    // Print full message.
+//    print(userInfo)
+//    
+//    // Change this to your preferred presentation option
+//      completionHandler([[.banner, .sound]])
+//  }
     
  
   /*  func getNotificationSettings(_ center: UNUserNotificationCenter,completionHandler: @escaping (UNNotificationSettings) -> Void){

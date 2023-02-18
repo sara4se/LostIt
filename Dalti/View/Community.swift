@@ -23,9 +23,11 @@ struct Community: View {
     @State var itemType = ["Lost","Found"]
     var completionHandler: ((Result<Action, Error>) -> Void)?
     @State var  ItemType = ""
+    @State private var orderPlaced = false
     @State var dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
     var body: some View {
         NavigationStack{
+          
             VStack {
 //                Picker(selection: $selectedSchool, label: Text("School Name")) {
 //                    ForEach(self.schoolData.datas.sorted(by: { $0.name < $1.name } )) {i in
@@ -66,11 +68,24 @@ struct Community: View {
                         }.padding(10)
                     }
                 }
-            }
+            }.alert(isPresented: $orderPlaced) {
+                Alert(
+                  title: Text("Food Ordered"),
+                  message:
+                    Text("""
+                      Your food has been ordered.
+                      Would you like to be notified on arrival?
+                      """),
+                  primaryButton: .default(Text("Yes")) {
+                    requestNotification()
+                  },
+                  secondaryButton: .default(Text("No"))
+                )
+              }
             .onAppear() {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
-                locationManager.locationCurrnent()
+//                locationManager.locationCurrnent()
                 print("long",  locationManager.locationCurrnent().longitude)
                 print("lat",  locationManager.locationCurrnent().latitude)
             }
@@ -134,11 +149,17 @@ struct Community: View {
                     //                            Image(uiImage: image)
                     //                            //                    Image(uiImage: item.ImageURL)
                     //                                .resizable()
+//                    AsyncImage(url: URL(string: "https://example.com/icon.png")) { image in
+//                        image.resizable(resizingMode: .tile)
+//                    } placeholder: {
+//                        Color.green
+//                    }
                     AnimatedImage(url: URL(string: item.ImageURL)).resizable()
+//                        .placeholder(UIImage(systemName: "text.below.photo.fill"))
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size.width, height: size.height)
-                        .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
-                    
+                        .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8)).foregroundColor(.gray)
+               
                     
                 }.frame(height: 400)
                                 LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
@@ -190,7 +211,7 @@ struct Community: View {
                             Text("Call")
                         }
                         Button{
-                            requestNotification()
+                            
                              print("this is loction manger resilt ",locationManager.didArriveAtTakeout)
                             if (locationManager.didArriveAtTakeout){
                                 
@@ -257,6 +278,10 @@ struct Community: View {
         }
         .transition(.identity)
     }
+    func placeOrder() {
+      orderPlaced = true
+    }
+
     func requestNotification() {
       locationManager.validateLocationAuthorizationStatus()
     }
@@ -273,5 +298,6 @@ struct Community: View {
 struct Community_Previews: PreviewProvider {
     static var previews: some View {
         Community()
+            //.environmentObject(locationManager)
     }
 }

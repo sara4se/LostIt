@@ -20,25 +20,188 @@ enum Action {
 }
 struct Post: View {
     var post: PostModel
+    @Environment(\.presentationMode) private var presentationMode
+    @State var presentActionSheet = false
+    var mode: Mode = .new
+   var completionHandler: ((Result<Action, Error>) -> Void)?
+    @State var itemType = ["Lost","Found"]
+    @ObservedObject var viewModel = PostViewModel()
+//    @ObservedObject var viewModel2 = PostsViewModel()
+    @State var Show: Bool = true
+    @State var Show2: Bool = false
+    @State private var image: UIImage?
+    @State private var orderPlaced = false
+    @EnvironmentObject private var locationManager: LocationManager
     var body: some View {
       
         NavigationStack{
             ZStack {
-                Color.gray.opacity(0.1)
-                .ignoresSafeArea()
-                VStack{
+                Color("BackGroundColor").ignoresSafeArea()
+                  Form{
+                            Section{
+                                
+                                PhotoView(image: $image)
                 
-                    Dalti.ItemType()
-    
-                }
+                            }header: {
+                                HStack{
+                                    Text("Item Image:")
+                                        .font(.custom("SF Pro", size: 16))
+                                        .foregroundColor(Color("colorOfText"))
+                                    Text("(OPTIONAL)")
+                                        .font(.custom("SF Pro", size: 12))
+                                }
+                            }
+                            
+                            Section {
+                                
+                                Picker("Select the item state", selection: $viewModel.post.ItemState) {
+                                    ForEach(itemType, id: \.self) {
+                                        Text($0)}
+                                    .font(.custom("SF Pro", size: 16))
+                                }.pickerStyle(.navigationLink)
+                                if(!viewModel.post.ItemState.isEmpty){
+                                    let _ = Show2.toggle()
+                                    
+                                }
+                            }
+                            Section{
+                                
+                                TextField("Add Name", text: $viewModel.post.ItemName)
+                                    .font(.custom("SF Pro", size: 16))
+                                    .lineSpacing(5)
+                                //                    if(!Title.isEmpty){
+                                //                        let _ = Show2.toggle()}
+                            }header: {
+                                HStack{
+                                    Text("Item Name:")
+                                        .font(.custom("SF Pro", size: 16))
+                                        .foregroundColor(Color("colorOfText"))
+                                    Text("(REQUIRE)")
+                                        .font(.custom("SF Pro", size: 10))
+                                }
+                                
+                            }
+                            
+                            Section{
+                                
+                                TextEditorWithPlaceholder(text: $viewModel.post.Description)
+                                    .font(.custom("SF Pro", size: 16))
+                                    .frame(width: 355 , height: 104)
+                                    .padding(.top, 20)
+                                    .padding(.leading,20)
+                                
+                            } header: {
+                                HStack{
+                                    Text("Description:")
+                                        .font(.custom("SF Pro", size: 16))
+                                        .foregroundColor(Color("colorOfText"))
+                                    Text("(OPTIONAL)")
+                                        .font(.custom("SF Pro", size: 10))
+                                }
+                            }
+                            
+                            Section{
+                                Toggle(
+                                    isOn: $Show,
+                                    label:{
+                                        Text("Show phone number ")
+                                            .font(.custom("SF Pro", size: 16))
+                                        
+                                    })}
+                            
+                        footer:{
+                            Button(action: placeOrder) {
+                                Text("Place Order:")
+                                .foregroundColor(.white)
+                                .frame(minWidth: 100, maxWidth: .infinity)
+                                .frame(height: 45)
+                            }
+                            .background(Color("rw-green"))
+                            .cornerRadius(3.0)
+                            
+                            Button {
+                                
+                                handleDoneTapped()
+                                
+            //                    if(image != nil){
+            //                        viewModel.post.ImageURL = (image?.toJpegString(compressionQuality: 0.2))!
+            //                        print("happpppy to get here")
+            //                    }
+            //                    viewModel.uploadImageToStorge(image: image)
+                                // viewModel.handelUploadImage(image : image!)
+                            } label: {
+                                
+                                if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){
+                                    Text("Post")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                        .frame(width: 300 , height: 53)
+                                        .background(Color(("Mygreen")))
+                                        .cornerRadius(8)
+                                }else{
+                                    Text("Post")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                        .frame(width: 300 , height: 53)
+                                        .background(Color(("Mygray")))
+                                        .cornerRadius(8)
+                                }
+                                
+                                
+                                
+                            }.disabled(viewModel.post.ItemState.isEmpty || viewModel.post.ItemName.isEmpty)
+                                .padding(.all)
+                                .disabled(!viewModel.modified)
+                        }
+                            //
+                        }.pickerStyle(.inline)
+                          
+                    }
+                    .alert(isPresented: $orderPlaced) {
+                        Alert(
+                            title: Text("Food Ordered"),
+                            message:
+                                Text("""
+                              Your food has been ordered.
+                              Would you like to be notified on arrival?
+                              """),
+                            primaryButton: .default(Text("Yes")) {
+                                requestNotification()
+                            },
+                            secondaryButton: .default(Text("No"))
+                        )
+                    }
              
             }
             .navigationBarTitle("Post", displayMode: .large)
         }
         
-        
+    func handleCancelTapped() {
+        self.dismiss()
     }
-}
+    func requestNotification() {
+      locationManager.validateLocationAuthorizationStatus()
+    }
+    
+    func handleDoneTapped() {
+      //  self.viewModel.handleDoneTapped()
+        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description)
+        self.dismiss()
+    }
+    
+    func handleDeleteTapped() {
+        viewModel.handleDeleteTapped()
+        self.dismiss()
+        self.completionHandler?(.success(.delete))
+    }
+    func placeOrder() {
+      orderPlaced = true
+    }
+    func dismiss() {
+        self.presentationMode.wrappedValue.dismiss()
+    }
+    }
+
 
 struct Post_Previews: PreviewProvider {
     
@@ -67,152 +230,7 @@ extension UIImage {
         return data?.base64EncodedString(options: .endLineWithLineFeed)
     }
 }
-struct ItemType: View {
-    @Environment(\.presentationMode) private var presentationMode
-    @State var presentActionSheet = false
-    var mode: Mode = .new
-   var completionHandler: ((Result<Action, Error>) -> Void)?
-    @State var itemType = ["Lost","Found"]
-    @ObservedObject var viewModel = PostViewModel()
-//    @ObservedObject var viewModel2 = PostsViewModel()
-    @State var Show: Bool = true
-    @State var Show2: Bool = false
-    @State private var image: UIImage?
-//    @State private var UrlForImage: URL?
-    var body: some View {
-        ZStack {
-            Form{
-                Section{
-                    
-                    AddPhoto(image: $image)
-    
-                }header: {
-                    HStack{
-                        Text("Item Image:")
-                            .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(Color("colorOfText"))
-                        
-                        Text("(OPTIONAL)")
-                            .font(.custom("SF Pro", size: 12))
-                    }
-                }
-                
-                Section {
-                    Picker("Select the item state", selection: $viewModel.post.ItemState) {
-                        ForEach(itemType, id: \.self) {
-                            Text($0)}
-                        .font(.custom("SF Pro", size: 16))
-                    }.pickerStyle(.navigationLink)
-                    if(!viewModel.post.ItemState.isEmpty){
-                        let _ = Show2.toggle()
-                        
-                    }
-                }
-                Section{
-                    
-                    TextField("Add Name", text: $viewModel.post.ItemName)
-                        .font(.custom("SF Pro", size: 16))
-                        .lineSpacing(5)
-                    //                    if(!Title.isEmpty){
-                    //                        let _ = Show2.toggle()}
-                }header: {
-                    HStack{
-                        Text("Item Name:")
-                            .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(Color("colorOfText"))
-                        Text("(REQUIRE)")
-                            .font(.custom("SF Pro", size: 10))
-                    }
-                    
-                }
-                
-                Section{
-                    
-                    TextEditorWithPlaceholder(text: $viewModel.post.Description)
-                        .font(.custom("SF Pro", size: 16))
-                        .frame(width: 355 , height: 104)
-                        .padding(.top, 20)
-                        .padding(.leading,20)
-                    
-                } header: {
-                    HStack{
-                        Text("Description:")
-                            .font(.custom("SF Pro", size: 16))
-                            .foregroundColor(Color("colorOfText"))
-                        Text("(OPTIONAL)")
-                            .font(.custom("SF Pro", size: 10))
-                    }
-                }
-                
-                Section{
-                    Toggle(
-                        isOn: $Show,
-                        label:{
-                            Text("Show phone number ")
-                                .font(.custom("SF Pro", size: 16))
-                            
-                        })}
-                
-            footer:{
-                
-                Button {
-                    handleDoneTapped()
-//                    if(image != nil){
-//                        viewModel.post.ImageURL = (image?.toJpegString(compressionQuality: 0.2))!
-//                        print("happpppy to get here")
-//                    }
-//                    viewModel.uploadImageToStorge(image: image)
-                   // viewModel.handelUploadImage(image : image!)
-                } label: {
-                    
-                    if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){
-                        Text("Post")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(width: 300 , height: 53)
-                            .background(Color(("Mygreen")))
-                            .cornerRadius(8)
-                    }else{
-                        Text("Post")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(width: 300 , height: 53)
-                            .background(Color(("Mygray")))
-                            .cornerRadius(8)
-                    }
-                    
-                    
-                    
-                }.disabled(viewModel.post.ItemState.isEmpty || viewModel.post.ItemName.isEmpty)
-                    .padding(.all)
-                    .disabled(!viewModel.modified)
-            }
-                //
-            }
-            .pickerStyle(.inline)
-        }
-    }
-    func handleCancelTapped() {
-        self.dismiss()
-    }
-    
-    func handleDoneTapped() {
-      //  self.viewModel.handleDoneTapped()
-        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description)
-        self.dismiss()
-    }
-    
-    func handleDeleteTapped() {
-        viewModel.handleDeleteTapped()
-        self.dismiss()
-        self.completionHandler?(.success(.delete))
-    }
-    
-    func dismiss() {
-        self.presentationMode.wrappedValue.dismiss()
-    }
-    
- }
+ 
 
 
 struct TextEditorWithPlaceholder: View {
@@ -220,6 +238,7 @@ struct TextEditorWithPlaceholder: View {
         
         var body: some View {
             ZStack(alignment: .leading) {
+
                 if text.isEmpty {
                    VStack {
                         Text("Item color, location...")
@@ -307,53 +326,3 @@ struct AddPhoto: View {
     }
 }
 
-struct SUImagePickerView: UIViewControllerRepresentable {
-    
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @Binding var image:  UIImage?
-//    @Binding var UrlForImage:  URL?
-    @Binding var isPresented: Bool
-    
-    func makeCoordinator() -> ImagePickerViewCoordinator {
-        return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
-    }
-    
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let pickerController = UIImagePickerController()
-        pickerController.sourceType = sourceType
-        pickerController.delegate = context.coordinator
-        return pickerController
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        // Nothing to update here
-    }
-
-}
-
-class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    @Binding var image:  UIImage?
-    @Binding var isPresented: Bool
-//    @Binding var  UrlForImage: URL?
-   
-    init(image: Binding<UIImage?>, isPresented: Binding<Bool>) {
-        self._image = image
-        self._isPresented = isPresented
-//        self._UrlForImage = UrlForImage
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            self.image = Image(uiImage: image)
-            self.image = image
-            print("this is my image \(image)")
-        }
-        self.isPresented = false
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.isPresented = false
-    }
-    
-}
