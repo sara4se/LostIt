@@ -92,16 +92,6 @@ class LocationManager: NSObject, ObservableObject {
       break
     }
   }
-      func viewDidLoad() {
-        locationManager.requestWhenInUseAuthorization()
-        var currentLoc: CLLocation!
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-        CLLocationManager.authorizationStatus() == .authorizedAlways) {
-           currentLoc = locationManager.location
-           print("currentLoc: ",currentLoc.coordinate.latitude)
-           print("currentLoc: ",currentLoc.coordinate.longitude)
-        }
-     }
   // 1
   private func requestNotificationAuthorization() {
     // 2

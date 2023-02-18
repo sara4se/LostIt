@@ -16,6 +16,14 @@
 		5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5621C785299D4FB400625D55 /* SDWebImageSwiftUI */; };
 		5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBA1299E700900415833 /* FirebaseMessaging */; };
 		5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAB299E9DC000415833 /* LocationManager.swift */; };
+		5621EBB429A0442500415833 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */; };
+		5621EBBB29A046D800415833 /* Delete account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB629A046D700415833 /* Delete account.swift */; };
+		5621EBBC29A046D800415833 /* I Need Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB729A046D700415833 /* I Need Help.swift */; };
+		5621EBBD29A046D800415833 /* Forget Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB829A046D700415833 /* Forget Password.swift */; };
+		5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB929A046D700415833 /* Privacy Policy.swift */; };
+		5621EBBF29A046D800415833 /* settingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBBA29A046D700415833 /* settingsPage.swift */; };
+		5621EBC129A1239000415833 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC029A1239000415833 /* PostDetailView.swift */; };
+		5621EBC329A12A0200415833 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC229A12A0200415833 /* PhotoView.swift */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -38,6 +46,14 @@
 		5621C7A3299E1B2500625D55 /* Dalti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dalti.entitlements; sourceTree = "<group>"; };
 		5621EBAB299E9DC000415833 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5621EBB1299F9FCE00415833 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
+		5621EBB629A046D700415833 /* Delete account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delete account.swift"; sourceTree = "<group>"; };
+		5621EBB729A046D700415833 /* I Need Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "I Need Help.swift"; sourceTree = "<group>"; };
+		5621EBB829A046D700415833 /* Forget Password.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Forget Password.swift"; sourceTree = "<group>"; };
+		5621EBB929A046D700415833 /* Privacy Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Privacy Policy.swift"; sourceTree = "<group>"; };
+		5621EBBA29A046D700415833 /* settingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingsPage.swift; sourceTree = "<group>"; };
+		5621EBC029A1239000415833 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		5621EBC229A12A0200415833 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -77,6 +93,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5621EBB529A046D700415833 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5621EBB629A046D700415833 /* Delete account.swift */,
+				5621EBB729A046D700415833 /* I Need Help.swift */,
+				5621EBB829A046D700415833 /* Forget Password.swift */,
+				5621EBB929A046D700415833 /* Privacy Policy.swift */,
+				5621EBBA29A046D700415833 /* settingsPage.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		562C5D0E298ACF2400A23762 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +125,7 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBB529A046D700415833 /* Setting */,
 				56DED36E29902EF000453E73 /* Helper */,
 				5621EBB1299F9FCE00415833 /* Info.plist */,
 				5621C7A3299E1B2500625D55 /* Dalti.entitlements */,
@@ -130,6 +159,8 @@
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
 				56DED3732990315900453E73 /* CustomCorner.swift */,
+				5621EBC029A1239000415833 /* PostDetailView.swift */,
+				5621EBC229A12A0200415833 /* PhotoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,6 +186,7 @@
 		56DED36E29902EF000453E73 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */,
 				56DED37129902F1900453E73 /* ScaledButtonStyle.swift */,
 			);
 			path = Helper;
@@ -244,6 +276,10 @@
 			files = (
 				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
+				5621EBBD29A046D800415833 /* Forget Password.swift in Sources */,
+				5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */,
+				5621EBB429A0442500415833 /* LaunchScreenStateManager.swift in Sources */,
+				5621EBC329A12A0200415833 /* PhotoView.swift in Sources */,
 				5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */,
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
@@ -256,6 +292,10 @@
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
 				562C5D2E298AD00700A23762 /* Community.swift in Sources */,
 				56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */,
+				5621EBBC29A046D800415833 /* I Need Help.swift in Sources */,
+				5621EBC129A1239000415833 /* PostDetailView.swift in Sources */,
+				5621EBBB29A046D800415833 /* Delete account.swift in Sources */,
+				5621EBBF29A046D800415833 /* settingsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
