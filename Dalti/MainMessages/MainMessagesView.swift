@@ -74,8 +74,7 @@ class MainMessagesViewModel: ObservableObject {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        
-        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
+        FirebaseManager.shared.firestore.collection("Community").document("Users").collection(FirebaseConstants.users).document(uid).getDocument { snapshot, error in
             if let error = error {
                 self.errorMessage = "Failed to fetch current user: \(error)"
                 print("Failed to fetch current user:", error)

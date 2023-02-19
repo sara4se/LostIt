@@ -87,8 +87,9 @@ struct Community: View {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
 //                locationManager.locationCurrnent()
-//                print("long",  locationManager.locationCurrnent().longitude)
-//                print("lat",  locationManager.locationCurrnent().latitude)
+                print("long",  locationManager.locationCurrnent().longitude)
+                print("lat",  locationManager.locationCurrnent().latitude)
+                
             }
 //            .background(Color("BackGroundColor"))
             .navigationBarBackButtonHidden(true)

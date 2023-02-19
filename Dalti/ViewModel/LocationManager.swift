@@ -45,7 +45,7 @@ class LocationManager: NSObject, ObservableObject {
     
     func locationCurrnent() -> CLLocationCoordinate2D{
         let lc = locationManager.location
-        location = CLLocationCoordinate2D(latitude: lc!.coordinate.latitude, longitude: lc!.coordinate.longitude)
+        location = CLLocationCoordinate2D(latitude: lc?.coordinate.latitude ?? 0.0, longitude: lc?.coordinate.longitude ?? 0.0)
         //        print("currentLoc: ",location.latitude)
         //        print("currentLoc: ",location.longitude)
         

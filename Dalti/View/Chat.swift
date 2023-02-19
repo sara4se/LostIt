@@ -210,8 +210,10 @@ struct Chat: View {
    
    private func storeUserInformation(imageProfileUrl: URL) {
        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+       let id = FirebaseManager.shared.firestore.collection("Community").document().documentID
        let userData = [FirebaseConstants.email: self.viewModelChat.userfb.email, FirebaseConstants.uid: uid, FirebaseConstants.profileImageUrl: imageProfileUrl.absoluteString]
-       FirebaseManager.shared.firestore.collection(FirebaseConstants.users)
+       FirebaseManager.shared.firestore.collection("Community")
+           .document("Users").collection(FirebaseConstants.users)
            .document(uid).setData(userData) { err in
                if let err = err {
                    print(err)

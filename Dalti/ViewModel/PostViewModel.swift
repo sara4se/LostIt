@@ -33,11 +33,14 @@ class PostViewModel: ObservableObject {
     var db = Firestore.firestore()
     
     private func removePost() {
-        let id = self.db.collection("Posts").document().documentID
+        let id = self.db.collection("Community").document().documentID
            // self.uploadImageToStorge(uuimage: placeHolderImage, documentId)
 //        db.collection("Posts").document(id)
-        guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        self.db.collection("Posts").document("Post").collection(fromId).document(id).delete { error in
+       // guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
+//            .db.collection("Posts").document(id).
+//            .db.collection("Posts").document("Post").collection(fromId).document(id)
+        
+        self.db.collection("Community").document(id).delete { error in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -68,12 +71,14 @@ class PostViewModel: ObservableObject {
                             guard let url = downloadUrl?.absoluteString else {return}
                                 let post = PostModel(ItemName: ItemName, ItemState: ItemState, Description: Description, ImageURL: url)
                         print("this is your post after put it in the storge : \(String(describing: post))")
-                        let id = self.db.collection("Posts").document().documentID
+                        let id = self.db.collection("Community").document().documentID
+                        let idPost = self.db.collection("Post").document().documentID
                         print("this is your id after put it in the storge : \(String(describing: id))")
                         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
-                        self.db.collection("users").document(fromId).collection("Posts").document(id).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": id])
+                        self.db.collection("Community").document("Posts").collection("Post").document(idPost) .setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": fromId])
 //                        db.collection("users").document(fromId).collection("Posts") after
 //                        db.collection("Posts").document("Post").collection(fromId) before
+                        
                     }
                 }
             }

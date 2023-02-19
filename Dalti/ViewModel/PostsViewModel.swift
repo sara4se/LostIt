@@ -28,17 +28,17 @@ class PostsViewModel: ObservableObject {
             listenerRegistration = nil
         }
     }
-    //self.db.collection("Posts").document("Post").collection(fromId).document(id).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": id])
-
+    
     func subscribe() {
         if listenerRegistration == nil {
-            guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
-//            let id = self.db.collection("Posts").document().documentID
-//            self.db.collection("users").document(fromId).collection("Posts").document(id).setData(
+         //   guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
 //            self.db.collection("Posts").document("Post").collection(fromId).document(id)
-//                .document(id).collection("sm")
-//            listenerRegistration = db.collection("Posts").document("Post").collection(fromId).addSnapshotListener { (querySnapshot, error) in
-            listenerRegistration =  self.db.collection("users").document(fromId).collection("Posts").addSnapshotListener { (querySnapshot, error) in
+            let id = self.db.collection("Community").document().documentID
+//            self.db.collection("Community").document("Posts")
+//            let idPost = self.db.collection("Post").document().documentID
+                
+            listenerRegistration = db.collection("Community").document("Posts").collection("Post")
+                .addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
                     return
