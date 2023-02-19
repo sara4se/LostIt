@@ -20,7 +20,7 @@ struct Splash: View {
     @StateObject private var locationManager = LocationManager()
        var body: some View {
            ZStack{
-               Color("BackGroundColor").ignoresSafeArea()
+//               Color("BackGroundColor").ignoresSafeArea()
                           
                if self.isActive{
                   
@@ -43,10 +43,11 @@ struct Splash: View {
                                .font(.custom("SF Pro", size: 13))
                                
                            //                               .offset(x: 10, y: -20)
-                       }.scaleEffect(animation ? 2 : 1)
-                       //.animation(Animation.easeInOut(duration: 1))
-                           .animation(.easeInOut(duration: 1), value: animation)
-                           .padding(40)
+                       }
+//                       .scaleEffect(animation ? 2 : 1)
+//                       //.animation(Animation.easeInOut(duration: 1))
+//                           .animation(.easeInOut(duration: 1), value: animation)
+//                           .padding(40)
                        //   .animation(.easeOut(duration: 0.4), value: showSplash)
                    }
                }

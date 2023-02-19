@@ -17,6 +17,8 @@ struct Community: View {
     @State var currentItem : PostModel?
     @StateObject var viewModels = PostsViewModel()
     @StateObject var viewModel = PostViewModel()
+    @ObservedObject private var vm = MainMessagesViewModel()
+    @ObservedObject var viewModelChat = ChatViewModel()
     @State var showDeaialPage: Bool = false
     @Namespace var animation
     @State var animateView : Bool = false
@@ -68,38 +70,43 @@ struct Community: View {
                         }.padding(10)
                     }
                 }
-            }.alert(isPresented: $orderPlaced) {
-                Alert(
-                  title: Text("Food Ordered"),
-                  message:
-                    Text("""
-                      Your food has been ordered.
-                      Would you like to be notified on arrival?
-                      """),
-                  primaryButton: .default(Text("Yes")) {
-                    requestNotification()
-                  },
-                  secondaryButton: .default(Text("No"))
-                )
-              }
+            }
+//            .alert(isPresented: $locationManager.didArriveAtTakeout) {
+//                  Alert(
+//                    title: Text("Check In"),
+//                    message:
+//                      Text("""
+//                        You have arrived to collect your order.
+//                        Do you want to check in?
+//                        """),
+//                    primaryButton: .default(Text("Yes")),
+//                    secondaryButton: .default(Text("No"))
+//                  )
+//                }
             .onAppear() {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
 //                locationManager.locationCurrnent()
-                print("long",  locationManager.locationCurrnent().longitude)
-                print("lat",  locationManager.locationCurrnent().latitude)
+//                print("long",  locationManager.locationCurrnent().longitude)
+//                print("lat",  locationManager.locationCurrnent().latitude)
             }
-            .background(Color("BackGroundColor"))
+//            .background(Color("BackGroundColor"))
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                                     HStack {
-                NavigationLink(destination: Profile(), label:{
+                NavigationLink(destination: Profile(viewModelChat: viewModelChat), label:{
                     Label("Profile", systemImage: "person.circle")
                         .foregroundColor(Color("lightGreen"))
                 })
             }, trailing:
                                     HStack {
-                NavigationLink(destination: Chat(), label:{
+//                Chat(didCompleteLoginProcess: {
+//
+//                       self.vm.isUserCurrentlyLoggedOut = false
+//                       self.vm.fetchCurrentUser()
+//                       self.vm.fetchRecentMessages()
+//                   }, viewModelChat: viewModelChat)
+                NavigationLink(destination: MainMessagesView(), label:{
                     Label("Chat", systemImage: "message")
                         .foregroundColor(Color("lightGreen"))
                 })
@@ -121,7 +128,7 @@ struct Community: View {
                 DetailView(item: currentItem).ignoresSafeArea(.container, edges: .top)
             }
         }
-        .background(alignment: .top){
+        .background{
             RoundedRectangle(cornerRadius: 15, style: .continuous)
                 .fill(.white)
                 .frame(height: animateView ? nil : 350 , alignment: .top)

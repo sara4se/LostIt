@@ -18,9 +18,9 @@ struct Profile: View {
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var avatarImage = UIImage(named: "image2")!
-    
+//    @StateObject var userfb : UserFB
 //    @AppStorage("name") var name = DefaultSettings.name
-    
+    @ObservedObject var viewModelChat : ChatViewModel
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -59,7 +59,7 @@ struct Profile: View {
                                 }
                         }
                         VStack {
-                            TextField("Name", text: $name)
+                            Text(viewModelChat.userfb.email)
                                 .textContentType(.name)
                                 .font(.system(size: 18))
                             Divider()
@@ -91,7 +91,7 @@ struct Profile: View {
                 .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                     ImagePicker(selectedImage: $selectedImage, avatarImage: $avatarImage)
                 }
-            }.background(Color("BackGroundColor"))
+            } 
 //            Spacer()
         }
     }
@@ -116,7 +116,7 @@ struct Profile: View {
 }
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile()
+        Profile(viewModelChat: ChatViewModel())
     }
 }
     

@@ -14,7 +14,7 @@ struct SignIn: View {
         NavigationStack{
        
             ZStack{
-                Color("BackGroundColor").ignoresSafeArea()
+//                Color("BackGroundColor").ignoresSafeArea()
             }
             NavigationLink {
                 // destination view to navigation to
