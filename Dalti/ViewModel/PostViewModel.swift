@@ -35,7 +35,9 @@ class PostViewModel: ObservableObject {
     private func removePost() {
         let id = self.db.collection("Posts").document().documentID
            // self.uploadImageToStorge(uuimage: placeHolderImage, documentId)
-            db.collection("Posts").document(id).delete { error in
+//        db.collection("Posts").document(id)
+        guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        self.db.collection("Posts").document("Post").collection(fromId).document(id).delete { error in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -68,8 +70,10 @@ class PostViewModel: ObservableObject {
                         print("this is your post after put it in the storge : \(String(describing: post))")
                         let id = self.db.collection("Posts").document().documentID
                         print("this is your id after put it in the storge : \(String(describing: id))")
-                        self.db.collection("Posts").document(id).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": id])
-   
+                        guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
+                        self.db.collection("users").document(fromId).collection("Posts").document(id).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": id])
+//                        db.collection("users").document(fromId).collection("Posts") after
+//                        db.collection("Posts").document("Post").collection(fromId) before
                     }
                 }
             }

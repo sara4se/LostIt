@@ -24,6 +24,17 @@
 		5621EBBF29A046D800415833 /* settingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBBA29A046D700415833 /* settingsPage.swift */; };
 		5621EBC129A1239000415833 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC029A1239000415833 /* PostDetailView.swift */; };
 		5621EBC329A12A0200415833 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC229A12A0200415833 /* PhotoView.swift */; };
+		5621EBCC29A1551A00415833 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBCB29A1551A00415833 /* ChatUser.swift */; };
+		5621EBCE29A1551C00415833 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBCD29A1551C00415833 /* RecentMessage.swift */; };
+		5621EBD029A1552000415833 /* ChatMesage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBCF29A1552000415833 /* ChatMesage.swift */; };
+		5621EBD429A1553300415833 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBD229A1553300415833 /* FirebaseConstants.swift */; };
+		5621EBD529A1553300415833 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBD329A1553300415833 /* FirebaseManager.swift */; };
+		5621EBDC29A1553C00415833 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBD829A1553B00415833 /* ChatLogView.swift */; };
+		5621EBDD29A1553C00415833 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBDA29A1553B00415833 /* NewMessageView.swift */; };
+		5621EBDE29A1553C00415833 /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBDB29A1553B00415833 /* MainMessagesView.swift */; };
+		5621EBE329A1560B00415833 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBE229A1560B00415833 /* FirebaseAuth */; };
+		5621EBE529A1691300415833 /* UserFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBE429A1691300415833 /* UserFB.swift */; };
+		5621EBE729A2030E00415833 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBE629A2030E00415833 /* ChatViewModel.swift */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -54,6 +65,16 @@
 		5621EBBA29A046D700415833 /* settingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingsPage.swift; sourceTree = "<group>"; };
 		5621EBC029A1239000415833 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		5621EBC229A12A0200415833 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		5621EBCB29A1551A00415833 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		5621EBCD29A1551C00415833 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
+		5621EBCF29A1552000415833 /* ChatMesage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMesage.swift; sourceTree = "<group>"; };
+		5621EBD229A1553300415833 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		5621EBD329A1553300415833 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		5621EBD829A1553B00415833 /* ChatLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		5621EBDA29A1553B00415833 /* NewMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageView.swift; sourceTree = "<group>"; };
+		5621EBDB29A1553B00415833 /* MainMessagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
+		5621EBE429A1691300415833 /* UserFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFB.swift; sourceTree = "<group>"; };
+		5621EBE629A2030E00415833 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -76,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */,
+				5621EBE329A1560B00415833 /* FirebaseAuth in Frameworks */,
 				5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */,
 				5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */,
 				5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */,
@@ -105,6 +127,41 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		5621EBD129A1553300415833 /* Ult */ = {
+			isa = PBXGroup;
+			children = (
+				5621EBD229A1553300415833 /* FirebaseConstants.swift */,
+				5621EBD329A1553300415833 /* FirebaseManager.swift */,
+			);
+			path = Ult;
+			sourceTree = "<group>";
+		};
+		5621EBD629A1553B00415833 /* MainMessages */ = {
+			isa = PBXGroup;
+			children = (
+				5621EBD729A1553B00415833 /* Chat */,
+				5621EBD929A1553B00415833 /* NewMessages */,
+				5621EBDB29A1553B00415833 /* MainMessagesView.swift */,
+			);
+			path = MainMessages;
+			sourceTree = "<group>";
+		};
+		5621EBD729A1553B00415833 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				5621EBD829A1553B00415833 /* ChatLogView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		5621EBD929A1553B00415833 /* NewMessages */ = {
+			isa = PBXGroup;
+			children = (
+				5621EBDA29A1553B00415833 /* NewMessageView.swift */,
+			);
+			path = NewMessages;
+			sourceTree = "<group>";
+		};
 		562C5D0E298ACF2400A23762 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +182,8 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBD629A1553B00415833 /* MainMessages */,
+				5621EBD129A1553300415833 /* Ult */,
 				5621EBB529A046D700415833 /* Setting */,
 				56DED36E29902EF000453E73 /* Helper */,
 				5621EBB1299F9FCE00415833 /* Info.plist */,
@@ -171,6 +230,7 @@
 				5621C782299D4F5000625D55 /* PostsViewModel.swift */,
 				5621EBAB299E9DC000415833 /* LocationManager.swift */,
 				5621C768299830B700625D55 /* PostViewModel.swift */,
+				5621EBE629A2030E00415833 /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,7 +238,11 @@
 		562C5D2A298ACF5200A23762 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBCD29A1551C00415833 /* RecentMessage.swift */,
+				5621EBCB29A1551A00415833 /* ChatUser.swift */,
+				5621EBCF29A1552000415833 /* ChatMesage.swift */,
 				56E2E6BC298EE66600A9979B /* PostModel.swift */,
+				5621EBE429A1691300415833 /* UserFB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,6 +278,7 @@
 				5621C76F2998B73E00625D55 /* FirebaseStorage */,
 				5621C785299D4FB400625D55 /* SDWebImageSwiftUI */,
 				5621EBA1299E700900415833 /* FirebaseMessaging */,
+				5621EBE229A1560B00415833 /* FirebaseAuth */,
 			);
 			productName = Dalti;
 			productReference = 562C5D17298ACF2400A23762 /* Dalti.app */;
@@ -275,25 +340,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
+				5621EBD029A1552000415833 /* ChatMesage.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
+				5621EBD529A1553300415833 /* FirebaseManager.swift in Sources */,
+				5621EBE529A1691300415833 /* UserFB.swift in Sources */,
+				5621EBCE29A1551C00415833 /* RecentMessage.swift in Sources */,
+				5621EBDD29A1553C00415833 /* NewMessageView.swift in Sources */,
 				5621EBBD29A046D800415833 /* Forget Password.swift in Sources */,
 				5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */,
 				5621EBB429A0442500415833 /* LaunchScreenStateManager.swift in Sources */,
 				5621EBC329A12A0200415833 /* PhotoView.swift in Sources */,
 				5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */,
+				5621EBCC29A1551A00415833 /* ChatUser.swift in Sources */,
 				56DED3742990315900453E73 /* CustomCorner.swift in Sources */,
 				562C5D30298AD01800A23762 /* Profile.swift in Sources */,
 				562C5D36298AD06500A23762 /* Splash.swift in Sources */,
 				562C5D34298AD03700A23762 /* Chat.swift in Sources */,
 				56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */,
 				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
+				5621EBD429A1553300415833 /* FirebaseConstants.swift in Sources */,
+				5621EBDE29A1553C00415833 /* MainMessagesView.swift in Sources */,
 				562C5D32298AD02B00A23762 /* Post.swift in Sources */,
 				5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */,
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
 				562C5D2E298AD00700A23762 /* Community.swift in Sources */,
 				56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */,
+				5621EBE729A2030E00415833 /* ChatViewModel.swift in Sources */,
 				5621EBBC29A046D800415833 /* I Need Help.swift in Sources */,
 				5621EBC129A1239000415833 /* PostDetailView.swift in Sources */,
+				5621EBDC29A1553C00415833 /* ChatLogView.swift in Sources */,
 				5621EBBB29A046D800415833 /* Delete account.swift in Sources */,
 				5621EBBF29A046D800415833 /* settingsPage.swift in Sources */,
 			);
@@ -547,6 +622,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		5621EBE229A1560B00415833 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
