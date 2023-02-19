@@ -14,6 +14,11 @@ struct ScaledButtonStyle: ButtonStyle{
             .animation(.easeInOut, value: configuration.isPressed)
     }
 }
+extension Double{
+    func fixedFraction(digits: Int) -> String {
+        .init(format: "%.*f", digits, self)
+    }
+}
 extension View {
     func safeArea()->UIEdgeInsets{
         guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -53,3 +58,115 @@ extension View {
         )
     }
 }
+
+enum LaunchScreenStep {
+    case firstStep
+    case secondStep
+    case finished
+}
+
+enum DefaultSettings {
+    // Profile
+    static var name: String = "Ahmad Ali"
+    static var phone: String = "0597223332"
+}
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+    @Binding var avatarImage: UIImage
+    @Environment(\.presentationMode) var presentationMode
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+}
+
+struct User{
+    var name = "Ahmad"
+    var userName = "username"
+    var password = "default pass"
+    var email = "default email"
+    var bio = "default Bio"
+    var Phone = "0597223332"
+    
+}
+
+var currentUser = User()
+
+extension ImagePicker {
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate , UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+        
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            parent.selectedImage = image
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+
+struct SUImagePickerView: UIViewControllerRepresentable {
+    
+    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @Binding var image:  UIImage?
+//    @Binding var UrlForImage:  URL?
+    @Binding var isPresented: Bool
+    
+    func makeCoordinator() -> ImagePickerViewCoordinator {
+        return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
+    }
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let pickerController = UIImagePickerController()
+        pickerController.sourceType = sourceType
+        pickerController.delegate = context.coordinator
+        return pickerController
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        // Nothing to update here
+    }
+
+}
+
+class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @Binding var image:  UIImage?
+    @Binding var isPresented: Bool
+//    @Binding var  UrlForImage: URL?
+   
+    init(image: Binding<UIImage?>, isPresented: Binding<Bool>) {
+        self._image = image
+        self._isPresented = isPresented
+//        self._UrlForImage = UrlForImage
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+//            self.image = Image(uiImage: image)
+            self.image = image
+            print("this is my image \(image)")
+        }
+        self.isPresented = false
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.isPresented = false
+    }
+    
+}
+
