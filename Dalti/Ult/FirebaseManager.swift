@@ -1,6 +1,6 @@
 //
 //  FirebaseManager.swift
-//  LBTASwiftUIFirebaseChat
+//  Dalti
 //
 //  Created by Rawan on 24/07/1444 AH.
 //

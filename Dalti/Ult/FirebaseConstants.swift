@@ -1,6 +1,6 @@
 //
 //  FirebaseConstants.swift
-//  LBTASwiftUIFirebaseChat
+//  Dalti
 //
 //  Created by Rawan on 26/07/1444 AH.
 //

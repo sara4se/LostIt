@@ -14,36 +14,38 @@ struct settingsPage: View {
     @State private var Confirmpassword: String = "Confirmpassword"
     @State private var ShowPassword = false
     @State private var isPresentedFullScreenCover = false
-    
+    @State var shouldShowLogOutOptions = false
+    @ObservedObject private var vm = MainMessagesViewModel()
     var body: some View {
-        NavigationView{
+        NavigationStack {
             VStack {
                 Form{
                     Section(header: Text("More Information")) {
                         
                         NavigationLink("Privacy Policy" ,destination: Privacy_Policy())
+                      
                         
                         NavigationLink("I Need Help" ,destination: I_Need_Help())
                     }
                     
-                    Section(header: Text("Account Action")) {
-                        
-                        NavigationLink("Forget Password" ,destination: Text("Forgot my password"))
-                        
-                        NavigationLink("Blocked" ,destination: Text("People you already bloked"))
-                        
-                        
-                        NavigationLink(destination: Delete_account()) {
-                            Text("Delete Account")
-                        }
-                    }
+//                    Section(header: Text("Account Action")) {
+//
+//                        NavigationLink("Forget Password" ,destination: Text("Forgot my password"))
+//
+//                        NavigationLink("Blocked" ,destination: Text("People you already bloked"))
+//
+//
+//                        NavigationLink(destination: Delete_account()) {
+//                            Text("Delete Account")
+//                        }
+//                    }
                 }
                 
                 Spacer()
                 
                 Button("Log Out", action: {
                     
-                    isPresentedFullScreenCover = true})
+                    shouldShowLogOutOptions = true})
                 
                 .foregroundColor(.white)
                 .frame(width: 350 ,height: 50)
@@ -54,14 +56,21 @@ struct settingsPage: View {
                 .border(Color(.clear))
                 .font(.system(size: 16, weight: .bold))
                 .padding()
-                
-                .fullScreenCover(isPresented: $isPresentedFullScreenCover) {
-                    SignIn()
+                .actionSheet(isPresented: $shouldShowLogOutOptions) {
+                    .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
+                        .destructive(Text("Sign Out"), action: {
+                            print("handle sign out")
+//                            vm.handleSignOut()
+                            vm.isUserCurrentlyLoggedOut.toggle()
+                        }),
+                        .cancel()
+                    ])
                 }
             }
                 .navigationTitle("Setting")
         }
     }
+    
 }
 
 

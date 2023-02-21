@@ -22,7 +22,6 @@
 		5621EBBD29A046D800415833 /* Forget Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB829A046D700415833 /* Forget Password.swift */; };
 		5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB929A046D700415833 /* Privacy Policy.swift */; };
 		5621EBBF29A046D800415833 /* settingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBBA29A046D700415833 /* settingsPage.swift */; };
-		5621EBC129A1239000415833 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC029A1239000415833 /* PostDetailView.swift */; };
 		5621EBC329A12A0200415833 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBC229A12A0200415833 /* PhotoView.swift */; };
 		5621EBCC29A1551A00415833 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBCB29A1551A00415833 /* ChatUser.swift */; };
 		5621EBCE29A1551C00415833 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBCD29A1551C00415833 /* RecentMessage.swift */; };
@@ -35,6 +34,7 @@
 		5621EBE329A1560B00415833 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBE229A1560B00415833 /* FirebaseAuth */; };
 		5621EBE529A1691300415833 /* UserFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBE429A1691300415833 /* UserFB.swift */; };
 		5621EBE729A2030E00415833 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBE629A2030E00415833 /* ChatViewModel.swift */; };
+		5621EBEA29A29A4000415833 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBE929A29A4000415833 /* Location.swift */; };
 		562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1A298ACF2400A23762 /* DaltiApp.swift */; };
 		562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D1C298ACF2400A23762 /* SignIn.swift */; };
 		562C5D1F298ACF2600A23762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562C5D1E298ACF2600A23762 /* Assets.xcassets */; };
@@ -63,7 +63,6 @@
 		5621EBB829A046D700415833 /* Forget Password.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Forget Password.swift"; sourceTree = "<group>"; };
 		5621EBB929A046D700415833 /* Privacy Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Privacy Policy.swift"; sourceTree = "<group>"; };
 		5621EBBA29A046D700415833 /* settingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingsPage.swift; sourceTree = "<group>"; };
-		5621EBC029A1239000415833 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		5621EBC229A12A0200415833 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		5621EBCB29A1551A00415833 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		5621EBCD29A1551C00415833 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		5621EBDB29A1553B00415833 /* MainMessagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		5621EBE429A1691300415833 /* UserFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFB.swift; sourceTree = "<group>"; };
 		5621EBE629A2030E00415833 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		5621EBE929A29A4000415833 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		562C5D17298ACF2400A23762 /* Dalti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562C5D1A298ACF2400A23762 /* DaltiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaltiApp.swift; sourceTree = "<group>"; };
 		562C5D1C298ACF2400A23762 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
@@ -218,7 +218,6 @@
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
 				56DED3732990315900453E73 /* CustomCorner.swift */,
-				5621EBC029A1239000415833 /* PostDetailView.swift */,
 				5621EBC229A12A0200415833 /* PhotoView.swift */,
 			);
 			path = View;
@@ -243,6 +242,7 @@
 				5621EBCF29A1552000415833 /* ChatMesage.swift */,
 				56E2E6BC298EE66600A9979B /* PostModel.swift */,
 				5621EBE429A1691300415833 /* UserFB.swift */,
+				5621EBE929A29A4000415833 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
+				5621EBEA29A29A4000415833 /* Location.swift in Sources */,
 				5621EBD029A1552000415833 /* ChatMesage.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
 				5621EBD529A1553300415833 /* FirebaseManager.swift in Sources */,
@@ -367,7 +368,6 @@
 				56DED37229902F1900453E73 /* ScaledButtonStyle.swift in Sources */,
 				5621EBE729A2030E00415833 /* ChatViewModel.swift in Sources */,
 				5621EBBC29A046D800415833 /* I Need Help.swift in Sources */,
-				5621EBC129A1239000415833 /* PostDetailView.swift in Sources */,
 				5621EBDC29A1553C00415833 /* ChatLogView.swift in Sources */,
 				5621EBBB29A046D800415833 /* Delete account.swift in Sources */,
 				5621EBBF29A046D800415833 /* settingsPage.swift in Sources */,
@@ -504,7 +504,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ask for location";
+				INFOPLIST_KEY_NSCameraUsageDescription = something;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -536,7 +538,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ask for location";
+				INFOPLIST_KEY_NSCameraUsageDescription = something;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
