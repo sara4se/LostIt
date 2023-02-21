@@ -45,7 +45,6 @@ Help reader to save their best quotes.
 </p>
 
 ## Success Criteria
-- Project is completed on time ✅
 - Design interfaces that support both LTR - RTL languages ✅
 - Localize your app to support multiple languages ✅
 - Build an app that supports Apple’s built-in accessibility settings ✅
