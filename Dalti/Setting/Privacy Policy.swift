@@ -10,34 +10,30 @@ import SwiftUI
 struct Privacy_Policy: View {
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             ScrollView {
-                ZStack {
-                    
-                    Image("LOGO")
-                        .resizable()
-                        .opacity(0.3)
-                    //  .aspectRatio(contentMode: .fill)
-                        .offset(y:50)
-                        .frame(width:200, height:200)
-                    //                     .padding()
-                }
-                
-             
+ 
                 VStack{
-                    Link(destination: URL(string: "https://daltyy.blogspot.com/2023/02/nalqaha.html")!, label: { Label("Press Here To Read ", systemImage: "")})
-                        .font(.system(size: 20))
-                        .bold()
-//                        .offset(y:200)
-                        .padding(20)
-                        .foregroundColor(.white)
-                        .background(Color("babyGren"))
-                        .cornerRadius(6)
-                }
-            
-                .offset(y:80)
+                    Text("Pleas click bellow to read the privacy policy page on the web")
+                        .font(.custom("SF Pro", size: 22))
+                        .fontWeight(.semibold)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("colorOfText"))
+                        .frame(minWidth: 100, maxWidth: .infinity).padding(10)
+                    Spacer()
+                    Link(destination: URL(string: "https://daltyy.blogspot.com/2023/02/nalqaha.html")!, label: { Label("Privacy Policy", systemImage: "arrow.up.forward").font(.system(size: 20))
+                            .bold()
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(width: 300 , height: 53)
+                            .background(Color(("Mygreen")))
+                            .cornerRadius(8)
+                        
+                    }
+                )
+                }.frame(width: 500,height: 400).padding(20)
               
-                .navigationTitle("Our Privacy Policys")
+                .navigationTitle("Privacy Policy")
                 .font(.caption)
                 .accentColor(.black)
                 .ignoresSafeArea()

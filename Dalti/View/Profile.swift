@@ -8,19 +8,20 @@
 import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
-
+import SDWebImageSwiftUI
 struct Profile: View {
-    @State private var name = "Mashael Alharbi"
+ 
     @State private var phoneNumber = "+966 597223332"
-    
+ 
+    @ObservedObject private var vm = MainMessagesViewModel()
     @State var splashScreen  = true
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var avatarImage = UIImage(named: "image2")!
+    @StateObject var viewModelChat : ChatViewModel = ChatViewModel()
 //    @StateObject var userfb : UserFB
 //    @AppStorage("name") var name = DefaultSettings.name
-    @ObservedObject var viewModelChat : ChatViewModel
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -45,30 +46,46 @@ struct Profile: View {
                         .shadow(radius: 1)
                         .frame(width: 400, height: 146)
                     
-                    HStack (spacing: 40) {
+                    HStack (spacing: 4) {
                         VStack {
-                            Image(uiImage: avatarImage)
+                            WebImage(url: URL(string: vm.chatUser?.profileImageUrl ?? ""))
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                                .clipShape(Circle())
-                                .padding()
-                                .offset(x:30)
-                                .onTapGesture {
-                                    showImagePicker = true
-                                }
-                        }
+                                .scaledToFill()
+                            if (vm.chatUser?.profileImageUrl == nil){
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .foregroundColor(Color(.label))
+                                    .scaledToFill()
+//                                    .frame(width: 70, height: 70)
+//                                    .clipped()
+//                                    .cornerRadius(50)
+//                                    .overlay(RoundedRectangle(cornerRadius: 44)
+//                                        .stroke(Color(.label), lineWidth: 1)
+//                                    )
+//                                    .shadow(radius: 5)
+                            }
+                        }.frame(width: 100, height: 100)
+                            .clipped()
+                            .cornerRadius(50).overlay(RoundedRectangle(cornerRadius: 44)
+                            .stroke(Color(.label), lineWidth: 1)
+                        )
+                        .shadow(radius: 5)
                         VStack {
-                            Text(viewModelChat.userfb.email)
-                                .textContentType(.name)
-                                .font(.system(size: 18))
-                            Divider()
-                                .padding(.trailing/*@END_MENU_TOKEN@*/)
-                                .frame(width: 215, height: 1.0)
-                                .offset(x:-10)
-                            TextField("Phone Number" , text: $phoneNumber)
-                                .textContentType(.telephoneNumber)
-                                .font(.system(size: 18))
+                            HStack{
+                                
+                                let email = vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? ""
+                                Text("Name ")
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundColor(Color("colorOfText"))
+                                Text(email)
+                                    .font(.system(size: 24, weight: .regular))
+                                    .foregroundColor(Color("colorOfText"))
+                            }
+                                Divider()
+                                    .padding(.trailing/*@END_MENU_TOKEN@*/)
+                                    .frame(width: 215, height: 1.0)
+                                    .offset(x:-10)
+                            
                         }
                     }.padding() //Hstack
                } //Zstack
@@ -88,19 +105,19 @@ struct Profile: View {
                 }// End Vstack
                
                 .navigationBarTitle("Profile", displayMode: .large)
-                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
-                    ImagePicker(selectedImage: $selectedImage, avatarImage: $avatarImage)
-                }
+//                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
+//                    ImagePicker(selectedImage: $selectedImage, avatarImage: $avatarImage)
+//                }
             } 
 //            Spacer()
         }
     }
     
     
-    func loadImage() {
-        guard let selectedImage = selectedImage else { return }
-        profileImage = Image(uiImage: selectedImage)
-    }
+//    func loadImage() {
+//        guard let selectedImage = selectedImage else { return }
+//        profileImage = Image(uiImage: selectedImage)
+//    }
 
  func gererateQRCode(from string: String) -> UIImage {
     filter.message = Data(string.utf8)

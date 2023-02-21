@@ -1,60 +1,34 @@
-/// Copyright (c) 2021 Razeware LLC
-/// 
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-/// 
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-/// 
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-/// 
-/// This project and source code may use libraries or frameworks that are
-/// released under various Open-Source licenses. Use of those libraries and
-/// frameworks are governed by their own individual licenses.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
+ //  LocationManager.swift
+//  Dalti
+//
+//  Created by Sara Alhumidi on 28/07/1444 AH.
+//
 
 import CoreLocation
 import UserNotifications
 
 class LocationManager: NSObject, ObservableObject {
     // 24.793550,46.746728
-    @Published var location = CLLocationCoordinate2D()
-    //CLLocationCoordinate2D(latitude: 24.793550, longitude: 46.746728)
+    @Published var locationCurrent = CLLocationCoordinate2D()
     let notificationCenter = UNUserNotificationCenter.current()
     lazy var storeRegion = makeStoreRegion()
     @Published var didArriveAtTakeout = true
-    // 1
+    static let geoCoder = CLGeocoder()
     lazy var locationManager = makeLocationManager()
-    
-    func locationCurrnent() -> CLLocationCoordinate2D{
-        let lc = locationManager.location
-        location = CLLocationCoordinate2D(latitude: lc?.coordinate.latitude ?? 0.0, longitude: lc?.coordinate.longitude ?? 0.0)
-        //        print("currentLoc: ",location.latitude)
-        //        print("currentLoc: ",location.longitude)
-        
-        return location
-    }
+//
+//    func locationCurrnent() -> CLLocationCoordinate2D{
+//       // let lc = locationManager.location
+//     //   locationCurrent = CLLocationCoordinate2D(latitude: lc?.coordinate.latitude ?? 0.0, longitude: lc?.coordinate.longitude ?? 0.0)
+//
+//        return locationCurrent
+//    }
+  
     private func makeLocationManager() -> CLLocationManager {
         // 3
         let manager = CLLocationManager()
+      
         manager.allowsBackgroundLocationUpdates = true
+        manager.startMonitoringVisits()
         // 4
         return manager
     }
@@ -63,7 +37,7 @@ class LocationManager: NSObject, ObservableObject {
     private func makeStoreRegion() -> CLCircularRegion {
         // 2
         let region = CLCircularRegion(
-            center: location,
+            center: locationCurrent,
             radius: 32,
             identifier: UUID().uuidString)
         // 3
@@ -104,13 +78,13 @@ class LocationManager: NSObject, ObservableObject {
                 // 4
                 print("Auth Request result: \(result)")
                 if result {
-                    self!.registerNotification()
+                   // self!.registerNotification()
                 }
             }
     }
     
     // 1
-    private func registerNotification(){
+ /*   private func registerNotification(){
         // 2
         let content = UNMutableNotificationContent()
         content.title = "Feed the cat"
@@ -153,13 +127,55 @@ class LocationManager: NSObject, ObservableObject {
             }
         }
     }
-    
+   */
     // 1
     override init() {
         super.init()
         // 2
         notificationCenter.delegate = self
     }
+}
+extension LocationManager: CLLocationManagerDelegate {
+    
+    func newVisitReceived(_ visit: CLVisit, description: String) {
+      let location = Location(visit: visit, descriptionString: description)
+        locationCurrent.latitude = location.latitude
+        locationCurrent.latitude = location.longitude
+      let content = UNMutableNotificationContent()
+      content.title = "New Journal entry 📌"
+      content.body = location.description
+      content.sound = UNNotificationSound.default
+      
+      let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+      let request = UNNotificationRequest(identifier: location.dateString, content: content, trigger: trigger)
+      
+        notificationCenter.add(request, withCompletionHandler: nil)
+    }
+    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        // create CLLocation from the coordinates of CLVisit
+        let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+        
+        // Get location description
+        LocationManager.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
+            if let place = placemarks?.first {
+                let description = "\(place)"
+                self.newVisitReceived(visit, description: description)
+            }
+        }
+    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//      guard let location = locations.first else {
+//        return
+//      }
+//        LocationManager.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
+//        if let place = placemarks?.first {
+//          let description = "Fake visit: \(place)"
+//
+//          let fakeVisit = FakeVisit(coordinates: location.coordinate, arrivalDate: Date(), departureDate: Date())
+//          self.newVisitReceived(fakeVisit, description: description)
+//        }
+//      }
+//    }
 }
 extension LocationManager: UNUserNotificationCenterDelegate {
     // 1

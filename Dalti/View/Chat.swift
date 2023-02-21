@@ -57,13 +57,13 @@ struct Chat: View {
     @State private var isLoginMode = false
 //    @State private var email = ""
 //    @State private var password = ""
-    @ObservedObject var viewModelChat : ChatViewModel
+    @ObservedObject var viewModelChat : ChatViewModel = ChatViewModel()
     
 //    @State var image: UIImage?
     @State private var shouldShowImagePicker = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
@@ -107,28 +107,31 @@ struct Chat: View {
                     }
                     .padding(12)
                     .background(Color.white)
-                    
                     Button {
                         handleAction()
                     } label: {
-                        HStack {
-                            Spacer()
-                            Text(isLoginMode ? "Log In" : "Create Account")
-                                .foregroundColor(.white)
-                                .padding(.vertical, 10)
-                                .font(.system(size: 14, weight: .semibold))
-                            Spacer()
-                        }.background(Color.blue)
-                        
-                    }
+                        Text(isLoginMode ? "Log In" : "Create Account")
+                        .foregroundColor(.white)
+                        .frame(minWidth: 100, maxWidth: .infinity)
+                        .frame(height: 45)
+                    } 
+                    .background(Color("Mygreen"))
+                    .cornerRadius(3.0)
+                   
 //                    Text(String(self.viewModelChat.$isLoginMode)).foregroundColor(.red)
                  let _ = print(self.$isLoginMode)
-                    Text(self.loginStatusMessage)
-                        .foregroundColor(.red)
+//                    Text(self.loginStatusMessage)
+//                        .foregroundColor(.red)
+                    let _ = print(self.loginStatusMessage)
                 }
                 .padding()
                 
-            }
+            }.navigationBarItems(leading:
+                                        
+                NavigationLink(destination: Community(), label:{
+                    Label("Community", systemImage: "person.3")
+                        .foregroundColor(Color("lightGreen"))
+                }))
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.05))
                 .ignoresSafeArea())
@@ -145,7 +148,8 @@ struct Chat: View {
         FirebaseManager.shared.auth.signIn(withEmail: viewModelChat.userfb.email, password: viewModelChat.userfb.password) { result, err in
            if let err = err {
                print("Failed to login user:", err)
-               self.loginStatusMessage = "Failed to login user: \(err)"
+              
+               self.loginStatusMessage = "Failed to login user"
                return
            }
            
@@ -204,13 +208,13 @@ struct Chat: View {
                
                guard let url = url else { return }
                self.storeUserInformation(imageProfileUrl: url)
+               self.didCompleteLoginProcess()
            }
        }
    }
    
    private func storeUserInformation(imageProfileUrl: URL) {
        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-       let id = FirebaseManager.shared.firestore.collection("Community").document().documentID
        let userData = [FirebaseConstants.email: self.viewModelChat.userfb.email, FirebaseConstants.uid: uid, FirebaseConstants.profileImageUrl: imageProfileUrl.absoluteString]
        FirebaseManager.shared.firestore.collection("Community")
            .document("Users").collection(FirebaseConstants.users)
@@ -235,7 +239,8 @@ struct Chat: View {
         } else {
              createNewAccount()
             print("Register a new account inside of Firebase Auth and then store image in Storage somehow....",isLoginMode)
-            isLoginMode.toggle()
+           // isLoginMode.toggle()
+            self.didCompleteLoginProcess()
                      
         }
     }

@@ -34,13 +34,13 @@ struct Splash: View {
                            Image("LOGO")
                                .resizable()
                                .aspectRatio(contentMode: .fit)
-                               .frame(width: 100, height: 100, alignment: .center)
+                               .frame(width: 200, height: 200, alignment: .center)
                               
                            //                           Text("ضالتي / قريب / تلقاه، نلقاه، لقيته..الخ ")
                            //                           Text("LOSTET")
-                           Text("App Name")
+                           Text("Findet")
                                .foregroundColor(Color("lightGreen"))
-                               .font(.custom("SF Pro", size: 13))
+                               .font(.custom("SF Pro", size: 22))
                                
                            //                               .offset(x: 10, y: -20)
                        }

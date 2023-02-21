@@ -87,8 +87,8 @@ struct Community: View {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
 //                locationManager.locationCurrnent()
-                print("long",  locationManager.locationCurrnent().longitude)
-                print("lat",  locationManager.locationCurrnent().latitude)
+                print("long",  locationManager.locationCurrent.longitude)
+                print("lat",  locationManager.locationCurrent.longitude)
                 
             }
 //            .background(Color("BackGroundColor"))
@@ -101,13 +101,14 @@ struct Community: View {
                 })
             }, trailing:
                                     HStack {
-//                Chat(didCompleteLoginProcess: {
-//
-//                       self.vm.isUserCurrentlyLoggedOut = false
-//                       self.vm.fetchCurrentUser()
-//                       self.vm.fetchRecentMessages()
-//                   }, viewModelChat: viewModelChat)
-                NavigationLink(destination: MainMessagesView(), label:{
+/* Chat(didCompleteLoginProcess: {
+ self.vm.isUserCurrentlyLoggedOut = false
+ self.vm.fetchCurrentUser()
+ self.vm.fetchRecentMessages()
+}, viewModelChat: viewModelChat)*/
+                
+                
+                NavigationLink(destination :    MainMessagesView() , label:{
                     Label("Chat", systemImage: "message")
                         .foregroundColor(Color("lightGreen"))
                 })
@@ -117,11 +118,6 @@ struct Community: View {
                         .foregroundColor(Color("lightGreen"))
                 })
             })
-            .toolbar {
-                ToolbarItem(placement: .status) {
-                    
-                }
-            }
             .navigationBarTitle("Community", displayMode: .large)
             
         }.overlay{

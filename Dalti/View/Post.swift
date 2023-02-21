@@ -44,10 +44,10 @@ struct Post: View {
                 
                             }header: {
                                 HStack{
-                                    Text("Item Image:")
+                                    Text("Item Image:").textCase(nil)
                                         .font(.custom("SF Pro", size: 16))
                                         .foregroundColor(Color("colorOfText"))
-                                    Text("(OPTIONAL)")
+                                    Text("(Optional)").textCase(nil)
                                         .font(.custom("SF Pro", size: 12))
                                 }
                             }
@@ -73,10 +73,10 @@ struct Post: View {
                                 //                        let _ = Show2.toggle()}
                             }header: {
                                 HStack{
-                                    Text("Item Name:")
+                                    Text("Item Name:").textCase(nil)
                                         .font(.custom("SF Pro", size: 16))
                                         .foregroundColor(Color("colorOfText"))
-                                    Text("(REQUIRE)")
+                                    Text("(Require)").textCase(nil)
                                         .font(.custom("SF Pro", size: 10))
                                 }
                                 
@@ -92,10 +92,10 @@ struct Post: View {
                                 
                             } header: {
                                 HStack{
-                                    Text("Description:")
+                                    Text("Description:").textCase(nil)
                                         .font(.custom("SF Pro", size: 16))
                                         .foregroundColor(Color("colorOfText"))
-                                    Text("(OPTIONAL)")
+                                    Text("(Optional)").textCase(nil)
                                         .font(.custom("SF Pro", size: 10))
                                 }
                             }
@@ -116,18 +116,11 @@ struct Post: View {
                                 .frame(minWidth: 100, maxWidth: .infinity)
                                 .frame(height: 45)
                             }
-                            .background(Color("rw-green"))
+                            .background(Color("Mygreen"))
                             .cornerRadius(3.0)
                             
                             Button {
                                 handleDoneTapped()
-                                
-            //                    if(image != nil){
-            //                        viewModel.post.ImageURL = (image?.toJpegString(compressionQuality: 0.2))!
-            //                        print("happpppy to get here")
-            //                    }
-            //                    viewModel.uploadImageToStorge(image: image)
-                                // viewModel.handelUploadImage(image : image!)
                             } label: {
                                 
                                 if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){

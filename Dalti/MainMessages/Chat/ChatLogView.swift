@@ -9,39 +9,8 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
-//struct FirebaseConstants {
-//    static let fromId = "fromId"
-//    static let toId = "toId"
-//    static let text = "text"
-//    static let timestamp = "timestamp"
-//    static let email = "email"
-//    static let uid = "uid"
-//    static let profileImageUrl = "profileImageUrl"
-//    static let messages = "messages"
-//    static let users = "users"
-//    static let recentMessages = "recent_messages"
-//}
-
-//struct ChatMessage: Identifiable {
-//
-//    var id: String { documentId }
-//
-//    let documentId: String
-//    let fromId, toId, text: String
-//
-//    init(documentId: String, data: [String: Any]) {
-//        self.documentId = documentId
-//        self.fromId = data[FirebaseConstants.fromId] as? String ?? ""
-//        self.toId = data[FirebaseConstants.toId] as? String ?? ""
-//        self.text = data[FirebaseConstants.text] as? String ?? ""
-//    }
-//}
-
-import SwiftUI
-import Firebase
-
 class ChatLogViewModel: ObservableObject {
-    
+    //checked
     @Published var chatText = ""
     @Published var errorMessage = ""
     
@@ -58,11 +27,17 @@ class ChatLogViewModel: ObservableObject {
     var firestoreListener: ListenerRegistration?
     
     func fetchMessages() {
+      
         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
         guard let toId = chatUser?.uid else { return }
         firestoreListener?.remove()
         chatMessages.removeAll()
-        firestoreListener = FirebaseManager.shared.firestore
+        
+        firestoreListener = FirebaseManager.shared.firestore.collection("Community")
+            .document("Users")
+            .collection(FirebaseConstants.users)
+            .document(fromId)
+//        FirebaseManager.shared.firestore
             .collection(FirebaseConstants.messages)
             .document(fromId)
             .collection(toId)
@@ -99,7 +74,7 @@ class ChatLogViewModel: ObservableObject {
         
         guard let toId = chatUser?.uid else { return }
         
-        let document = FirebaseManager.shared.firestore.collection(FirebaseConstants.messages)
+        let document = FirebaseManager.shared.firestore.collection("Community").document("Users").collection(FirebaseConstants.users).document(fromId).collection(FirebaseConstants.messages)
             .document(fromId)
             .collection(toId)
             .document()
@@ -121,7 +96,7 @@ class ChatLogViewModel: ObservableObject {
             self.count += 1
         }
         
-        let recipientMessageDocument = FirebaseManager.shared.firestore.collection("messages")
+        let recipientMessageDocument = FirebaseManager.shared.firestore.collection("Community").document("Users").collection(FirebaseConstants.users).document(fromId).collection("messages")
             .document(toId)
             .collection(fromId)
             .document()
@@ -143,7 +118,7 @@ class ChatLogViewModel: ObservableObject {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         guard let toId = self.chatUser?.uid else { return }
         
-        let document = FirebaseManager.shared.firestore
+        let document = FirebaseManager.shared.firestore.collection("Community").document("Users").collection(FirebaseConstants.users).document(uid)
             .collection(FirebaseConstants.recentMessages)
             .document(uid)
             .collection(FirebaseConstants.messages)
@@ -168,6 +143,7 @@ class ChatLogViewModel: ObservableObject {
             }
         }
         
+//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         guard let currentUser = FirebaseManager.shared.currentUser else { return }
         let recipientRecentMessageDictionary = [
             FirebaseConstants.timestamp: Timestamp(),
@@ -178,7 +154,8 @@ class ChatLogViewModel: ObservableObject {
             FirebaseConstants.email: currentUser.email
         ] as [String : Any]
         
-        FirebaseManager.shared.firestore
+        FirebaseManager.shared.firestore.collection("Community").document("Users")
+            .collection(FirebaseConstants.users).document(currentUser.uid)
             .collection(FirebaseConstants.recentMessages)
             .document(toId)
             .collection(FirebaseConstants.messages)

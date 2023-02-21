@@ -59,12 +59,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct DaltiApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             Splash()
         }
+    }
+    func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
+        print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
+      //  self.vm.chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
     }
 }
 

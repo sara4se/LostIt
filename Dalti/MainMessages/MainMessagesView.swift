@@ -1,6 +1,6 @@
 //
 //  MainMessagesView.swift
-//  LBTASwiftUIFirebaseChat
+//  Dalti
 //
 //  Created by Rawan on 24/07/1444 AH.
 //
@@ -11,15 +11,21 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class MainMessagesViewModel: ObservableObject {
-    
+    //checked
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
     @Published var isUserCurrentlyLoggedOut = false
+    //@Published var isUserCurrentlyLoggedIn = true
     
     init() {
         
+        func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
+            print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
+            chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
+        }
         DispatchQueue.main.async {
             self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+           // self.isUserCurrentlyLoggedIn = FirebaseManager.shared.auth.currentUser?.uid != nil
         }
         
         fetchCurrentUser()
@@ -32,12 +38,13 @@ class MainMessagesViewModel: ObservableObject {
     private var firestoreListener: ListenerRegistration?
     
     func fetchRecentMessages() {
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         
         firestoreListener?.remove()
         self.recentMessages.removeAll()
-        
-        firestoreListener = FirebaseManager.shared.firestore
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        firestoreListener = FirebaseManager.shared.firestore.collection("Community")
+            .document("Users").collection(FirebaseConstants.users)
+            .document(uid)
             .collection(FirebaseConstants.recentMessages)
             .document(uid)
             .collection(FirebaseConstants.messages)
@@ -74,7 +81,8 @@ class MainMessagesViewModel: ObservableObject {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        FirebaseManager.shared.firestore.collection("Community").document("Users").collection(FirebaseConstants.users).document(uid).getDocument { snapshot, error in
+        FirebaseManager.shared.firestore.collection("Community").document("Users")
+            .collection(FirebaseConstants.users).document(uid).getDocument { snapshot, error in
             if let error = error {
                 self.errorMessage = "Failed to fetch current user: \(error)"
                 print("Failed to fetch current user:", error)
@@ -102,7 +110,7 @@ struct MainMessagesView: View {
     @ObservedObject private var vm = MainMessagesViewModel()
     
     private var chatLogViewModel = ChatLogViewModel(chatUser: nil)
-    @ObservedObject var viewModelChat : ChatViewModel = ChatViewModel()
+//    @ObservedObject var viewModelChat : ChatViewModel = ChatViewModel()
     var body: some View {
         NavigationView {
             
@@ -170,12 +178,14 @@ struct MainMessagesView: View {
                 .cancel()
             ])
         }
+ 
+        
         .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {
             Chat(didCompleteLoginProcess: {
                 self.vm.isUserCurrentlyLoggedOut = false
                 self.vm.fetchCurrentUser()
                 self.vm.fetchRecentMessages()
-            }, viewModelChat: viewModelChat)
+            })
 //            if(viewModelChat.didCompleteLoginProcess){
 //                self.vm.isUserCurrentlyLoggedOut = false
 //                self.vm.fetchCurrentUser()
@@ -249,15 +259,17 @@ struct MainMessagesView: View {
                 HStack {
                     Spacer()
                     Text("+ New Message")
-                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                         
+                    
                     Spacer()
                 }
                 .foregroundColor(.white)
                 .padding(.vertical)
-                .background(Color.blue)
-                .cornerRadius(32)
+                .background(Color("Mygreen"))
+                .cornerRadius(3.0)
                 .padding(.horizontal)
-                .shadow(radius: 15)
+                .shadow(radius: 3)
             }
             .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
                 NewMessageView(didSelectNewUser: { user in

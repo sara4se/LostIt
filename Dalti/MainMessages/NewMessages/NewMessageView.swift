@@ -1,6 +1,6 @@
 //
 //  NewMessageView.swift
-//  LBTASwiftUIFirebaseChat
+//  Dalti
 //
 //  Created by Rawan on 25/07/1444 AH.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 class NewMessageViewModel: ObservableObject {
-    
+    //checked
     @Published var users = [ChatUser]()
     @Published var errorMessage = ""
     
@@ -20,7 +20,8 @@ class NewMessageViewModel: ObservableObject {
     private func fetchAllUsers() {
 //        FirebaseManager.shared.firestore.collection("Community")
 //            .document("Users").collection(FirebaseConstants.users)
-        FirebaseManager.shared.firestore.collection("Community").document("Users").collection("User")
+        FirebaseManager.shared.firestore.collection("Community")
+            .document("Users").collection("User")
             .getDocuments { documentsSnapshot, error in
                 if let error = error {
                     self.errorMessage = "Failed to fetch users: \(error)"
