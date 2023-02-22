@@ -13,7 +13,6 @@ class UserFB : Identifiable {
     var id: String
     var email : String
     var password : String
- 
 //    init(id : String , emil: String, password: String) {
 //        self.id = id
 //        self.email = emil

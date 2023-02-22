@@ -20,7 +20,7 @@ struct settingsPage: View {
         NavigationStack {
             VStack {
                 Form{
-                    Section(header: Text("More Information")) {
+                    Section {
                         
                         NavigationLink("Privacy Policy" ,destination: Privacy_Policy())
                       
@@ -43,29 +43,26 @@ struct settingsPage: View {
                 
                 Spacer()
                 
-                Button("Log Out", action: {
-                    
-                    shouldShowLogOutOptions = true})
-                
-                .foregroundColor(.white)
-                .frame(width: 350 ,height: 50)
-                
-                .background(Color.red.opacity(0.9))
-                .opacity(0.9)
-                .cornerRadius(10)
-                .border(Color(.clear))
-                .font(.system(size: 16, weight: .bold))
-                .padding()
-                .actionSheet(isPresented: $shouldShowLogOutOptions) {
-                    .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
-                        .destructive(Text("Sign Out"), action: {
-                            print("handle sign out")
-//                            vm.handleSignOut()
-                            vm.isUserCurrentlyLoggedOut.toggle()
-                        }),
-                        .cancel()
-                    ])
-                }
+//                Button("Log Out", action: {
+//
+//                    shouldShowLogOutOptions = true})
+//                
+//                 .foregroundColor(.white)
+//                .font(.headline)
+//                .frame(width: 300 , height: 53)
+//                .background(Color(("Mygray")))
+//                .cornerRadius(8)
+//                .shadow(radius: 3)
+//                .actionSheet(isPresented: $shouldShowLogOutOptions) {
+//                    .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
+//                        .destructive(Text("Sign Out"), action: {
+//                            print("handle sign out")
+////                            vm.handleSignOut()
+//                            vm.isUserCurrentlyLoggedOut.toggle()
+//                        }),
+//                        .cancel()
+//                    ])
+//                }
             }
                 .navigationTitle("Setting")
         }

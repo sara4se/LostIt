@@ -12,9 +12,10 @@ class LocationManager: NSObject, ObservableObject {
     @Published var locationCurrent = CLLocationCoordinate2D()
     let notificationCenter = UNUserNotificationCenter.current()
     lazy var storeRegion = makeStoreRegion()
-    @Published var didArriveAtTakeout = true
+    @Published var didArriveAtTakeout = false
     static let geoCoder = CLGeocoder()
     lazy var locationManager = makeLocationManager()
+    
 //
 //    func locationCurrnent() -> CLLocationCoordinate2D{
 //       // let lc = locationManager.location
@@ -48,6 +49,7 @@ class LocationManager: NSObject, ObservableObject {
     }
     
     // 1
+    
     func validateLocationAuthorizationStatus() {
         // 2
         switch locationManager.authorizationStatus {
@@ -78,13 +80,13 @@ class LocationManager: NSObject, ObservableObject {
                 // 4
                 print("Auth Request result: \(result)")
                 if result {
-                   // self!.registerNotification()
+                self!.registerNotification()
                 }
             }
     }
     
     // 1
- /*   private func registerNotification(){
+   private func registerNotification(){
         // 2
         let content = UNMutableNotificationContent()
         content.title = "Feed the cat"
@@ -106,17 +108,17 @@ class LocationManager: NSObject, ObservableObject {
             content: content,
             trigger: trigger)
         
-//        UNUserNotificationCenter.current().add(request)
-//        // 5
-//        notificationCenter
-//            .add(request) { error in
-//                if error != nil {
-//                    print("Error this is me : \(String(describing: error))")
-//                }
-//            }
+        UNUserNotificationCenter.current().add(request)
+        // 5
+        notificationCenter
+            .add(request) { error in
+                if error != nil {
+                    print("Error this is me : \(String(describing: error))")
+                }
+            }
         
         // add our notification request
-        if (location.longitude == location.longitude || location.latitude == location.latitude){
+       if (locationCurrent.longitude == locationCurrent.longitude || locationCurrent.latitude == locationCurrent.latitude){
             UNUserNotificationCenter.current().add(request)
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
@@ -127,7 +129,7 @@ class LocationManager: NSObject, ObservableObject {
             }
         }
     }
-   */
+   
     // 1
     override init() {
         super.init()

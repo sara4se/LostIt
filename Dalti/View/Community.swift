@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import SDWebImageSwiftUI
 import UserNotifications
- 
+
 struct Community: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -26,26 +26,19 @@ struct Community: View {
     var completionHandler: ((Result<Action, Error>) -> Void)?
     @State var  ItemType = ""
     @State private var orderPlaced = false
-    @State var dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+
+    //  @Binding var Show: Bool
     var body: some View {
         NavigationStack{
-          
+            
             VStack {
-//                Picker(selection: $selectedSchool, label: Text("School Name")) {
-//                    ForEach(self.schoolData.datas.sorted(by: { $0.name < $1.name } )) {i in
-//                        Text(self.schoolData.datas.count != 0 ? i.name : "No Schools Available").tag(i as schoolName?)
-//                    }
-//                }
-//                Text("Selected School: \(selectedSchool?.name ?? "No School Selected")")
-//
-//                Divider()
-                Picker("Select the item state", selection: $ItemType) {
-                    ForEach(itemType, id: \.self) {
-                        Text($0).foregroundColor(Color("lightGreen"))}
-                    .font(.custom("SF Pro", size: 16))
-                }.pickerStyle(.segmented)
-                    .frame(width: 345).padding(1)
-                
+//                Picker("Select the item state", selection: $ItemType) {
+//                    ForEach(itemType, id: \.self) {
+//                        Text(LocalizedStringKey($0)).foregroundColor(Color("lightGreen"))}
+//                    .font(.custom("SF Pro", size: 16))
+//                }.pickerStyle(.segmented)
+//                    .frame(width: 345).padding(1)
+                Divider()
                 ScrollView(.vertical,showsIndicators: false){
                     VStack(spacing: 0){
                         ForEach(viewModels.posts){post in
@@ -57,10 +50,6 @@ struct Community: View {
                             }
                         label: {
                             CardView(item: post)
-                            //                                .overlay(
-                            //                                RoundedRectangle(cornerRadius: 8)
-                            //                                    .stroke(Color("cornerColor"), lineWidth: 1)
-                            //                            )
                                 .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
                         }.buttonStyle(ScaledButtonStyle())
                                 .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
@@ -72,26 +61,26 @@ struct Community: View {
                 }
             }
 //            .alert(isPresented: $locationManager.didArriveAtTakeout) {
-//                  Alert(
-//                    title: Text("Check In"),
+//                Alert(
+//                    title: Text("Check"),
 //                    message:
-//                      Text("""
-//                        You have arrived to collect your order.
-//                        Do you want to check in?
+//                        Text("""
+//
+//                        Do you want to..?
 //                        """),
 //                    primaryButton: .default(Text("Yes")),
 //                    secondaryButton: .default(Text("No"))
-//                  )
-//                }
+//                )
+//            }
             .onAppear() {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
-//                locationManager.locationCurrnent()
+                //                locationManager.locationCurrnent()
                 print("long",  locationManager.locationCurrent.longitude)
                 print("lat",  locationManager.locationCurrent.longitude)
                 
             }
-//            .background(Color("BackGroundColor"))
+            //            .background(Color("BackGroundColor"))
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                                     HStack {
@@ -101,19 +90,12 @@ struct Community: View {
                 })
             }, trailing:
                                     HStack {
-/* Chat(didCompleteLoginProcess: {
- self.vm.isUserCurrentlyLoggedOut = false
- self.vm.fetchCurrentUser()
- self.vm.fetchRecentMessages()
-}, viewModelChat: viewModelChat)*/
-                
-                
                 NavigationLink(destination :    MainMessagesView() , label:{
                     Label("Chat", systemImage: "message")
                         .foregroundColor(Color("lightGreen"))
                 })
                 
-                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "")), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })
@@ -144,33 +126,19 @@ struct Community: View {
             ZStack(alignment: .topLeading){
                 GeometryReader{ proxy in
                     let size = proxy.size
-                    //                    Image("image2")
-                    //                    if let encodedString = item.ImageURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: encodedString) {
-                    //                     let _ =   print("url ***************\(url)")
-                    //                        if let urltoImage = url, let data = try? Data(contentsOf: urltoImage),
-                    //                           let image = UIImage(data: data){
-                    //                            let _ =   print("data **************\(data)")
-                    //                            Image(uiImage: image)
-                    //                            //                    Image(uiImage: item.ImageURL)
-                    //                                .resizable()
-//                    AsyncImage(url: URL(string: "https://example.com/icon.png")) { image in
-//                        image.resizable(resizingMode: .tile)
-//                    } placeholder: {
-//                        Color.green
-//                    }
                     AnimatedImage(url: URL(string: item.ImageURL)).resizable()
-//                        .placeholder(UIImage(systemName: "text.below.photo.fill"))
+                    //                        .placeholder(UIImage(systemName: "text.below.photo.fill"))
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size.width, height: size.height)
                         .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8)).foregroundColor(.gray)
-               
+                    
                     
                 }.frame(height: 400)
-                                LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
+                LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
                 VStack(alignment: .leading, spacing: 8){
-                    Text(item.ItemState.uppercased())
+                    Text(item.ItemState)
                         .font(.largeTitle.bold())
-                }.foregroundColor(Color("colorOfText"))
+                }.foregroundColor(.white)
                     .padding()
                     .offset(y: currentItem?.id == item.id && animateView ? safeArea().top : 0)
             }
@@ -183,17 +151,18 @@ struct Community: View {
                     // .frame(width: 335.75,height: 20.18)
                     Text(animateView ? "" : item.Description )
                         .font(.caption).fontWeight(.regular)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color("colorOfText"))
-                            .frame(width: 335.75,height: 31.95)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("colorOfText"))
+                        .frame(width: 335.75,height: 31.95)
                     
                 }.padding([.leading,.top])
             }
         }.foregroundColor(Color("BackGroundColor"))
-        .background{
-            RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor")).border(animateView ? .clear : .gray,width: 1)
-        }
-        .matchedGeometryEffect(id: item.id, in: animation)
+            .background{
+                RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor")).shadow(radius: animateView ? 0 : 2)
+                    .border(animateView ? .clear : .gray,width: 1)
+            }
+            .matchedGeometryEffect(id: item.id, in: animation)
     }
     
     func DetailView(item: PostModel)-> some View{
@@ -202,49 +171,23 @@ struct Community: View {
                 CardView(item: item)
                     .scaleEffect(animateView ? 1 : 0.93)
                 VStack(spacing: 15){
-                    Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)
+                    if (item.Description != ""){
+                        Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)}
+                    else{ Text( "the item in the photo above is missing please contact the person who post it by call or chat within the app, help people to find their items and they will help you too..").multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)}
+                    Spacer()
                     Divider()
                     HStack{
-                        let PhoneNumber = "123-456-7890"
-                        Button{
-                            let tel = "tel://"
-                            let formattedString = tel + PhoneNumber
-                            guard let url = URL(string: formattedString) else { return }
-                            UIApplication.shared.open(url)
-                        } label: {
-                            Text("Call")
-                        }
-                        Button{
-                            
-                             print("this is loction manger resilt ",locationManager.didArriveAtTakeout)
-                            if (locationManager.didArriveAtTakeout){
-                                
-//                                let content = UNMutableNotificationContent()
-//                                content.title = "Feed the cat"
-//                                content.subtitle = "It looks hungry"
-//                                content.sound = UNNotificationSound.default
-//
-//                                // show this notification five seconds from now
-//                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//
-//                                // choose a random identifier
-//                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//                                // add our notification request
-//                                UNUserNotificationCenter.current().add(request)
-    //                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-    //                                if success {
-    //                                    print("All set!")
-    //                                } else if let error = error {
-    //                                    print(error.localizedDescription)
-    //                                }
-    //                            }
+                        //                        let phonenum = "03030339"
+                        if(item.Phone != ""){
+                            Button{
+                                let tel = "tel://"
+                                let formattedString = tel + item.Phone
+                                guard let url = URL(string: formattedString) else { return }
+                                UIApplication.shared.open(url)
+                            } label: {
+                                Text("Call")
                             }
-                        
                         }
-                    label: {
-                        Text("Chat")
-                    }
                         
                     }
                     
@@ -262,11 +205,11 @@ struct Community: View {
                     showDeaialPage = false
                 }
             }
-            label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title)
-                    .foregroundColor(.white)
-            }.padding()
+        label: {
+            Image(systemName: "xmark.circle.fill")
+                .font(.title)
+                .foregroundColor(.white)
+        }.padding()
                 .padding(.top,safeArea().top)
                 .offset(y: -10)
                 .opacity(animateView ? 1 : 0)
@@ -283,11 +226,11 @@ struct Community: View {
         .transition(.identity)
     }
     func placeOrder() {
-      orderPlaced = true
+        orderPlaced = true
     }
-
+    
     func requestNotification() {
-      locationManager.validateLocationAuthorizationStatus()
+        locationManager.validateLocationAuthorizationStatus()
     }
     func handleDeleteTapped() {
         viewModel.handleDeleteTapped()
@@ -302,6 +245,6 @@ struct Community: View {
 struct Community_Previews: PreviewProvider {
     static var previews: some View {
         Community()
-            //.environmentObject(locationManager)
+        //.environmentObject(locationManager)
     }
 }

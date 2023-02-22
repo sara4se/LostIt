@@ -44,7 +44,7 @@ class ChatLogViewModel: ObservableObject {
             .order(by: FirebaseConstants.timestamp)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
-                    self.errorMessage = "Failed to listen for messages: \(error)"
+                    self.errorMessage = "Failed to listen for messages"
                     print(error)
                     return
                 }
@@ -57,7 +57,7 @@ class ChatLogViewModel: ObservableObject {
                                 print("Appending chatMessage in ChatLogView: \(Date())")
                             }
                         } catch {
-                            print("Failed to decode message: \(error)")
+                            print("Failed to decode message")
                         }
                     }
                 })
@@ -84,7 +84,7 @@ class ChatLogViewModel: ObservableObject {
         try? document.setData(from: msg) { error in
             if let error = error {
                 print(error)
-                self.errorMessage = "Failed to save message into Firestore: \(error)"
+                self.errorMessage = "Failed to save message into Firestore"
                 return
             }
             
@@ -137,8 +137,8 @@ class ChatLogViewModel: ObservableObject {
         
         document.setData(data) { error in
             if let error = error {
-                self.errorMessage = "Failed to save recent message: \(error)"
-                print("Failed to save recent message: \(error)")
+                self.errorMessage = "Failed to save recent message"
+                print("Failed to save recent message")
                 return
             }
         }
@@ -162,7 +162,7 @@ class ChatLogViewModel: ObservableObject {
             .document(currentUser.uid)
             .setData(recipientRecentMessageDictionary) { error in
                 if let error = error {
-                    print("Failed to save recipient recent message: \(error)")
+                    print("Failed to save recipient recent message")
                     return
                 }
             }
