@@ -46,8 +46,8 @@
 		562C5D34298AD03700A23762 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D33298AD03700A23762 /* Chat.swift */; };
 		562C5D36298AD06500A23762 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D35298AD06500A23762 /* Splash.swift */; };
 		5695580629A67B61001B20FD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5695580829A67B61001B20FD /* Localizable.strings */; };
-		5695580B29A6D5F5001B20FD /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5695580A29A6D5F5001B20FD /* MainMessagesViewModel.swift */; };
 		5695580D29A6D712001B20FD /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5695580C29A6D712001B20FD /* NewMessageViewModel.swift */; };
+		5695580F29A6E304001B20FD /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5695580E29A6E304001B20FD /* MainMessagesViewModel.swift */; };
 		56AC346629A519B000519E4F /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC346529A519B000519E4F /* Feature.swift */; };
 		56AC346829A519F700519E4F /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC346729A519F700519E4F /* OnboardingContainerView.swift */; };
 		56AC346A29A51A2D00519E4F /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC346929A51A2D00519E4F /* OnboardingContentView.swift */; };
@@ -94,8 +94,8 @@
 		562C5D35298AD06500A23762 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		5695580729A67B61001B20FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5695580929A67B88001B20FD /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5695580A29A6D5F5001B20FD /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		5695580C29A6D712001B20FD /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
+		5695580E29A6E304001B20FD /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		56AC346529A519B000519E4F /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		56AC346729A519F700519E4F /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
 		56AC346929A51A2D00519E4F /* OnboardingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
@@ -246,8 +246,8 @@
 				5621EBAB299E9DC000415833 /* LocationManager.swift */,
 				5621C768299830B700625D55 /* PostViewModel.swift */,
 				5621EBE629A2030E00415833 /* ChatViewModel.swift */,
-				5695580A29A6D5F5001B20FD /* MainMessagesViewModel.swift */,
 				5695580C29A6D712001B20FD /* NewMessageViewModel.swift */,
+				5695580E29A6E304001B20FD /* MainMessagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -381,9 +381,9 @@
 				56E2E6BD298EE66600A9979B /* PostModel.swift in Sources */,
 				562C5D2C298ACFBD00A23762 /* SignUp.swift in Sources */,
 				5621EBD429A1553300415833 /* FirebaseConstants.swift in Sources */,
+				5695580F29A6E304001B20FD /* MainMessagesViewModel.swift in Sources */,
 				5621EBDE29A1553C00415833 /* MainMessagesView.swift in Sources */,
 				562C5D32298AD02B00A23762 /* Post.swift in Sources */,
-				5695580B29A6D5F5001B20FD /* MainMessagesViewModel.swift in Sources */,
 				5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */,
 				56AC346A29A51A2D00519E4F /* OnboardingContentView.swift in Sources */,
 				562C5D1B298ACF2400A23762 /* DaltiApp.swift in Sources */,
