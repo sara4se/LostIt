@@ -104,7 +104,7 @@ class MainMessagesViewModel: ObservableObject {
 struct MainMessagesView: View {
     
     @State var shouldShowLogOutOptions = false
-    
+    //@Binding var Show: Bool
     @State var shouldNavigateToChatLogView = false
     
     @ObservedObject private var vm = MainMessagesViewModel()
@@ -112,7 +112,7 @@ struct MainMessagesView: View {
     private var chatLogViewModel = ChatLogViewModel(chatUser: nil)
 //    @ObservedObject var viewModelChat : ChatViewModel = ChatViewModel()
     var body: some View {
-        NavigationView {
+        NavigationStack {
             
             VStack {
                 customNavBar
@@ -125,6 +125,8 @@ struct MainMessagesView: View {
             .overlay(
                 newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)
+            
+             .navigationBarTitle("Chat", displayMode: .large)
         }
     }
     
@@ -270,6 +272,7 @@ struct MainMessagesView: View {
                 .cornerRadius(3.0)
                 .padding(.horizontal)
                 .shadow(radius: 3)
+
             }
             .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
                 NewMessageView(didSelectNewUser: { user in
@@ -287,7 +290,7 @@ struct MainMessagesView: View {
     
     struct MainMessagesView_Previews: PreviewProvider {
         static var previews: some View {
-          MainMessagesView()
+            MainMessagesView()
                 .preferredColorScheme(.dark)
             
         }

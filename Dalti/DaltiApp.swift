@@ -8,10 +8,36 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseMessaging
+
+@main
+struct DaltiApp: App {
+    
+    init(){
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color(.black))]
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
+         }
+
+    @AppStorage("isOnboarding") var isOnboarding = true
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    var body: some Scene {
+        WindowGroup {
+            if isOnboarding {
+                OnboardingContainerView()
+            }
+            else {
+                Splash()
+            }
+        }
+    }
+    func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
+        print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
+      //  self.vm.chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
+    }
+}
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.Message_ID"
- 
-    
+   
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
@@ -36,10 +62,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Messaging Delegate
         
         Messaging.messaging().delegate = self
-        
+        Messaging.messaging().isAutoInitEnabled = true
         return true
     }
     
+
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -47,7 +74,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-    
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+      Messaging.messaging().apnsToken = deviceToken
+    }
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -56,21 +86,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     
 }
-
-@main
-struct DaltiApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    var body: some Scene {
-        WindowGroup {
-            Splash()
-        }
-    }
-    func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
-        print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
-      //  self.vm.chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
-    }
-}
-
 
 // MARK: - UNUserNotificationCenterDelegate
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -184,25 +199,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     completionHandler()
   }*/
   
-//  func application(_ application: UIApplication,
-//                   didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-//                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
-//                     -> Void) {
-//    // If you are receiving a notification message while your app is in the background,
-//    // this callback will not be fired till the user taps on the notification launching the application.
-//    // TODO: Handle data of notification
-//    // With swizzling disabled you must let Messaging know about the message, for Analytics
-//    // Messaging.messaging().appDidReceiveMessage(userInfo)
-//    // Print message ID.
-//    if let messageID = userInfo[gcmMessageIDKey] {
-//      print("Message ID: \(messageID)")
-//    }
-//
-//    // Print full message.
-//    print(userInfo)
-//
-//    completionHandler(UIBackgroundFetchResult.newData)
-//  }
+  func application(_ application: UIApplication,
+                   didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
+                     -> Void) {
+    // If you are receiving a notification message while your app is in the background,
+    // this callback will not be fired till the user taps on the notification launching the application.
+    // TODO: Handle data of notification
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // Messaging.messaging().appDidReceiveMessage(userInfo)
+    // Print message ID.
+    if let messageID = userInfo[gcmMessageIDKey] {
+      print("Message ID: \(messageID)")
+    }
+
+    // Print full message.
+    print(userInfo)
+
+    completionHandler(UIBackgroundFetchResult.newData)
+  }
 
     func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
         print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")

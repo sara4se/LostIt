@@ -10,6 +10,7 @@ import SwiftUI
 struct SignIn: View {
     @State var itemType = ["Lost","Found"]
     @State var  ItemType = ""
+   // @Binding var Show: Bool
     var body: some View {
         NavigationStack{
        

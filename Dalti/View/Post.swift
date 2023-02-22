@@ -44,19 +44,20 @@ struct Post: View {
                 
                             }header: {
                                 HStack{
-                                    Text("Item Image:").textCase(nil)
+                                    Text("Select item image:").textCase(nil)
                                         .font(.custom("SF Pro", size: 16))
                                         .foregroundColor(Color("colorOfText"))
-                                    Text("(Optional)").textCase(nil)
-                                        .font(.custom("SF Pro", size: 12))
+                                    Text("(Require)").textCase(nil)
+                                        .font(.custom("SF Pro", size: 10))
                                 }
                             }
                             
                             Section {
                                 
-                                Picker("Select the item state", selection: $viewModel.post.ItemState) {
+                                Picker("Select item state", selection: $viewModel.post.ItemState) {
                                     ForEach(itemType, id: \.self) {
-                                        Text($0)}
+                                        Text(LocalizedStringKey($0))}
+                                   
                                     .font(.custom("SF Pro", size: 16))
                                 }.pickerStyle(.navigationLink)
                                 if(!viewModel.post.ItemState.isEmpty){
@@ -69,19 +70,15 @@ struct Post: View {
                                 TextField("Add Name", text: $viewModel.post.ItemName)
                                     .font(.custom("SF Pro", size: 16))
                                     .lineSpacing(5)
-                                //                    if(!Title.isEmpty){
-                                //                        let _ = Show2.toggle()}
                             }header: {
                                 HStack{
-                                    Text("Item Name:").textCase(nil)
+                                    Text("Item name:").textCase(nil)
                                         .font(.custom("SF Pro", size: 16))
                                         .foregroundColor(Color("colorOfText"))
                                     Text("(Require)").textCase(nil)
                                         .font(.custom("SF Pro", size: 10))
                                 }
-                                
-                            }
-                            
+                           }
                             Section{
                                 
                                 TextEditorWithPlaceholder(text: $viewModel.post.Description)
@@ -101,23 +98,34 @@ struct Post: View {
                             }
                             
                             Section{
+                                TextField("Add phone number", text: $viewModel.post.Phone)
+                                    .font(.custom("SF Pro", size: 16))
+                                    .lineSpacing(5)
                                 Toggle(
                                     isOn: $Show,
                                     label:{
                                         Text("Show phone number ")
                                             .font(.custom("SF Pro", size: 16))
                                         
-                                    })}
+                                    })
+                            }header: {
+                                HStack{
+                                    Text("Phone number:").textCase(nil)
+                                        .font(.custom("SF Pro", size: 16))
+                                        .foregroundColor(Color("colorOfText"))
+                                }
+                            }
                             
                         footer:{
-                            Button(action: placeOrder) {
-                                Text("Place Order:")
-                                .foregroundColor(.white)
-                                .frame(minWidth: 100, maxWidth: .infinity)
-                                .frame(height: 45)
-                            }
-                            .background(Color("Mygreen"))
-                            .cornerRadius(3.0)
+//                            Button(action: placeOrder) {
+//                                Text("Place Order:")
+//                                    .foregroundColor(.white)
+//                                    .font(.headline)
+//                                    .frame(width: 300 , height: 53)
+//                                    .background(Color(("Mygray")))
+//                                    .cornerRadius(8)
+//                            }
+//
                             
                             Button {
                                 handleDoneTapped()
@@ -130,6 +138,7 @@ struct Post: View {
                                         .frame(width: 300 , height: 53)
                                         .background(Color(("Mygreen")))
                                         .cornerRadius(8)
+                                        .shadow(radius: 3)
                                 }else{
                                     Text("Post")
                                         .foregroundColor(.white)
@@ -137,10 +146,8 @@ struct Post: View {
                                         .frame(width: 300 , height: 53)
                                         .background(Color(("Mygray")))
                                         .cornerRadius(8)
+                                        .shadow(radius: 3)
                                 }
-                                
-                                
-                                
                             }.disabled(viewModel.post.ItemState.isEmpty || viewModel.post.ItemName.isEmpty)
                                 .padding(.all)
                                 .disabled(!viewModel.modified)
@@ -151,12 +158,9 @@ struct Post: View {
                     }
                     .alert(isPresented: $orderPlaced) {
                         Alert(
-                            title: Text("Food Ordered"),
+                            title: Text("Post Upload"),
                             message:
-                                Text("""
-                              Your food has been ordered.
-                              Would you like to be notified on arrival?
-                              """),
+                                Text("Do you like to be notified when Your item been found?"),
                             primaryButton: .default(Text("Yes")) {
                                 requestNotification()
                             },
@@ -177,7 +181,7 @@ struct Post: View {
     
     func handleDoneTapped() {
       //  self.viewModel.handleDoneTapped()
-        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description)
+        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description,Phone: viewModel.post.Phone)
         self.dismiss()
     }
     
@@ -198,7 +202,7 @@ struct Post: View {
 struct Post_Previews: PreviewProvider {
     
     static var previews: some View {
-        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: ""))
+        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: ""))
     }
 }
 
@@ -257,64 +261,3 @@ struct TextEditorWithPlaceholder: View {
 
 
 let placeHolderImage = UIImage()
-//
-//extension UIImageView {
-// // Check to see if the image is the same as our placeholder
-//  func isPlaceholderImage(_ placeHolderImage: UIImage = placeHolderImage) -> Bool {
-//    return image == placeHolderImage
-//  }
-//}
-
-
-//struct AddPhoto: View {
-//    @StateObject var viewModel = PostsViewModel()
-//    @Binding var image: UIImage?
-////    @Binding var  UrlForImage: URL?
-//    //= UIImage(systemName: "")
-//    //Image("photo")
-//    @State private var shouldPresentImagePicker = false
-//    @State private var shouldPresentActionScheet = false
-//    @State private var shouldPresentCamera = true
-//
-//    var body: some View {
-//        // WARNING: Force wrapped image for demo purpose
-//
-//        ZStack{
-//
-//            let imagetoSwift = Image(uiImage: image ?? placeHolderImage)
-//            imagetoSwift
-//                .resizable()
-//                .frame(width: 355, height: 211)
-//                .cornerRadius(8)
-//                .overlay( RoundedRectangle(cornerRadius: 8)
-//                    .stroke(Color(.white), lineWidth: 1))
-//                .background(Color("cornerColor"))
-//                .cornerRadius(8)
-//
-//            if (!shouldPresentActionScheet && !shouldPresentImagePicker && shouldPresentCamera){
-//                Image(systemName: "plus")
-//                    .resizable()
-//                    .frame(width: 68 , height: 76)
-//                .foregroundColor(Color("darkgray"))
-//
-//            }
-//
-//        }
-//
-//        .onTapGesture { self.shouldPresentActionScheet = true
-//
-//        }
-//        .sheet(isPresented: $shouldPresentImagePicker) {
-//            SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker)
-//        }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-//            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to upload your item image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = true
-//            }), ActionSheet.Button.default(Text("Photo Library"), action: {
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = false
-//            }), ActionSheet.Button.cancel()])
-//        }
-//    }
-//}
-

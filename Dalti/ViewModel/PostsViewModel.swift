@@ -33,7 +33,7 @@ class PostsViewModel: ObservableObject {
         if listenerRegistration == nil {
          //   guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
 //            self.db.collection("Posts").document("Post").collection(fromId).document(id)
-            let id = self.db.collection("Community").document().documentID
+          
 //            self.db.collection("Community").document("Posts")
 //            let idPost = self.db.collection("Post").document().documentID
                 
@@ -63,22 +63,5 @@ class PostsViewModel: ObservableObject {
             }
         }
     }
-    
-// 
-//    func downloadImageFunc(){
-//        Storage.storage().reference().child("temp").getData(maxSize: 12 * 1024 * 1024) { (data,error) in
-//            if let error = error{
-//                print("an error has occurrd - \(error.localizedDescription)")
-//            }else {
-//                if let imageData = data{
-//                    // self.postToFB.ImageURL = UIImage(data: imageData)
-//                    //                    print("image download successfully")
-//                }
-//                else{
-//                    print("could't unwrap/case image to data")
-//                }
-//            }
-//        }
-//    }
     
 }

@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  Dalti
+
+  Created by Sara Alhumidi on 02/08/1444 AH.
+  
+*/
+"Community" = "Community";
+"Send" = "Send";
+"Description" = "Description";
+"Cancel" = "Cancel";
+"NewMessage" = "New Message";
+"PrivacyPolicy" = "Privacy Policy";
+"INeedHelp" = "I need help";
+"MoreInformation" = "More Information";
+"Setting" = "Setting";
+"SignUpPage" = "Sign Up Page";
+"SignIn" = "Sign In";
+"Lost" = "Lost";
+"Selecttheitemstate" = "Select the item state";
+"Profile" = "Profile";
+"Chat" = "Chat";
+"Post" = "Post";
+"Call" = "Call";
+"ContactUs" = "Contact Us";

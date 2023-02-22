@@ -24,7 +24,7 @@ class NewMessageViewModel: ObservableObject {
             .document("Users").collection("User")
             .getDocuments { documentsSnapshot, error in
                 if let error = error {
-                    self.errorMessage = "Failed to fetch users: \(error)"
+                    self.errorMessage = "Failed to fetch users"
                     print("Failed to fetch users: \(error)")
                     return
                 }
@@ -49,7 +49,7 @@ struct NewMessageView: View {
     @ObservedObject var vm = NewMessageViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 Text(vm.errorMessage)
                 
@@ -86,6 +86,8 @@ struct NewMessageView: View {
                         }
                     }
                 }
+            
+             .navigationBarTitle("Chat", displayMode: .large)
         }
     }
 }
