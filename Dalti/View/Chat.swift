@@ -89,12 +89,7 @@ struct Chat: View {
                 }
                 .padding()
                 
-            }.navigationBarItems(leading:
-                                        
-                NavigationLink(destination: Community(), label:{
-                    Label("Community", systemImage: "person.2")
-                        .foregroundColor(Color("lightGreen"))
-                }))
+            }
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.05))
                 .ignoresSafeArea())
@@ -149,7 +144,7 @@ struct Chat: View {
         FirebaseManager.shared.auth.createUser(withEmail: viewModelChat.userfb.email, password: viewModelChat.userfb.password) { result, err in
            if let err = err {
                print("Failed to create user:", err)
-               self.loginStatusMessage = "Failed to create user: \(err)"
+               self.loginStatusMessage = "Failed to create user"
                return
            }
            print("Successfully created user: \(result?.user.uid ?? "")")
@@ -167,13 +162,13 @@ struct Chat: View {
         guard let imageData = self.viewModelChat.image?.jpegData(compressionQuality: 0.5) else { return }
         ref.putData(imageData, metadata: nil) { metadata, err in
            if let err = err {
-               self.loginStatusMessage = "Failed to push image to Storage: \(err)"
+               self.loginStatusMessage = "Failed to push image to Storage"
                return
            }
            
            ref.downloadURL { url, err in
                if let err = err {
-                   self.loginStatusMessage = "Failed to retrieve downloadURL: \(err)"
+                   self.loginStatusMessage = "Failed to retrieve downloadURL"
                    return
                }
                
@@ -195,7 +190,7 @@ struct Chat: View {
            .document(uid).setData(userData) { err in
                if let err = err {
                    print(err)
-                   self.loginStatusMessage = "\(err)"
+                  // self.loginStatusMessage = "\(err)"
                    return
                }
                

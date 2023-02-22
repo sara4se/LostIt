@@ -122,7 +122,6 @@ struct Community: View {
     func CardView(item: PostModel)-> some View{
         
         VStack(alignment: .leading, spacing: 15){
-            
             ZStack(alignment: .topLeading){
                 GeometryReader{ proxy in
                     let size = proxy.size
@@ -153,14 +152,15 @@ struct Community: View {
                         .font(.caption).fontWeight(.regular)
                         .fontWeight(.bold)
                         .foregroundColor(Color("colorOfText"))
-                        .frame(width: 335.75,height: 31.95)
+                        .frame(width: 335.75,height: animateView ? 0 : 50.95)
                     
                 }.padding([.leading,.top])
             }
-        }.foregroundColor(Color("BackGroundColor"))
+        }
+        .foregroundColor(Color("BackGroundColor"))
             .background{
-                RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor")).shadow(radius: animateView ? 0 : 2)
-                    .border(animateView ? .clear : .gray,width: 1)
+                RoundedRectangle(cornerRadius: 8,style: .continuous).fill(Color("BackGroundColor")).shadow(radius: animateView ? 0 : 5).ignoresSafeArea()
+//                    .border(animateView ? .clear : .gray,width: 1)
             }
             .matchedGeometryEffect(id: item.id, in: animation)
     }
@@ -169,11 +169,14 @@ struct Community: View {
         ScrollView(.vertical,showsIndicators: false){
             VStack{
                 CardView(item: item)
-                    .scaleEffect(animateView ? 1 : 0.93)
+                    .scaleEffect(animateView ? 1 : 0.87)
                 VStack(spacing: 15){
                     if (item.Description != ""){
-                        Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)}
-                    else{ Text( "the item in the photo above is missing please contact the person who post it by call or chat within the app, help people to find their items and they will help you too..").multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20)}
+                        Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20).frame(height: 200)}
+                    else{
+                        Text( "the item in the photo above is missing please contact the person who post it by call or chat within the app, help people to find their items and they will help you too..").multilineTextAlignment(.leading).lineSpacing(10).frame(height: 200).padding(.bottom,20)
+                        
+                    }
                     Spacer()
                     Divider()
                     HStack{
@@ -193,7 +196,8 @@ struct Community: View {
                     
                 }.padding()
             }
-        }.overlay(alignment: .topTrailing, content: {
+        }
+        .overlay(alignment: .topTrailing, content: {
             Button{
                 withAnimation(.interactiveSpring(response: 0.6,
                                                  dampingFraction: 0.7 ,blendDuration: 0.7)){

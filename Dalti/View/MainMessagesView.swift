@@ -10,97 +10,6 @@ import SDWebImageSwiftUI
 import Firebase
 import FirebaseFirestoreSwift
 
-class MainMessagesViewModel: ObservableObject {
-    //checked
-    @Published var errorMessage = ""
-    @Published var chatUser: ChatUser?
-    @Published var isUserCurrentlyLoggedOut = false
-    //@Published var isUserCurrentlyLoggedIn = true
-    
-    init() {
-        
-        func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
-            print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
-            chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
-        }
-        DispatchQueue.main.async {
-            self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
-           // self.isUserCurrentlyLoggedIn = FirebaseManager.shared.auth.currentUser?.uid != nil
-        }
-        
-        fetchCurrentUser()
-        
-        fetchRecentMessages()
-    }
-    
-    @Published var recentMessages = [RecentMessage]()
-    
-    private var firestoreListener: ListenerRegistration?
-    
-    func fetchRecentMessages() {
-        
-        firestoreListener?.remove()
-        self.recentMessages.removeAll()
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        firestoreListener = FirebaseManager.shared.firestore.collection("Community")
-            .document("Users").collection(FirebaseConstants.users)
-            .document(uid)
-            .collection(FirebaseConstants.recentMessages)
-            .document(uid)
-            .collection(FirebaseConstants.messages)
-            .order(by: FirebaseConstants.timestamp)
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    self.errorMessage = "Failed to listen for recent messages: \(error)"
-                    print(error)
-                    return
-                }
-                
-                querySnapshot?.documentChanges.forEach({ change in
-                    let docId = change.document.documentID
-                    
-                    if let index = self.recentMessages.firstIndex(where: { rm in
-                        return rm.id == docId
-                    }) {
-                        self.recentMessages.remove(at: index)
-                    }
-                    
-                    do {
-                        if let rm = try? change.document.data(as: RecentMessage.self) {
-                            self.recentMessages.insert(rm, at: 0)
-                        }
-                    } catch {
-                        print(error)
-                    }
-                })
-            }
-    }
-    
-    func fetchCurrentUser() {
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
-            self.errorMessage = "Could not find firebase uid"
-            return
-        }
-        FirebaseManager.shared.firestore.collection("Community").document("Users")
-            .collection(FirebaseConstants.users).document(uid).getDocument { snapshot, error in
-            if let error = error {
-                self.errorMessage = "Failed to fetch current user: \(error)"
-                print("Failed to fetch current user:", error)
-                return
-            }
-            
-            self.chatUser = try? snapshot?.data(as: ChatUser.self)
-            FirebaseManager.shared.currentUser = self.chatUser
-        }
-    }
-    
-    func handleSignOut() {
-        isUserCurrentlyLoggedOut.toggle()
-        try? FirebaseManager.shared.auth.signOut()
-    }
-    
-}
-
 struct MainMessagesView: View {
     
     @State var shouldShowLogOutOptions = false
@@ -124,13 +33,16 @@ struct MainMessagesView: View {
             }
             .overlay(
                 newMessageButton, alignment: .bottom)
-            .navigationBarHidden(true)
+//            .navigationBarHidden(true)
+//
+//             .navigationBarTitle("Chat", displayMode: .large)
             
-             .navigationBarTitle("Chat", displayMode: .large)
+             .navigationBarTitle("Profile", displayMode: .large)
         }
     }
     
     private var customNavBar: some View {
+        NavigationStack{
         HStack(spacing: 16) {
             
             WebImage(url: URL(string: vm.chatUser?.profileImageUrl ?? ""))
@@ -169,7 +81,14 @@ struct MainMessagesView: View {
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(Color(.label))
             }
-        }
+        }.sheet(isPresented: $vm.isUserCurrentlyLoggedOut, content: {
+            Chat(didCompleteLoginProcess: {
+                self.vm.isUserCurrentlyLoggedOut = false
+                self.vm.fetchCurrentUser()
+                self.vm.fetchRecentMessages()
+            })
+            
+        })
         .padding()
         .actionSheet(isPresented: $shouldShowLogOutOptions) {
             .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
@@ -180,81 +99,86 @@ struct MainMessagesView: View {
                 .cancel()
             ])
         }
+    }
+    }
  
-        
-        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {
-            Chat(didCompleteLoginProcess: {
-                self.vm.isUserCurrentlyLoggedOut = false
-                self.vm.fetchCurrentUser()
-                self.vm.fetchRecentMessages()
-            })
-//            if(viewModelChat.didCompleteLoginProcess){
+//
+//        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {
+//            Chat(didCompleteLoginProcess: {
 //                self.vm.isUserCurrentlyLoggedOut = false
 //                self.vm.fetchCurrentUser()
 //                self.vm.fetchRecentMessages()
-//                Chat(viewModelChat: ChatViewModel())
-//            }
-        
-        }
-    }
+//            })
+////            if(viewModelChat.didCompleteLoginProcess){
+////                self.vm.isUserCurrentlyLoggedOut = false
+////                self.vm.fetchCurrentUser()
+////                self.vm.fetchRecentMessages()
+////                Chat(viewModelChat: ChatViewModel())
+////            }
+//
+//        }.ignoresSafeArea()
+    
 
         
         private var messagesView: some View {
-            ScrollView {
-                ForEach(vm.recentMessages) { recentMessage in
-                    VStack {
-                        Button {
-                            let uid = FirebaseManager.shared.auth.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId
-                            
-                            self.chatUser = .init(id: uid, uid: uid, email: recentMessage.email, profileImageUrl: recentMessage.profileImageUrl)
-                            
-                            self.chatLogViewModel.chatUser = self.chatUser
-                            self.chatLogViewModel.fetchMessages()
-                            self.shouldNavigateToChatLogView.toggle()
-                        } label: {
-                            HStack(spacing: 16) {
-                                WebImage(url: URL(string: recentMessage.profileImageUrl))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 64, height: 64)
-                                    .clipped()
-                                    .cornerRadius(64)
-                                    .overlay(RoundedRectangle(cornerRadius: 64)
-                                        .stroke(Color.black, lineWidth: 1))
-                                    .shadow(radius: 5)
+            NavigationStack{
+                ScrollView {
+                    ForEach(vm.recentMessages) { recentMessage in
+                        VStack {
+                            Button {
+                                let uid = FirebaseManager.shared.auth.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId
                                 
+                                self.chatUser = .init(id: uid, uid: uid, email: recentMessage.email, profileImageUrl: recentMessage.profileImageUrl)
                                 
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(recentMessage.username)
-                                        .font(.system(size: 16, weight: .bold))
+                                self.chatLogViewModel.chatUser = self.chatUser
+                                self.chatLogViewModel.fetchMessages()
+                                self.shouldNavigateToChatLogView.toggle()
+                            } label: {
+                                HStack(spacing: 16) {
+                                    WebImage(url: URL(string: recentMessage.profileImageUrl))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 64, height: 64)
+                                        .clipped()
+                                        .cornerRadius(64)
+                                        .overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color.black, lineWidth: 1))
+                                        .shadow(radius: 5)
+                                    
+                                    
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text(recentMessage.username)
+                                            .font(.system(size: 16, weight: .bold))
+                                            .foregroundColor(Color(.label))
+                                            .multilineTextAlignment(.leading)
+                                        Text(recentMessage.text)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(Color(.darkGray))
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                    Spacer()
+                                    
+                                    Text(recentMessage.timeAgo)
+                                        .font(.system(size: 14, weight: .semibold))
                                         .foregroundColor(Color(.label))
-                                        .multilineTextAlignment(.leading)
-                                    Text(recentMessage.text)
-                                        .font(.system(size: 14))
-                                        .foregroundColor(Color(.darkGray))
-                                        .multilineTextAlignment(.leading)
                                 }
-                                Spacer()
-                                
-                                Text(recentMessage.timeAgo)
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(Color(.label))
                             }
-                        }
+                            
+                            
+                            
+                            Divider()
+                                .padding(.vertical, 8)
+                        }.padding(.horizontal)
                         
-                        
-                        
-                        Divider()
-                            .padding(.vertical, 8)
-                    }.padding(.horizontal)
-                    
-                }.padding(.bottom, 50)
+                    }.padding(.bottom, 50)
+                }
             }
         }
         
         @State var shouldShowNewMessageScreen = false
         
         private var newMessageButton: some View {
+            
             Button {
                 shouldShowNewMessageScreen.toggle()
             } label: {
@@ -273,8 +197,8 @@ struct MainMessagesView: View {
                 .padding(.horizontal)
                 .shadow(radius: 3)
 
-            }
-            .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
+            }.sheet(isPresented: $shouldShowNewMessageScreen, content: {
+//            .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
                 NewMessageView(didSelectNewUser: { user in
                     print(user.email)
                     self.shouldNavigateToChatLogView.toggle()
@@ -282,7 +206,8 @@ struct MainMessagesView: View {
                     self.chatLogViewModel.chatUser = user
                     self.chatLogViewModel.fetchMessages()
                 })
-            }
+            })
+            
         }
         
         @State var chatUser: ChatUser?
