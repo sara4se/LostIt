@@ -231,7 +231,6 @@
 				562C5D31298AD02B00A23762 /* Post.swift */,
 				562C5D33298AD03700A23762 /* Chat.swift */,
 				562C5D35298AD06500A23762 /* Splash.swift */,
-				56DED3732990315900453E73 /* CustomCorner.swift */,
 				5621EBC229A12A0200415833 /* PhotoView.swift */,
 				56AC346729A519F700519E4F /* OnboardingContainerView.swift */,
 				56AC346929A51A2D00519E4F /* OnboardingContentView.swift */,
@@ -269,6 +268,7 @@
 		56DED36E29902EF000453E73 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				56DED3732990315900453E73 /* CustomCorner.swift */,
 				5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */,
 				56DED37129902F1900453E73 /* ScaledButtonStyle.swift */,
 			);
