@@ -36,7 +36,7 @@ struct Splash: View {
                                //                           Text("ضالتي / قريب / تلقاه، نلقاه، لقيته..الخ ")
                                //                           Text("LOSTET")
                                
-                               Text("Lost-it")
+                               Text("LostIt")
                                    .foregroundColor(Color("lightGreen"))
                                    .font(.custom("SF Pro", size: 40))
                                HStack {
