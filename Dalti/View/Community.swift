@@ -135,7 +135,7 @@ struct Community: View {
                 }.frame(height: 400)
                 LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
                 VStack(alignment: .leading, spacing: 8){
-                    Text(item.ItemState)
+                    Text(LocalizedStringKey(item.ItemState))
                         .font(.largeTitle.bold())
                 }.foregroundColor(.white)
                     .padding()
