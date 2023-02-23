@@ -63,8 +63,8 @@ struct settingsPage: View {
 //                        .cancel()
 //                    ])
 //                }
-            }
-                .navigationTitle("Setting")
+            } .navigationBarTitle("Setting", displayMode: .large)
+                
         }
     }
     

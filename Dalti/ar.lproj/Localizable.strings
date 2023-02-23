@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Dalti
-
-  Created by Sara Alhumidi on 02/08/1444 AH.
-  
-*/
+/*
+ Localizable.strings
+ Dalti
+ 
+ Created by Sara Alhumidi on 02/08/1444 AH.
+ 
+ */
 "Community" = "المجتمع";
 "Send" = "ارسال";
 "Description" = "وصف";
@@ -46,13 +46,25 @@
 "Name " = "الأسم :";
 "Scan to contact" = "أمسح للتواصل";
 "Item color, location..." = "لون الغرض ، الموقع الذي فقدته به ...";
- "If you have any questions or suggestions about Our App, do not hesitate to contact Us via :" = "اذا كان لديك اي اسالة بأمكانك التواصل معنا";
+"If you have any questions or suggestions about Our App, do not hesitate to contact Us via :" = "اذا كان لديك اي اسالة بأمكانك التواصل معنا";
 
- "Forget Password" = "نسيت كلمة المرور";
- "Pleas click bellow to read the privacy policy page on the web" = "اذا كنت تريد الإطلاع على صفحتنا بالويب لقراءة سياسة الخصوصية الخاصة بنا اضغط على الزر بالأسفل للذهاب للصفحة";
+"Forget Password" = "نسيت كلمة المرور";
+"Pleas click bellow to read the privacy policy page on the web" = "اذا كنت تريد الإطلاع على صفحتنا بالويب لقراءة سياسة الخصوصية الخاصة بنا اضغط على الزر بالأسفل للذهاب للصفحة";
 
- "the item in the photo above is missing please contact the person who post it by call or chat within the app, help people to find their items and they will help you too.." = "الغرض بالاعلى مفقود الرجاء التواصل مع الشخص الذي قام بنشره أما بالأتصال به أو بمحادثته بالرسائل الخاصة من خلال التطبيق";
- "You have arrived to collect your order." = "";
- "Do you want to check in?" = "";
-
-
+"the item in the photo above is missing please contact the person who post it by call or chat within the app, help people to find their items and they will help you too.." = "الغرض بالاعلى مفقود الرجاء التواصل مع الشخص الذي قام بنشره أما بالأتصال به أو بمحادثته بالرسائل الخاصة من خلال التطبيق";
+"You have arrived to collect your order." = "";
+"Do you want to check in?" = "";
+"Create Account" = "إنشاء حساب";
+"Log In" = "تسجيل دخول";
+"Email" = "إيميل";
+"Password" = "كلمة المرور";
+"Login" = "تسجيل الدخول";
+"Inform about what you lost or found easily and quickly!" = "أعلمنا عما فقدت أو وجدت بسهولة وسرعة";
+"View lost and found items that people post it" = "إطلع على ما تم نشره من المفقودات التي تم نشرها من قبل أشخاص آخرين";
+"Easily and quickly talk with people who found your lost item!" = "تواصل مع الأ شخاص الذين وجدوا أغراضك أو العكس بسهولة وسرعة";
+"Inform people around you" = "أعلم الآشخاص في محطيك";
+"Navigate in community" = "تصفح المنشورات";
+"Contact who have your item" = "تواصل مع من وجد غرضك";
+"Start Using Findit" = " Lostit إبدا باستخدام ";
+"Skip" = "تخطي";
+"online" = "متصل";

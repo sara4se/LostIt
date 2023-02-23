@@ -21,20 +21,17 @@ struct Privacy_Policy: View {
                         .foregroundColor(Color("colorOfText"))
                         .frame(width: 350, height: 100).padding(10)
                     Link(destination: URL(string: "https://daltyy.blogspot.com/2023/02/nalqaha.html")!, label: { Label("Privacy Policy", systemImage: "arrow.up.forward").font(.system(size: 20))
-                            .bold()
                             .foregroundColor(.white)
                             .font(.headline)
                             .frame(width: 300 , height: 53)
                             .background(Color(("Mygreen")))
                             .cornerRadius(8)
+                            .shadow(radius: 3)
                         
                     }
                 )
                 }.frame(width: 500,height: 400).padding(20)
-              
-                .navigationTitle("Privacy Policy")
-                .font(.caption)
-                .accentColor(.black)
+                    .navigationBarTitle("Privacy Policy", displayMode: .large)
                 .ignoresSafeArea()
             }
         }

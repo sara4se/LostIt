@@ -189,13 +189,12 @@ struct MainMessagesView: View {
                          
                     
                     Spacer()
-                }
-                .foregroundColor(.white)
-                .padding(.vertical)
-                .background(Color("Mygreen"))
-                .cornerRadius(3.0)
-                .padding(.horizontal)
-                .shadow(radius: 3)
+                } .foregroundColor(.white)
+                    .font(.headline)
+                    .frame(width: 300 , height: 53)
+                    .background(Color(("Mygreen")))
+                    .cornerRadius(8)
+                    .shadow(radius: 3)
 
             }.sheet(isPresented: $shouldShowNewMessageScreen, content: {
 //            .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {

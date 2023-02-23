@@ -9,8 +9,8 @@ import SwiftUI
 
 
 let features = [
-    Feature(title: "Inform people nearby", subtitle: "Inform about what you lost or found easily and quickly!", image: "Onboarding1"),
-    Feature(title: "Navigate in community ", subtitle: "View lost and found items that people post nearby you!", image: "Onboarding2"),
+    Feature(title: "Inform people around you", subtitle: "Inform about what you lost or found easily and quickly!", image: "Onboarding1"),
+    Feature(title: "Navigate in community", subtitle: "View lost and found items that people post it", image: "Onboarding2"),
     Feature(title: "Contact who have your item", subtitle: "Easily and quickly talk with people who found your lost item!", image: "Onboarding3")
 ]
 
@@ -26,11 +26,11 @@ struct OnboardingContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .padding(.horizontal,16)
                         .frame(width:352 ,height: 326)
-                    Text(feature.title)
+                    Text(LocalizedStringKey(feature.title))
                         .font(.custom("SF Pro Display", size: 24))
                         .fontWeight(.semibold)
                         .padding(.top)
-                    Text(feature.subtitle)
+                    Text(LocalizedStringKey(feature.subtitle))
                         .font(.custom("SF Pro", size: 20))
                         .fontWeight(.light)
                         .multilineTextAlignment(.center)

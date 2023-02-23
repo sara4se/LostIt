@@ -74,12 +74,10 @@ struct Chat: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .frame(width: 300 , height: 53)
-                            .background(Color(("Mygray")))
+                            .background(Color(("Mygreen")))
                             .cornerRadius(8)
                             .shadow(radius: 3)
-                    } 
-                    .background(Color("Mygreen"))
-                    .cornerRadius(3.0)
+                    }
                    
 //                    Text(String(self.viewModelChat.$isLoginMode)).foregroundColor(.red)
                  let _ = print(self.$isLoginMode)
@@ -252,6 +250,7 @@ struct ImagePicker2: UIViewControllerRepresentable {
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true)
         }
+
         
     }
     

@@ -36,7 +36,7 @@ struct Splash: View {
                                //                           Text("ضالتي / قريب / تلقاه، نلقاه، لقيته..الخ ")
                                //                           Text("LOSTET")
                                
-                               Text("Findet")
+                               Text("Lost-it")
                                    .foregroundColor(Color("lightGreen"))
                                    .font(.custom("SF Pro", size: 40))
                                HStack {
@@ -56,12 +56,12 @@ struct Splash: View {
                    }
                }
             
-           }
+           }.navigationBarBackButtonHidden()
            .onAppear {
                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                      self.animation.toggle()
            }
-               DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                   
                        isActive = true
                        

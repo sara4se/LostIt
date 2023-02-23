@@ -30,7 +30,7 @@ struct I_Need_Help: View {
                         .offset(x: -30, y: -20)
                 }
             }
-        }.navigationTitle("Contact Us") 
+        }.navigationBarTitle("Contact Us", displayMode: .large)
     }
 }
 struct I_Need_Help_Previews: PreviewProvider {
