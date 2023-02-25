@@ -193,7 +193,6 @@
 		562C5D19298ACF2400A23762 /* Dalti */ = {
 			isa = PBXGroup;
 			children = (
-				5621EBD629A1553B00415833 /* MainMessages */,
 				5621EBD129A1553300415833 /* Ult */,
 				56DED36E29902EF000453E73 /* Helper */,
 				5621EBB1299F9FCE00415833 /* Info.plist */,
@@ -241,6 +240,7 @@
 		562C5D29298ACF4900A23762 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5621EBD629A1553B00415833 /* MainMessages */,
 				5621C782299D4F5000625D55 /* PostsViewModel.swift */,
 				5621EBAB299E9DC000415833 /* LocationManager.swift */,
 				5621C768299830B700625D55 /* PostViewModel.swift */,
@@ -547,8 +547,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The App Need The Camera To: Upload Photo for profile or missing and found items";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The App Need The Photo Library To: Upload Photo for profile or missing and found items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -585,8 +583,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dalti/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The App Need The Camera To: Upload Photo for profile or missing and found items";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The App Need The Location To notify people around you if you post for an lost item";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "The App Need The Photo Library To: Upload Photo for profile or missing and found items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

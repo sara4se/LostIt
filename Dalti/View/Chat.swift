@@ -67,9 +67,13 @@ struct Chat: View {
                     }
                     .padding(12)
                     .background(Color.white)
+                   
                     Button {
-                        handleAction()
+                        if (loginStatusMessage == ""){
+                            handleAction()
+                        }
                     } label: {
+                        
                         Text(isLoginMode ? "Log In" : "Create Account")
                             .foregroundColor(.white)
                             .font(.headline)
@@ -80,6 +84,7 @@ struct Chat: View {
                     }
                    
 //                    Text(String(self.viewModelChat.$isLoginMode)).foregroundColor(.red)
+                    Text(loginStatusMessage != "" ? self.loginStatusMessage : "" ).foregroundColor(.red)
                  let _ = print(self.$isLoginMode)
 //                    Text(self.loginStatusMessage)
 //                        .foregroundColor(.red)
@@ -162,6 +167,8 @@ struct Chat: View {
            if let err = err {
                self.loginStatusMessage = "Failed to push image to Storage"
                return
+               
+               
            }
            
            ref.downloadURL { url, err in
@@ -250,9 +257,7 @@ struct ImagePicker2: UIViewControllerRepresentable {
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true)
         }
-
-        
-    }
+   }
     
     func makeUIViewController(context: Context) -> some UIViewController {
         controller.delegate = context.coordinator
