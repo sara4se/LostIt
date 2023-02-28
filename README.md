@@ -52,6 +52,10 @@ Help reader to save their best quotes.
 ## Team Members
 
 <a href="https://www.linkedin.com/in/sara-a-mohammed101/">Sara Alhumidi</a> 
+<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Rawan alsufyani</a> 
+<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Afnan alhibi</a> 
+<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Mashaal alharbi</a> 
+<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Milah</a> 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
