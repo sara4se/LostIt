@@ -1,13 +1,27 @@
-# Dalti
-Dalti - ضالتي 
+# LostIt
+
 
 <!-- PROJECT LOGO -->
 <div>
-<h3><img align="left" width="100" height="100" src="AppIcone.png"> <br/> Dalti - ضالتي <br/>
+<h3><img align="left" width="100" height="100" src="https://user-images.githubusercontent.com/116797266/221581151-31cdb33f-3d0d-4f78-8418-59b48c320cd0.png"> <br/> LostIt <br/>
 <a href="https://drive.google.com/file/d/17os234X0wGAKJv9EsTMShAjxAddViP4r/view">Demo</a> <br/> </h3>   
  </div>   
  <br>
- 
+   
+
+
+  <br>
+
+<p align="center">
+  <a href="#Challenge-Statment">Challenge Statment</a> •
+  <a href="#Solution-Concept">Solution Concept</a> •
+  <a href="#Technologies-Used">Technologies Used</a> •
+  <a href="#Language-support">Language Support</a> •
+  <a href="#rChallenge-Summary">Challenge Summary</a> •
+  <a href="#Team-Members">Team Members</a>
+</p>
+
+
 ## Overveiw
 
 <video src="https://drive.google.com/file/d/1R_8viUhr6585lg09vtSf8HoRD42C1-dH/view" controls="controls" style="max-width: 730px;">
@@ -17,7 +31,7 @@ Dalti - ضالتي
 Inclusion.
 
 ### Challenge Statment
-Built tools to help productive people.
+An aaplication that allows users to post or navigate lost or found items in order to seek help from others by interacting with the posts through calls or chat.
 
 ### Solution Concept
 Help reader to save their best quotes.
@@ -27,32 +41,30 @@ Help reader to save their best quotes.
 [![Swift][Swift-img]][Swift-url]   [![Sketch][Sketch-img]][Sketch-url]   [![Xcode][Xcode-img]][Xcode-url]
 
 
-### Technologies Used
-- Accessability (Voice Control + Voice Over)
-- Vision  Kit 
-- Core Data
+
+## Technologies Used
+- [Firebase Authentication](https://firebase.google.com/docs/auth)
+- [Firesotre Database](https://firebase.google.com/docs/firestore/quickstart)
+- [Firebase Messages](https://firebase.google.com/docs/cloud-messaging)
+
 
 
 ### Language Support
 - Arabic
 - English
-- French
+
 
 
 ## Challenge Summary
-<p align="left">
-<img align="center" width=90% height=70% src="AppOverview-iQuote.jpeg">
-</p>
+
+
+## Solution Concept
+Create an iOS app for posting lost or found items so that people can find their items fast and easily by letting them get in touch via phone or chat.
 
 ## Success Criteria
 - Design interfaces that support both LTR - RTL languages ✅
 - Localize your app to support multiple languages ✅
 - Build an app that supports Apple’s built-in accessibility settings ✅
-
-## Team Members
-
-<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Sara Alhumidi</a> 
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -64,4 +76,20 @@ Help reader to save their best quotes.
 
 [Xcode-img]: https://img.shields.io/badge/-Xcode-blue
 [Xcode-url]: https://developer.apple.com/xcode/
+
+
+# Team Members
+
+
+<a href="https://www.linkedin.com/in/sara-a-mohammed101/">Sara Alhumidi</a> 
+
+Mashael Alharbi
+
+Mallah Alfaqeh
+
+Afnan Alhabi 
+> GitHub [@AfnanMohammedAlhabi](https://github.com/AfnanMohammedAlhabi) &nbsp;&middot;&nbsp;
+> LinkedIn [@Afnan Alhabi](https://www.linkedin.com/in/afnan-alhabi-ab99b622a/)
+
+Rawan Alsufyani
 
