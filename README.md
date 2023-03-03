@@ -28,10 +28,11 @@
 </video>
 
 ### Big Idea
-Inclusion.
+Help.
 
 ### Challenge Statment
-An aaplication that allows users to post or navigate lost or found items in order to seek help from others by interacting with the posts through calls or chat.
+An aplication that allows users to post or navigate lost or found items in order to  <br>
+seek help from others by interacting with the posts through calls or chat.
 
 ### Solution Concept
 Help reader to save their best quotes.
@@ -59,12 +60,11 @@ Help reader to save their best quotes.
 
 
 ## Solution Concept
-Create an iOS app for posting lost or found items so that people can find their items fast and easily by letting them get in touch via phone or chat.
+Create an iOS app for posting lost or found items so that people can find their items <br>
+fast and easily by letting them get in touch via phone or chat.
 
 ## Success Criteria
 - Design interfaces that support both LTR - RTL languages ✅
-- Localize your app to support multiple languages ✅
-- Build an app that supports Apple’s built-in accessibility settings ✅
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -93,3 +93,10 @@ Afnan Alhabi
 
 Rawan Alsufyani
 
+  <br>
+  
+  
+https://user-images.githubusercontent.com/116797266/221619201-1803872b-9885-425e-beb0-f83995ca92dc.mp4
+
+
+  <br>
