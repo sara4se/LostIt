@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <div>
 <h3><img align="left" width="100" height="100" src="https://user-images.githubusercontent.com/116797266/221581151-31cdb33f-3d0d-4f78-8418-59b48c320cd0.png"> <br/> LostIt <br/>
-<a href="https://drive.google.com/file/d/17os234X0wGAKJv9EsTMShAjxAddViP4r/view">Demo</a> <br/> </h3>   
+<a href="https://drive.google.com/file/d/15Klcy_0ADQNWVLavhzVLJTPsVoNtm6uP/view?usp=sharing">Demo</a> <br/> </h3>   
  </div>   
  <br>
    
