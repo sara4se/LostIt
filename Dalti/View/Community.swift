@@ -13,7 +13,9 @@ import UserNotifications
 struct Community: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject private var locationManager: LocationManager
+  //  @EnvironmentObject private var locationManager: LocationManager
+   // @ObservedObject var locationManager2 = LocationManager()
+
     @State var currentItem : PostModel?
     @StateObject var viewModels = PostsViewModel()
     @StateObject var viewModel = PostViewModel()
@@ -22,9 +24,11 @@ struct Community: View {
     @State var showDeaialPage: Bool = false
     @Namespace var animation
     @State var animateView : Bool = false
+    @State var showingReportAlert : Bool = false
     @State var itemType = ["Lost","Found"]
     var completionHandler: ((Result<Action, Error>) -> Void)?
     @State var  ItemType = ""
+
     @State private var orderPlaced = false
 
     //  @Binding var Show: Bool
@@ -49,17 +53,28 @@ struct Community: View {
                                 }
                             }
                         label: {
-                            CardView(item: post)
-                                .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
+//                            if Int(post.report) != nil {
+//                                let myInt1 = Int(post.report)
+//                                if myInt1!  < 1 {
+//                                    if showingReportAlert == false{
+                                        CardView(item: post)
+                                        .scaleEffect(currentItem?.id == post.id && showDeaialPage ? 1 : 0.93)
+    
+////                                    }
+//                                }
+//                            }
                         }.buttonStyle(ScaledButtonStyle())
-                                .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
+                         .opacity(showDeaialPage ? (currentItem?.id == post.id ? 1 : 0) : 1)
                         }
                         .onDelete() { indexSet in
-                            viewModels.removePosts(atOffsets: indexSet)
+//                            viewModels.removePosts(atOffsets: indexSet)
+//                            handleDeleteTapped()
                         }.padding(10)
+                   
                     }
                 }
             }
+            
 //            .alert(isPresented: $locationManager.didArriveAtTakeout) {
 //                Alert(
 //                    title: Text("Check"),
@@ -76,9 +91,10 @@ struct Community: View {
                 print("PostsListView appears. and data updates.")
                 self.viewModels.subscribe()
                 //                locationManager.locationCurrnent()
-                print("long",  locationManager.locationCurrent.longitude)
-                print("lat",  locationManager.locationCurrent.longitude)
-                
+               // print("long",  locationManager.currentLocation!.coordinate.longitude)
+ 
+               
+
             }
             //            .background(Color("BackGroundColor"))
             .navigationBarBackButtonHidden(true)
@@ -95,7 +111,7 @@ struct Community: View {
                         .foregroundColor(Color("lightGreen"))
                 })
                 
-                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "")), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })
@@ -144,6 +160,7 @@ struct Community: View {
             HStack(alignment:.firstTextBaseline,spacing: 21){
                 
                 VStack(alignment: .leading, spacing: 5) {
+                  
                     Text(item.ItemName).font(.callout).fontWeight(.semibold)
                         .fontWeight(.bold)
                         .foregroundColor(Color("colorOfText"))
@@ -155,6 +172,36 @@ struct Community: View {
                         .frame(width: 335.75,height: animateView ? 0 : 50.95)
                     
                 }.padding([.leading,.top])
+               // var myInt = Int(item.report)
+//                NavigationLink("reports" ,destination: Reports(Id: item.id))
+                NavigationLink(destination:  Reports(item: item, Id: item.ItemName), label:{
+                    Label("", systemImage: "exclamationmark.circle")
+                        .foregroundColor(Color("lightGreen"))
+                })
+//                Button {
+//
+//                    if reportCount < 10 {
+//                        showingReportAlert.toggle()
+//                    }
+////                    report()
+//                } label: {
+//                    Image(systemName: "exclamationmark.circle")
+//                        .resizable()
+//                        .frame(width: 10,height: 10)
+//                        .foregroundColor(Color("colorOfText"))
+//
+//                }.alert(isPresented: $showingReportAlert) {
+//                    myInt! += 1
+//                    reportCount = myInt!
+//                    viewModels.updatePost(report:  String(myInt!), item)
+//                    print(" report Count ",myInt!)
+//                    print(" report Count ",reportCount)
+//                    return Alert(title: Text("Post Reported!"), message: Text("You wont see this post cause you been report it"), primaryButton: .destructive(Text("Report")){
+//
+//                        print("reports...")
+//                    },   secondaryButton: .cancel())
+//
+//                }
             }
         }
         .foregroundColor(Color("BackGroundColor"))
@@ -234,17 +281,17 @@ struct Community: View {
     }
     
     func requestNotification() {
-        locationManager.validateLocationAuthorizationStatus()
+      //  locationManager.validateLocationAuthorizationStatus()
     }
-    func handleDeleteTapped() {
-        viewModel.handleDeleteTapped()
-        self.dismiss()
-        completionHandler?(.success(.delete))
-    }
+//    func handleDeleteTapped() {
+//
+//    }
+
     
     func dismiss() {
         self.presentationMode.wrappedValue.dismiss()
     }
+    
 }
 struct Community_Previews: PreviewProvider {
     static var previews: some View {

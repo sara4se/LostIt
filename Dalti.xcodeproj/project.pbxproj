@@ -17,7 +17,7 @@
 		5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 5621EBA1299E700900415833 /* FirebaseMessaging */; };
 		5621EBAC299E9DC000415833 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBAB299E9DC000415833 /* LocationManager.swift */; };
 		5621EBB429A0442500415833 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */; };
-		5621EBBB29A046D800415833 /* Delete account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB629A046D700415833 /* Delete account.swift */; };
+		5621EBBB29A046D800415833 /* Reports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB629A046D700415833 /* Reports.swift */; };
 		5621EBBC29A046D800415833 /* I Need Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB729A046D700415833 /* I Need Help.swift */; };
 		5621EBBD29A046D800415833 /* Forget Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB829A046D700415833 /* Forget Password.swift */; };
 		5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621EBB929A046D700415833 /* Privacy Policy.swift */; };
@@ -45,6 +45,12 @@
 		562C5D32298AD02B00A23762 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D31298AD02B00A23762 /* Post.swift */; };
 		562C5D34298AD03700A23762 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D33298AD03700A23762 /* Chat.swift */; };
 		562C5D36298AD06500A23762 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C5D35298AD06500A23762 /* Splash.swift */; };
+		566472A629C3A897003E3CD3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 566472A529C3A897003E3CD3 /* FirebaseDatabase */; };
+		566472A929C492A1003E3CD3 /* GeoFire in Frameworks */ = {isa = PBXBuildFile; productRef = 566472A829C492A1003E3CD3 /* GeoFire */; };
+		566472AB29C492A1003E3CD3 /* GeoFireUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 566472AA29C492A1003E3CD3 /* GeoFireUtils */; };
+		566472AD29C5BFDF003E3CD3 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566472AC29C5BFDF003E3CD3 /* LocationViewModel.swift */; };
+		566472AF29C5C06B003E3CD3 /* my_view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566472AE29C5C06B003E3CD3 /* my_view.swift */; };
+		566472B129C5DDA3003E3CD3 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566472B029C5DDA3003E3CD3 /* NotificationViewModel.swift */; };
 		5695580629A67B61001B20FD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5695580829A67B61001B20FD /* Localizable.strings */; };
 		5695580D29A6D712001B20FD /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5695580C29A6D712001B20FD /* NewMessageViewModel.swift */; };
 		5695580F29A6E304001B20FD /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5695580E29A6E304001B20FD /* MainMessagesViewModel.swift */; };
@@ -64,7 +70,7 @@
 		5621EBAB299E9DC000415833 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5621EBB1299F9FCE00415833 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5621EBB329A0442500415833 /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
-		5621EBB629A046D700415833 /* Delete account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Delete account.swift"; sourceTree = "<group>"; };
+		5621EBB629A046D700415833 /* Reports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reports.swift; sourceTree = "<group>"; };
 		5621EBB729A046D700415833 /* I Need Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "I Need Help.swift"; sourceTree = "<group>"; };
 		5621EBB829A046D700415833 /* Forget Password.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Forget Password.swift"; sourceTree = "<group>"; };
 		5621EBB929A046D700415833 /* Privacy Policy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Privacy Policy.swift"; sourceTree = "<group>"; };
@@ -92,6 +98,9 @@
 		562C5D31298AD02B00A23762 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		562C5D33298AD03700A23762 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		562C5D35298AD06500A23762 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		566472AC29C5BFDF003E3CD3 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		566472AE29C5C06B003E3CD3 /* my_view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_view.swift; sourceTree = "<group>"; };
+		566472B029C5DDA3003E3CD3 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		5695580729A67B61001B20FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5695580929A67B88001B20FD /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5695580C29A6D712001B20FD /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
@@ -109,11 +118,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566472A929C492A1003E3CD3 /* GeoFire in Frameworks */,
+				566472AB29C492A1003E3CD3 /* GeoFireUtils in Frameworks */,
 				5621C786299D4FB400625D55 /* SDWebImageSwiftUI in Frameworks */,
 				5621EBE329A1560B00415833 /* FirebaseAuth in Frameworks */,
 				5621C76C2998B73E00625D55 /* FirebaseFirestore in Frameworks */,
 				5621EBA2299E700900415833 /* FirebaseMessaging in Frameworks */,
 				5621C76E2998B73E00625D55 /* FirebaseFirestoreSwift in Frameworks */,
+				566472A629C3A897003E3CD3 /* FirebaseDatabase in Frameworks */,
 				5621C7702998B73E00625D55 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,11 +143,12 @@
 		5621EBB529A046D700415833 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				5621EBB629A046D700415833 /* Delete account.swift */,
+				5621EBB629A046D700415833 /* Reports.swift */,
 				5621EBB729A046D700415833 /* I Need Help.swift */,
 				5621EBB829A046D700415833 /* Forget Password.swift */,
 				5621EBB929A046D700415833 /* Privacy Policy.swift */,
 				5621EBBA29A046D700415833 /* settingsPage.swift */,
+				566472AE29C5C06B003E3CD3 /* my_view.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -247,6 +260,8 @@
 				5621EBE629A2030E00415833 /* ChatViewModel.swift */,
 				5695580C29A6D712001B20FD /* NewMessageViewModel.swift */,
 				5695580E29A6E304001B20FD /* MainMessagesViewModel.swift */,
+				566472AC29C5BFDF003E3CD3 /* LocationViewModel.swift */,
+				566472B029C5DDA3003E3CD3 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -298,6 +313,9 @@
 				5621C785299D4FB400625D55 /* SDWebImageSwiftUI */,
 				5621EBA1299E700900415833 /* FirebaseMessaging */,
 				5621EBE229A1560B00415833 /* FirebaseAuth */,
+				566472A529C3A897003E3CD3 /* FirebaseDatabase */,
+				566472A829C492A1003E3CD3 /* GeoFire */,
+				566472AA29C492A1003E3CD3 /* GeoFireUtils */,
 			);
 			productName = Dalti;
 			productReference = 562C5D17298ACF2400A23762 /* LostIt.app */;
@@ -331,6 +349,7 @@
 			packageReferences = (
 				5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5621C784299D4FB400625D55 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				566472A729C492A1003E3CD3 /* XCRemoteSwiftPackageReference "geofire-objc" */,
 			);
 			productRefGroup = 562C5D18298ACF2400A23762 /* Products */;
 			projectDirPath = "";
@@ -361,8 +380,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5621C769299830B700625D55 /* PostViewModel.swift in Sources */,
+				566472B129C5DDA3003E3CD3 /* NotificationViewModel.swift in Sources */,
 				5621EBEA29A29A4000415833 /* Location.swift in Sources */,
 				5621EBD029A1552000415833 /* ChatMesage.swift in Sources */,
+				566472AD29C5BFDF003E3CD3 /* LocationViewModel.swift in Sources */,
 				562C5D1D298ACF2400A23762 /* SignIn.swift in Sources */,
 				5621EBD529A1553300415833 /* FirebaseManager.swift in Sources */,
 				5621EBE529A1691300415833 /* UserFB.swift in Sources */,
@@ -370,6 +391,7 @@
 				5621EBDD29A1553C00415833 /* NewMessageView.swift in Sources */,
 				5621EBBD29A046D800415833 /* Forget Password.swift in Sources */,
 				5621EBBE29A046D800415833 /* Privacy Policy.swift in Sources */,
+				566472AF29C5C06B003E3CD3 /* my_view.swift in Sources */,
 				5621EBB429A0442500415833 /* LaunchScreenStateManager.swift in Sources */,
 				5621EBC329A12A0200415833 /* PhotoView.swift in Sources */,
 				5621C783299D4F5000625D55 /* PostsViewModel.swift in Sources */,
@@ -394,7 +416,7 @@
 				5621EBE729A2030E00415833 /* ChatViewModel.swift in Sources */,
 				5621EBBC29A046D800415833 /* I Need Help.swift in Sources */,
 				5621EBDC29A1553C00415833 /* ChatLogView.swift in Sources */,
-				5621EBBB29A046D800415833 /* Delete account.swift in Sources */,
+				5621EBBB29A046D800415833 /* Reports.swift in Sources */,
 				5695580D29A6D712001B20FD /* NewMessageViewModel.swift in Sources */,
 				5621EBBF29A046D800415833 /* settingsPage.swift in Sources */,
 			);
@@ -645,6 +667,14 @@
 				kind = branch;
 			};
 		};
+		566472A729C492A1003E3CD3 /* XCRemoteSwiftPackageReference "geofire-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/geofire-objc/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -677,6 +707,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		566472A529C3A897003E3CD3 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5621C76A2998B73D00625D55 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		566472A829C492A1003E3CD3 /* GeoFire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566472A729C492A1003E3CD3 /* XCRemoteSwiftPackageReference "geofire-objc" */;
+			productName = GeoFire;
+		};
+		566472AA29C492A1003E3CD3 /* GeoFireUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 566472A729C492A1003E3CD3 /* XCRemoteSwiftPackageReference "geofire-objc" */;
+			productName = GeoFireUtils;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

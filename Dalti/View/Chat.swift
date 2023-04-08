@@ -37,8 +37,7 @@ struct Chat: View {
                         Button {
                             shouldShowImagePicker.toggle()
                         } label: {
-                            
-                            VStack {
+                              VStack {
                                 if let image = self.viewModelChat.image {
                                     Image(uiImage: image)
                                         .resizable()
@@ -55,10 +54,8 @@ struct Chat: View {
                             .overlay(RoundedRectangle(cornerRadius: 64)
                                 .stroke(Color.black, lineWidth: 3)
                             )
-                            
-                        }
+                       }
                     }
-                    
                     Group {
                         TextField("Email", text: $viewModelChat.userfb.email)
                             .keyboardType(.emailAddress)
@@ -90,15 +87,11 @@ struct Chat: View {
 //                        .foregroundColor(.red)
                     let _ = print(self.loginStatusMessage)
                 }
-                .padding()
-                
-            }
+                .padding()  }
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.05))
                 .ignoresSafeArea())
-        }
-        
-         .navigationBarTitle("Chat", displayMode: .large)
+        }.navigationBarTitle("Chat", displayMode: .large)
         .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
             ImagePicker2(image: $viewModelChat.image)
                 .ignoresSafeArea()
@@ -164,7 +157,7 @@ struct Chat: View {
        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = self.viewModelChat.image?.jpegData(compressionQuality: 0.5) else { return }
         ref.putData(imageData, metadata: nil) { metadata, err in
-           if let err = err {
+            if err != nil {
                self.loginStatusMessage = "Failed to push image to Storage"
                return
                
@@ -172,7 +165,7 @@ struct Chat: View {
            }
            
            ref.downloadURL { url, err in
-               if let err = err {
+               if err != nil {
                    self.loginStatusMessage = "Failed to retrieve downloadURL"
                    return
                }

@@ -22,6 +22,7 @@ struct Post: View {
     var post: PostModel
     @Environment(\.presentationMode) private var presentationMode
     @State var presentActionSheet = false
+    @ObservedObject var updateUserLocation = LocationManager()
     var mode: Mode = .new
    var completionHandler: ((Result<Action, Error>) -> Void)?
     @State var itemType = ["Lost","Found"]
@@ -38,10 +39,8 @@ struct Post: View {
             ZStack {
                 Color("BackGroundColor").ignoresSafeArea()
                   Form{
-                            Section{
-                                
+                      Section{
                                 PhotoView(image: $image)
-                
                             }header: {
                                 HStack{
                                     Text("Select item image:").textCase(nil)
@@ -53,7 +52,6 @@ struct Post: View {
                             }
                             
                             Section {
-                                
                                 Picker("Select item state", selection: $viewModel.post.ItemState) {
                                     ForEach(itemType, id: \.self) {
                                         Text(LocalizedStringKey($0))}
@@ -126,11 +124,20 @@ struct Post: View {
 //                                    .cornerRadius(8)
 //                            }
 //
-                            
+                           
                             Button {
+//                                self.updateUserLocation.updateUserLocation()
+//                                // Schedule location updates
+//                                guard updateUserLocation.currentLocation != nil else {
+//                                print("Unable to get current user location")
+//                                return
+//                                }
+//                                
+//                               
+                                viewModel.post.report = "0"
                                 handleDoneTapped()
                             } label: {
-                                
+                              
                                 if(!viewModel.post.ItemState.isEmpty && !viewModel.post.ItemName.isEmpty){
                                     Text("Post")
                                         .foregroundColor(.white)
@@ -176,12 +183,12 @@ struct Post: View {
         self.dismiss()
     }
     func requestNotification() {
-      locationManager.validateLocationAuthorizationStatus()
+ //     locationManager.validateLocationAuthorizationStatus()
     }
     
     func handleDoneTapped() {
       //  self.viewModel.handleDoneTapped()
-        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description,Phone: viewModel.post.Phone)
+        self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description,Phone: viewModel.post.Phone, report: viewModel.post.report)
         self.dismiss()
     }
     
@@ -202,7 +209,7 @@ struct Post: View {
 struct Post_Previews: PreviewProvider {
     
     static var previews: some View {
-        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: ""))
+        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: "", report: ""))
     }
 }
 

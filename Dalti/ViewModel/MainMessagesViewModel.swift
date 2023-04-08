@@ -20,7 +20,7 @@ class MainMessagesViewModel: ObservableObject {
         
         func application (_ application : UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data){
             print("deviceToken token :\(deviceToken.map({String(format: "%02.2hhx", $0)}).joined())")
-            chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
+//            chatUser?.TokenDiv = deviceToken.map({String(format: "%02.2hhx", $0)}).joined()
         }
         DispatchQueue.main.async {
             self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
@@ -40,13 +40,17 @@ class MainMessagesViewModel: ObservableObject {
         
         firestoreListener?.remove()
         self.recentMessages.removeAll()
+    
+        guard let toId = chatUser?.uid else { return }
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         firestoreListener = FirebaseManager.shared.firestore.collection("Community")
             .document("Users").collection(FirebaseConstants.users)
             .document(uid)
             .collection(FirebaseConstants.recentMessages)
             .document(uid)
-            .collection(FirebaseConstants.messages)
+            .collection(toId)
+//            .document(uid)
+//            .collection(FirebaseConstants.messages)
             .order(by: FirebaseConstants.timestamp)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
