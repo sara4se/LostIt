@@ -64,28 +64,28 @@ struct Chat: View {
                     }
                     .padding(12)
                     .background(Color.white)
-                   
-                    Button {
-                        if (loginStatusMessage == ""){
+//                    if (loginStatusMessage == ""){
+                        Button {
+                            
                             handleAction()
+                            
+                        } label: {
+                            
+                            Text(isLoginMode ? "Log In" : "Create Account")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .frame(width: 300 , height: 53)
+                                .background(Color(("Mygreen")))
+                                .cornerRadius(8)
+                                .shadow(radius: 3)
                         }
-                    } label: {
-                        
-                        Text(isLoginMode ? "Log In" : "Create Account")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(width: 300 , height: 53)
-                            .background(Color(("Mygreen")))
-                            .cornerRadius(8)
-                            .shadow(radius: 3)
-                    }
-                   
-//                    Text(String(self.viewModelChat.$isLoginMode)).foregroundColor(.red)
+//                    }
+//                   } Text(String(self.viewModelChat.$isLoginMode)).foregroundColor(.red)
                     Text(loginStatusMessage != "" ? self.loginStatusMessage : "" ).foregroundColor(.red)
                  let _ = print(self.$isLoginMode)
-//                    Text(self.loginStatusMessage)
-//                        .foregroundColor(.red)
-                    let _ = print(self.loginStatusMessage)
+                //    Text(self.loginStatusMessage)
+                    //    .foregroundColor(.red)
+//                    let _ = print(self.loginStatusMessage)
                 }
                 .padding()  }
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
@@ -114,7 +114,7 @@ struct Chat: View {
              //                    default:
              //                        print("unknown error: \(err.localizedDescription)")
              //                    }
-               self.loginStatusMessage = "Failed to login user"
+         //      self.loginStatusMessage = "Failed to login user"
                return
            }
            
@@ -207,7 +207,7 @@ struct Chat: View {
              createNewAccount()
             print("Register a new account inside of Firebase Auth and then store image in Storage somehow....",isLoginMode)
            // isLoginMode.toggle()
-            self.didCompleteLoginProcess()
+         //   self.didCompleteLoginProcess()
                      
         }
     }

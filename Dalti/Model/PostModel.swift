@@ -16,7 +16,8 @@ struct PostModel : Identifiable,Codable{
     var Description : String
     var ImageURL : String
     var Phone : String
-    var report : String 
+    var report : String
+    var timestamp : Date
 }
 
 

@@ -15,6 +15,10 @@ struct Reports: View {
     @State var reprtDisc : String = ""
     @State var reportDone : Bool = false
     @State var reportCount = 0
+    @State private var selectedOption = 0
+    let options = ["It's spam", "It's inappropriate", "It's misleading", "Contains personal information", "It's violent or threatening", "Hate speech" ,"Nudity and sexual content" , "Harassment" ,"Scams and fraud" ,"Other" ]
+
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -34,6 +38,49 @@ struct Reports: View {
                         }
                     }
                     Section{
+                          Text("Please select a reason why you are reporting this content :")
+                                       .font(.subheadline)
+                                   
+                                   Menu(content: {
+                                       ForEach(0..<options.count) { index in
+                                           Button(action: {
+                                               self.selectedOption = index
+                                           })
+                                           {
+                                               Text(options[index])
+                                           }
+                                       }
+                                   }, label: {
+                                       HStack {
+                                           Text(options[selectedOption]).foregroundColor(.white)
+                                               .font(.body)
+                                           Spacer()
+                                           Image(systemName: "chevron.down")
+                                               .font(.body)
+                                       }.foregroundColor(Color("lightGreen"))
+                                       .padding(.vertical, 12)
+                                       .padding(.horizontal, 16)
+                                       .background(Color("lightGreen"))
+                                       .cornerRadius(8)
+                                   })
+                        
+//
+//                        Text("Selected Option: \(options[selectedOption])")
+//                        Picker(selection: $selectedOption, label: Text("")) {
+//                                     ForEach(0..<options.count) { index in
+//                                         Text(self.options[index]).tag(index)
+//                                     }
+//                        }.pickerStyle(MenuPickerStyle())
+//
+//                    } header: {
+//                        HStack{
+//                            Text("Why reporting this post?").textCase(nil)
+//                                .font(.custom("SF Pro", size: 16))
+//                                .foregroundColor(Color("colorOfText"))
+//                        }
+                    }
+                    
+                    Section{
                         
                         TextEditorWithPlaceholder(text: $reprtDisc )
                             .font(.custom("SF Pro", size: 16))
@@ -48,7 +95,7 @@ struct Reports: View {
                                 .foregroundColor(Color("colorOfText"))
                         }
                     }
-                    
+              
                 footer:{
 //                     var myInt = Int(item.report)
                     Button {
@@ -109,6 +156,6 @@ struct Reports: View {
 }
 struct Reports_Previews: PreviewProvider {
     static var previews: some View {
-        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: ""), Id: "")
+        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date()), Id: "")
     }
 }

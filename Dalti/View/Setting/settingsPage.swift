@@ -26,7 +26,7 @@ struct settingsPage: View {
                       
                         
                         NavigationLink("I Need Help" ,destination: I_Need_Help())
-                        NavigationLink("Reports" ,destination: Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: ""), Id: ""))
+                        NavigationLink("Reports" ,destination: Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date()), Id: ""))
                     }
                     
 //                    Section(header: Text("Account Action")) {

@@ -10,7 +10,7 @@ import FirebaseFirestore
 import Combine
 import FirebaseStorage
 import UIKit
-
+import Firebase
 
 class PostsViewModel: ObservableObject {
     @Published var posts = [PostModel]()
@@ -50,10 +50,36 @@ class PostsViewModel: ObservableObject {
             }
         }
     }
+    func retireReportedPost() {
+        let collectionRef = db.collection("Community").document("Posts").collection("report")
+        collectionRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                let currentDate = Date()
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let timestamp = data["timestamp"] as! Timestamp
+                    let postDate = timestamp.dateValue()
+                    let diff = Calendar.current.dateComponents([.hour], from: postDate, to: currentDate)
+                    if diff.hour! >= 24 {
+                        let documentID = document.documentID
+                        collectionRef.document(documentID).delete() { error in
+                            if let error = error {
+                                print("Error removing document: \(error)")
+                            } else {
+                                print("Document successfully removed!")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     func reportPost(report: String,_ post: PostModel) {
         if let documentId = post.id{
         do {
-            try db.collection("Community").document("Posts").collection("report").document(documentId).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": post.id,"Phone": post.Phone, "report": post.report ,"reportDescption": report])
+            try db.collection("Community").document("Posts").collection("report").document(documentId).setData(["Description":post.Description,"ImageURL": post.ImageURL,"ItemName": post.ItemName, "ItemState": post.ItemState, "id": post.id as Any,"Phone": post.Phone, "report": post.report ,"reportDescption": report, "timestamp": post.timestamp])
         }
         catch {
           print(error)

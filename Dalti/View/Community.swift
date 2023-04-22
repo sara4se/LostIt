@@ -111,7 +111,7 @@ struct Community: View {
                         .foregroundColor(Color("lightGreen"))
                 })
                 
-                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "")), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date())), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })
@@ -142,12 +142,9 @@ struct Community: View {
                 GeometryReader{ proxy in
                     let size = proxy.size
                     AnimatedImage(url: URL(string: item.ImageURL)).resizable()
-                    //                        .placeholder(UIImage(systemName: "text.below.photo.fill"))
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size.width, height: size.height)
                         .clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8)).foregroundColor(.gray)
-                    
-                    
                 }.frame(height: 400)
                 LinearGradient(colors: [.black.opacity(0.5),.black.opacity(0.2),.clear], startPoint: .top, endPoint: .bottom).clipShape(CustomCorner(corners: [.topRight,.topLeft], radius: 8))
                 VStack(alignment: .leading, spacing: 8){
@@ -156,11 +153,12 @@ struct Community: View {
                 }.foregroundColor(.white)
                     .padding()
                     .offset(y: currentItem?.id == item.id && animateView ? safeArea().top : 0)
+                
             }
             HStack(alignment:.firstTextBaseline,spacing: 21){
                 
                 VStack(alignment: .leading, spacing: 5) {
-                  
+                    
                     Text(item.ItemName).font(.callout).fontWeight(.semibold)
                         .fontWeight(.bold)
                         .foregroundColor(Color("colorOfText"))
@@ -172,36 +170,14 @@ struct Community: View {
                         .frame(width: 335.75,height: animateView ? 0 : 50.95)
                     
                 }.padding([.leading,.top])
-               // var myInt = Int(item.report)
-//                NavigationLink("reports" ,destination: Reports(Id: item.id))
-                NavigationLink(destination:  Reports(item: item, Id: item.ItemName), label:{
-                    Label("", systemImage: "exclamationmark.circle")
-                        .foregroundColor(Color("lightGreen"))
-                })
-//                Button {
-//
-//                    if reportCount < 10 {
-//                        showingReportAlert.toggle()
-//                    }
-////                    report()
-//                } label: {
-//                    Image(systemName: "exclamationmark.circle")
-//                        .resizable()
-//                        .frame(width: 10,height: 10)
-//                        .foregroundColor(Color("colorOfText"))
-//
-//                }.alert(isPresented: $showingReportAlert) {
-//                    myInt! += 1
-//                    reportCount = myInt!
-//                    viewModels.updatePost(report:  String(myInt!), item)
-//                    print(" report Count ",myInt!)
-//                    print(" report Count ",reportCount)
-//                    return Alert(title: Text("Post Reported!"), message: Text("You wont see this post cause you been report it"), primaryButton: .destructive(Text("Report")){
-//
-//                        print("reports...")
-//                    },   secondaryButton: .cancel())
-//
-//                }
+                if (!animateView){
+                    NavigationLink(destination:  Reports(item: item, Id: item.ItemName), label:{
+                        Label("", systemImage: "exclamationmark.circle")
+                            .foregroundColor(Color("lightGreen"))
+                    })
+          
+                }
+                
             }
         }
         .foregroundColor(Color("BackGroundColor"))
@@ -217,6 +193,14 @@ struct Community: View {
             VStack{
                 CardView(item: item)
                     .scaleEffect(animateView ? 1 : 0.87)
+//                Button {
+//
+//                   Reports(item: item, Id: item.ItemName)
+//                } label: {
+//                    Label("", systemImage: "exclamationmark.circle")
+//                        .foregroundColor(Color("lightGreen"))
+//                }
+
                 VStack(spacing: 15){
                     if (item.Description != ""){
                         Text(item.Description).multilineTextAlignment(.leading).lineSpacing(10).padding(.bottom,20).frame(height: 200)}
@@ -256,6 +240,7 @@ struct Community: View {
                     showDeaialPage = false
                 }
             }
+            
         label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.title)

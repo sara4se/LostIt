@@ -25,8 +25,8 @@ struct DaltiApp: App {
                 OnboardingContainerView()
             }
             else {
-             //   Splash()
-                my_view()
+                Splash()
+               // my_view()
             }
         }
     }
