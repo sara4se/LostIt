@@ -31,12 +31,6 @@ class PostsViewModel: ObservableObject {
     
     func subscribe() {
         if listenerRegistration == nil {
-         //   guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
-//            self.db.collection("Posts").document("Post").collection(fromId).document(id)
-          
-//            self.db.collection("Community").document("Posts")
-//            let idPost = self.db.collection("Post").document().documentID
-                
             listenerRegistration = db.collection("Community").document("Posts").collection("Post")
                 .addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {

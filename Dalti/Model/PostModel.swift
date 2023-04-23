@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseFirestoreSwift
-import UIKit
 struct PostModel : Identifiable,Codable{
     
     @DocumentID var id: String?
@@ -18,6 +17,7 @@ struct PostModel : Identifiable,Codable{
     var Phone : String
     var report : String
     var timestamp : Date
+    var idForUser : String
 }
 
 

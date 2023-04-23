@@ -19,14 +19,15 @@ struct settingsPage: View {
     var body: some View {
         NavigationStack {
             VStack {
+                let uid = FirebaseManager.shared.auth.currentUser?.uid
                 Form{
                     Section {
                         
                         NavigationLink("Privacy Policy" ,destination: Privacy_Policy())
                       
-                        
+                     
                         NavigationLink("I Need Help" ,destination: I_Need_Help())
-                        NavigationLink("Reports" ,destination: Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date()), Id: ""))
+                        NavigationLink("Reports" ,destination: Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date(), idForUser: uid ?? "Not Found"), Id: ""))
                     }
                     
 //                    Section(header: Text("Account Action")) {

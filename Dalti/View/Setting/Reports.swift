@@ -16,7 +16,7 @@ struct Reports: View {
     @State var reportDone : Bool = false
     @State var reportCount = 0
     @State private var selectedOption = 0
-    let options = ["It's spam", "It's inappropriate", "It's misleading", "Contains personal information", "It's violent or threatening", "Hate speech" ,"Nudity and sexual content" , "Harassment" ,"Scams and fraud" ,"Other" ]
+    let options = ["It's inappropriate", "It's misleading", "Contains personal information", "It's violent or threatening", "Hate speech" ,"Nudity and sexual content" , "Harassment" ,"Scams and fraud" ,"Other" ]
 
     
     var body: some View {
@@ -47,12 +47,12 @@ struct Reports: View {
                                                self.selectedOption = index
                                            })
                                            {
-                                               Text(options[index])
+                                               Text(LocalizedStringKey(options[index]))
                                            }
                                        }
                                    }, label: {
                                        HStack {
-                                           Text(options[selectedOption]).foregroundColor(.white)
+                                           Text(LocalizedStringKey(options[selectedOption])).foregroundColor(.white)
                                                .font(.body)
                                            Spacer()
                                            Image(systemName: "chevron.down")
@@ -90,7 +90,7 @@ struct Reports: View {
                         
                     } header: {
                         HStack{
-                            Text("Why reporting this post?").textCase(nil)
+                            Text("Add more info or other reason :").textCase(nil)
                                 .font(.custom("SF Pro", size: 16))
                                 .foregroundColor(Color("colorOfText"))
                         }
@@ -156,6 +156,6 @@ struct Reports: View {
 }
 struct Reports_Previews: PreviewProvider {
     static var previews: some View {
-        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date()), Id: "")
+        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date(), idForUser: ""), Id: "")
     }
 }

@@ -209,7 +209,7 @@ struct Post: View {
 struct Post_Previews: PreviewProvider {
     
     static var previews: some View {
-        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: "", report: "", timestamp: Date()))
+        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: "", report: "", timestamp: Date(), idForUser: ""))
     }
 }
 

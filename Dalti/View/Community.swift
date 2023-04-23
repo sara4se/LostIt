@@ -111,7 +111,7 @@ struct Community: View {
                         .foregroundColor(Color("lightGreen"))
                 })
                 
-                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date())), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date(),idForUser : "")), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })

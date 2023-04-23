@@ -68,3 +68,21 @@
 "Start Using Findit" = " Lostit إبدا باستخدام ";
 "Skip" = "تخطي";
 "online" = "متصل";
+"It's inappropriate" =  "محتوى غير ملائم";
+"It's misleading" = "محتوى مضلل";
+"Contains personal information" = "يحتوي على معلومات شخصية";
+"It's violent or threatening" = "محتوى عنيف أو يمثل تهديدًا";
+"Hate speech"= "يحتوي على كلام يحض على الكراهية";
+"Nudity and sexual content" = "محتوى جنسي ومحتوى عري";
+"Harassment" = "يحتوي على مضايقات";
+"Scams and fraud" = "خداع و احتيال";
+"Other" = "أخرى";
+"Reporting" = "الإبلاغ";
+"Please select a reason why you are reporting this content :" = " الرجاء إختيار سبب إبلاغك عن هذا المحتوى : ";
+"Add more info or other reason :" = "أضف سبب أخر أو المزيد من المعلومات : ";
+"Report" = "إبلاغ";
+"Reports" = "البلاغات";
+"Post Reported!" = "إبلاغ عن منشور" ;
+"Are you sure you want to report this post" = "هل أنت متأكد من بلاغك عن هذا المحتوي ؟" ;
+"Reporting an issue" = "إبلاغ عن منشور" ;
+
