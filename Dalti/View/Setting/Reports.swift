@@ -156,6 +156,6 @@ struct Reports: View {
 }
 struct Reports_Previews: PreviewProvider {
     static var previews: some View {
-        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date(), idForUser: ""), Id: "")
+        Reports(item: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date()), Id: "")
     }
 }

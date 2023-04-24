@@ -106,12 +106,12 @@ struct Community: View {
                 })
             }, trailing:
                                     HStack {
-                NavigationLink(destination :    MainMessagesView() , label:{
-                    Label("Chat", systemImage: "message")
-                        .foregroundColor(Color("lightGreen"))
-                })
+//                NavigationLink(destination :    MainMessagesView() , label:{
+//                    Label("Chat", systemImage: "message")
+//                        .foregroundColor(Color("lightGreen"))
+//                })
                 
-                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date(),idForUser : "")), label:{
+                NavigationLink(destination: Post(post: PostModel(ItemName: "", ItemState: "", Description: "", ImageURL: "", Phone: "", report: "", timestamp: Date())), label:{
                     Label("Post", systemImage: "plus")
                         .foregroundColor(Color("lightGreen"))
                 })

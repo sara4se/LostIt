@@ -17,7 +17,7 @@ struct PostModel : Identifiable,Codable{
     var Phone : String
     var report : String
     var timestamp : Date
-    var idForUser : String
+  //  var idForUser : String
 }
 
 

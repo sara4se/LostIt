@@ -188,6 +188,7 @@ struct Post: View {
     
     func handleDoneTapped() {
       //  self.viewModel.handleDoneTapped()
+       // guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         self.viewModel.uploadImageToStorge(uuimage: image, ItemName: viewModel.post.ItemName, ItemState: viewModel.post.ItemState, Description: viewModel.post.Description,Phone: viewModel.post.Phone, report: viewModel.post.report)
         self.dismiss()
     }
@@ -209,7 +210,7 @@ struct Post: View {
 struct Post_Previews: PreviewProvider {
     
     static var previews: some View {
-        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: "", report: "", timestamp: Date(), idForUser: ""))
+        Post(post: .init(ItemName: "", ItemState: "", Description: "", ImageURL: "" , Phone: "", report: "", timestamp: Date()))
     }
 }
 
