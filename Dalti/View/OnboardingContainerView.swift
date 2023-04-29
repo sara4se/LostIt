@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingContainerView: View {
     @AppStorage("isOnboarding") var isOnboarding: Bool?
+    @AppStorage("isEulaPopup") var isEulaPopup = false
 //    @Environment(\.presentationMode) private var presentationMode
     @State var isClick : Bool = false
     var body: some View {
@@ -16,7 +17,10 @@ struct OnboardingContainerView: View {
             VStack {
                 HStack{
                     Spacer()
-                    Button(action: { isOnboarding = false }, label: {
+                    Button(action: {
+                        isEulaPopup = false
+                        
+                    }, label: {
                         Text("Skip")
                             .font(.custom("SF Pro Display", size: 20))
                             .fontWeight(.regular)
@@ -36,7 +40,7 @@ struct OnboardingContainerView: View {
                     //              NavigationLink("", destination: Splash())
                     //  self.presentationMode.wrappedValue.dismiss()
                     isClick.toggle()
-                    isOnboarding = false
+//                    isOnboarding = false
                 } label: {
                     Text("Start Using Findit")
                         .foregroundColor(.white)
@@ -46,8 +50,11 @@ struct OnboardingContainerView: View {
                         .cornerRadius(8)
                         .shadow(radius: 3)
                 }.navigationBarBackButtonHidden()
+//                    .sheet(isPresented: $showEulaPopup) {
+//                        EulaPopupView(isPresented: $isEulaPopup)
+//                    }
                 NavigationLink("", isActive: $isClick) {
-                    Splash()
+                    EulaPopupView(isPresented: $isEulaPopup)
                 }
             }
         }}

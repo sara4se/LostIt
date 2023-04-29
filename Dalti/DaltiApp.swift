@@ -18,6 +18,7 @@ struct DaltiApp: App {
          }
 
     @AppStorage("isOnboarding") var isOnboarding = true
+  
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
